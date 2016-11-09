@@ -1,7 +1,7 @@
 ---
-title: "A second part"
-teaching: 5
-exercises: 5
+title: "Lesson 1: Core concepts using an example analysis"
+teaching: 15
+exercises: 30
 questions:
 - "Can we break up the lesson into multiple parts?"
 objectives:

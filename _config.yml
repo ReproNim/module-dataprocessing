@@ -6,17 +6,17 @@
 kind: "lesson"
 
 # Overall title for pages.
-title: "ReproNim lesson template"
+title: "ReproNim module for dataprocessing"
 
 # Repository URL (without trailing slash).
-repo: https://github.com/ReproNim/module-template
+repo: https://github.com/ReproNim/module-dataprocessing
 
 # Root URL below username.github.io domain, with leading slash but no trailing slash.
 # For example, for 'https://neurohackweek.github.io/lesson-example', use '/lesson-example'.
-root: "/module-template"
+root: "/module-dataprocessing"
 
 # Contact email address.
-email: debian@onerussian.com
+email: satra@mit.edu
 
 #------------------------------------------------------------
 # Generic settings (should not need to change).
@@ -32,8 +32,8 @@ swc_site: "https://software-carpentry.org"
 template_repo: "https://github.com/swcarpentry/styles"
 example_repo: "https://github.com/swcarpentry/lesson-example"
 example_site: "https://swcarpentry.github.com/lesson-example"
-rn_site: "https://repronim.github.io"
-#rn_site: "https://repronim.org"
+# rn_site: "https://repronim.github.io"
+rn_site: "http://repronim.org"
 rn_github: "https://github.com/repronim"
 
 # Start time in minutes (540 is 09:00 am)
