@@ -32,7 +32,7 @@ Although not essential it is helpful to have an understanding of:
 
 ### Nipype
 
-- https://github.com/miykael/nipype_tutorial
+- [Nipype tutorial](https://github.com/miykael/nipype_tutorial)
 
 ### Other workflow engines:
 
