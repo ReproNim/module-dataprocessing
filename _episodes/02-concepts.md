@@ -187,3 +187,9 @@ execution graph an analysis diverged and help zero in on the possible
 culprits.
 
 Lesson 6 covers details of how provenance can be captured.
+
+> ## Hands on exercise:
+>
+>  - Can you rerun the analysis in the simple workflow example?
+>  - Can you submit only your json files as a pull request?
+{: .challenge}
