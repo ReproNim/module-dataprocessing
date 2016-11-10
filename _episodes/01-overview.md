@@ -3,7 +3,7 @@ title: "Module overview"
 teaching: 10
 exercises: 0
 questions:
-- "How do we conduct reproducible analysis?"
+- "What do we need to know to conduct reproducible analysis?"
 objectives:
 - Understand the conceptual pieces that make up reproducible research.
 - Learn where to go for information
