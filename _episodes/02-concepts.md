@@ -66,8 +66,8 @@ preferably machine accessible.
 > standardized to provide machine accessibility.
 {: .callout}
 
-In this example the data and metdata are stored in a [google spreadsheet]().
-TODO - The column headers are described in detail in a JSON document 
+In this example the data and metdata are stored in a [google spreadsheet](https://docs.google.com/spreadsheets/d/11an55u9t2TAf0EV2pHN0vOd8Ww2Gie-tHp9xGULh_dA).
+**TODO** The column headers are described in detail in a JSON document 
 using JSONLD a format that supports semantic annotation. The annotation 
 provides information about the data contained in the column and allows 
 harmonizing the information with other similar tables. The phenotypic 

@@ -13,6 +13,15 @@ keypoints:
 
 ---
 
-Provenance tracking
-script on/off
-Reprozip: https://vida-nyu.github.io/reprozip/
+### Provenance tracking
+
+- command line: script on/off
+- strace/dtrace 
+- Reprozip: https://vida-nyu.github.io/reprozip/
+
+
+### NIDM
+
+- NIDM-R - http://nidm.nidash.org/getting-started/
+- NIDM-W/E - in progress
+  - Creating and modifying data models
