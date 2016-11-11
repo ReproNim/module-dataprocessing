@@ -37,16 +37,38 @@ Although not essential it is helpful to have an understanding of:
 - What formats are used to store them.
 
 - Behavioral/clinical datatypes
-   - Tables, numbers - Neuropsychological and clinical assessments
-   - Timeseries - Physiological measurements, behavioral responses
+   - Neuropsychological and clinical assessments
+       - CSV
+       - TSV
+       - JSON
+   - Physiological measurements, behavioral responses
 - MRI datatypes
    - 2D/3D/4D Images -  MRI/PET/CT scans
+       - Formats
+           - DICOM, Multiframe DICOM
+           - NifTi1/2
+               - CIFTI2
+           - FreeSurfer formats (mgz, annot, curv)
+           - BRIK/HEAD
+           - MINC2
+           - Nrrd
+   - Spatial coordinate systems
+       - MNI
+   - Transforms
+       - SPM/FSL/FreeSurfer mat files
+       - Formats
+          - HDF5
+          - Text
+          - Matlab
 - GWAS datatypes
-   - 
+   - https://software.broadinstitute.org/software/igv/FileFormats
 - EEG/MEG datatypes
-   - Timeseries - Physiological measurements, behavioral responses
+   - Physiological measurements
+   - Formats
+       - vmdk
 - Metadata dictionaries
-   - json/ld
+   - Formats
+       - json/ld
 
 ### Data and metadata standards
 
