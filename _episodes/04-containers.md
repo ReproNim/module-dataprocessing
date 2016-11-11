@@ -1,59 +1,56 @@
 ---
 title: "Lesson 3: Create and maintain reproducible computational environments"
-teaching: 15
-exercises: 0
+teaching: ??
+exercises: ??
 questions:
-- "How to use containers?"
+- "Why and how to use containers and Virtual Machines?"
 objectives:
-- "Recap what you've learned"
+- "Learn how to use and create Virtual Machines using VirtualBox and Vagrant"
+- "Learn how to use and create containers using Docker and Singularity"
 keypoints:
-- "A summary of everything so far"
+- "TODO"
 ---
 
 > ## You can skip this lesson if you can answer these questions? --->
->
->  - ??
+> What are the differences between Virtual Machines and software containers?  
+> How to use and create a Virtual Macine using VirtualBox and Vagrant?
+> How to use and create a container with Docker and Singularity? 
 {: .challenge}
 
 This lesson is an introduction to virtual machines and software containers.
 
 ### Lesson outline
 
-- Overview: when do you want to use virtual environments and containers, problems with packaging
-- Introduction to VirtualBox and Vagrant
-- Introduction to Docker
-- Introduction to Singularity
+- Overview: when do you want to use virtual environments and containers
+- Virtual Macines and Vagrant
+- Docker
+- Singularity
 
 
 ### Lesson requirements
 
-Although not essential it is helpful to have an understanding of:
- 
+It is essential to have a basic understanding of:
 - Command line and shell
+
+Although not essential it is helpful to have an understanding of:
 - Package manager
 - Git/Github
 
 
-####  Overview: when do you want to use virtual environments and containers, problems with packagin
+####  Overview: when do you want to use virtual environments and containers
+- A general motivation, problem with packaging (resources needed)
+- Differences between VMs and containers (using: https://medium.freecodecamp.com/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b#.kchrpokfz)
 
-A beginner-friendly introduction to containers, VMs and Docker:
-https://medium.freecodecamp.com/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b#.kchrpokfz
 
-
-#### VM
-
-- https://www.virtualbox.org/manual/ch01.html : VirtualBox manual
-- https://www.vagrantup.com/docs/getting-started/ : Vagrant getting started guide, uses Vagrant with VirtualBox
+#### Virtual Macines and Vagrant
+- Intro to VMs: using and configuring VirtualBox (using: https://www.virtualbox.org/manual/ch01.html)
+- Using Vagrant with VirtualBox (using: https://www.vagrantup.com/docs/getting-started/)
 
 
 #### Docker
-- A course from Neurohackweek 2016:
-https://neurohackweek.github.io/docker-for-scientists/
-video: http://www.slideshare.net/chrisfilo1/docker-for-scientists 
-- https://prakhar.me/docker-curriculum/ : tutorial for beginners, uses a simple app (Flask) as an example, can be forked and changed on github, 
-- https://www.dataquest.io/blog/docker-data-science/ : example using scientific environment and jupyter
+- Intro to Docker: using and creating containers (using: https://neurohackweek.github.io/docker-for-scientists/, http://www.slideshare.net/chrisfilo1/docker-for-scientists, https://prakhar.me/docker-curriculum/) 
+- Using Jupyter with Docker (using: https://www.dataquest.io/blog/docker-data-science/)
 
 #### Singularity
-- Overview: http://singularity.lbl.gov/about
-- A Singularity tutorial: https://github.com/cjprybol/reproducibility-via-singularity
+- Intro	to Docker: using and creating containers (using: http://singularity.lbl.gov/about, https://github.com/cjprybol/reproducibility-via-singularity)
 
