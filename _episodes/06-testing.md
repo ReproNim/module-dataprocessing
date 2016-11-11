@@ -1,51 +1,65 @@
 ---
 title: "Lesson 5: Use integration testing to revalidate analyses as data and software change"
-teaching: 15
-exercises: 0
+teaching: ??
+exercises: ??
 questions:
-- "How do we use continuous integration?"
+- "Why and how do we use continuous integration?"
 objectives:
-- Understand the conceptual pieces that make up reproducible research.
-- Learn where to go for information
+- Understand the various types of tests
+- Understand the Continuous Integration workflow 
 keypoints:
-- Reproducible research requires understanding all pieces of the data flow
-- You should be familiar with the necessary elements and tools for reproducible analysis.
+- Continuous Integration makes software development more efficient.
+- Continuous Integration platform can be easily used with a GitHub account.
 
 ---
 
 > ## You can skip this lesson if you can answer these questions? --->
 >
->  - ??
+>  - What are the unit, integration and regression tests?
+>  - What are the Python testing frameworks?
+>  - Why do you use Continuous Integration (CI) in software development?
+>  - What is the CI workflow?
+>  - How to use Travis CI with your GitHub account?
+>  - How to use CircleCI with your GitHub account?
+>  - How to run Docker container on CircleCI?
 {: .challenge}
 
-This lesson ...
+This lesson extends the software testing subject 
+and introduces Continuous Integration workflow. Examples of Python testing frameworks 
+and CI platforms will be used.   
 
 ### Lesson outline
 
-- ... 
+- Unit, integration and regression tests
+- Python testing frameworks
+- Overview of Continuous Integration
+- Travis CI with GitHub
+- CircleCI with GitHub
 
 ### Lesson requirements
 
+It is essential to have a basic understanding of:
+- Python
+- Git and GitHub
+
 Although not essential it is helpful to have an understanding of:
- 
-- ... 
+- Unit tests
 
-### General Ideas
+### Unit, integration and regression tests
+- Explaining difference between unit, integration and regression tests (using: http://katyhuff.github.io/python-testing/index.html)  
 
-- http://katyhuff.github.io/python-testing/index.html: nice intro to the concept of testing in python; part of the software carpentry. Includes the continuous integration concept and intro to Travis.
-- http://pythontesting.net/start-here/ Python testing frameworks, i.e. unittest, nose, pytest, doctests; the blog includes introductory and more advance posts 
-- https://earldouglas.com/articles/python-ci.html a short post about CI in Python including a simple example of Travis and Circle usage   
+### Python testing frameworks
+- A short introduction of popular Python testing frameworks: unittest, nose, pytest (using: http://pythontesting.net/start-here/)
 
+### Overview of Continuous Integration
+- Motivation and introduction to Continuous Integration workflow (using: http://katyhuff.github.io/python-testing/08-ci.html, using: https://earldouglas.com/articles/python-ci.html)
 
-### Travis
+### Travis CI with GitHub
+- Intro to travis.yml file (using: https://docs.travis-ci.com/user/getting-started/ ; https://docs.travis-ci.com/user/customizing-the-build/)
+- Travis.yml file for Python projects (using: https://docs.travis-ci.com/user/languages/python/,
+https://www.smartfile.com/blog/testing-python-with-travis-ci/)
 
-- http://katyhuff.github.io/python-testing/08-ci.html : the lesson about CI from software carpentry (see the previous point). 
-- https://docs.travis-ci.com/user/getting-started/ ; https://docs.travis-ci.com/user/customizing-the-build/ : very short intro from travis
-- https://docs.travis-ci.com/user/languages/python/ : python project with travis, includes examples of existing projects
-- https://www.smartfile.com/blog/testing-python-with-travis-ci/ : very short post on testing python with travis
-
-### Circle
-
-- https://circleci.com/docs/gettingstarted/ : getting started with Circle
-- https://circleci.com/docs/language-python/ : Python projects with Circle
-- https://circleci.com/docs/docker/ : using Docker containers with Circle
+### CircleCI with GitHub
+- Intro to circle.yml file (using: https://circleci.com/docs/gettingstarted/)
+- circle.yml file for Python projects (using: https://circleci.com/docs/language-python/)
+- Using Docker containers with Circle (using: https://circleci.com/docs/docker/)
