@@ -15,7 +15,8 @@ keypoints:
 
 > ## You can skip this lesson if you can answer these questions? --->
 >
->  - ??
+>  - What are the different formats used to store structural imaging data?
+>  - 
 {: .challenge}
 
 This lesson ...

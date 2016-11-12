@@ -24,7 +24,7 @@ keypoints:
 
 The typical brain imaging experiment uses data, software, and human 
 interaction to test hypotheses and/or explore relations in data. These
-complex interactions can involve many different elements (data quality, 
+analyses can involve many different elements (data quality, 
 software environment, algorithms, human input) that can introduce errors.
 It is therefore useful to capture the information necessary to repeat or 
 reproduce the analysis.
@@ -47,21 +47,22 @@ These steps are needed for the researcher to preserve information for
 future use, to document the methods for dissemination, and to repeat the
 experiment.
 
-### Expected knowledge
-
-This module intends to familiarize the reader with many different 
-components of such a dataflow. However, learning many of these concepts
-will benefit from the lessons in other ReproNim modules. We link across
-these modules as necessary.
-
-> ## Contribute to ReproNim training materials
-> If you find information out of date, new relevant information, and/or
-> incorrect information please submit an [issue](https://gqQQ11ithub.com/repronim/module-dataprocessing/issues)
-> or a pull request directly on GitHub.
-{: .callout}
+### Prerequisites
 
 For this module, we expect the reader to be familiar with unix computing 
-concepts and have a general idea of brain image analysis.
+concepts and have a general idea of brain image analysis. It is highly 
+recommended that you go through the overview lectures of the 
+reproducible basics and FAIR data principles modules.
+
+### What will you learn
+
+You will learn how to perform reproducible analysis, how to preserve the
+information, and how to share data and code with others.
+
+### How long will it take
+
+This module consists of 6 lessons, each comprising multiple units. Each 
+unit in this module will take you between up to 10 hours of work.
 
 ### Lessons included in this module
 
