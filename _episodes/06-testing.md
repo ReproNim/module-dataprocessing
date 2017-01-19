@@ -22,7 +22,7 @@ keypoints:
 >  - How to use Travis CI with your GitHub account?
 >  - How to use CircleCI with your GitHub account?
 >  - How to run Docker container on CircleCI?
-{: .challenge}
+
 
 This lesson extends the software testing subject 
 and introduces Continuous Integration workflow. Examples of Python testing frameworks 
@@ -69,7 +69,54 @@ Although not essential it is helpful to have an understanding of:
   * pytest library: a powerful python test framework, no boilerplate, easy to start working, 
     covers extensive options and testing features. 
 
-_ a very good introduction to all Python test framework: http://pythontesting.net/start-here/
+- Resources: a very good introduction to all Python test framework: http://pythontesting.net/start-here/
+
+
+### Pytest 
+If you don't have any specific reason to use other library we recomend using pytest. 
+The pytest framework makes it easy to write simple tests and allows you to use 
+the standard python assert for verifying your result.
+At the same time pytest scales well to support complex testing for whole libraries.
+
+- Examples of simple tests:
+  
+  * testing output of a function 
+~~~
+def half(a):
+    return a/2
+
+def test_div():
+    assert half(3) == 1.5
+~~~
+
+  * checking list's elements
+~~~
+states = ["CA", "CO", "FL"]
+def test_list():
+    assert "MA" in states
+~~~
+
+  * checking type of an object
+~~~
+import numpy as np
+a = np.array([[2, 3, 4], [12, 13, 5])]
+def test_array_type():
+    assert a.dtype == 'float64'
+~~~
+
+
+- The simplest excecution:
+~~~
+$ pytest
+~~~
+  * More oubout usage and options: http://doc.pytest.org/en/latest/usage.html
+  * Rules for standard test discovery: http://doc.pytest.org/en/latest/goodpractices.html
+
+
+- More examples and advance usage:
+  * http://pythontesting.net/framework/pytest/pytest-introduction/
+  * http://doc.pytest.org/en/latest/example/index.html
+
 
 ### Overview of Continuous Integration
 - Motivation and introduction to Continuous Integration workflow (using: http://katyhuff.github.io/python-testing/08-ci.html, using: https://earldouglas.com/articles/python-ci.html)
