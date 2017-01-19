@@ -46,10 +46,30 @@ Although not essential it is helpful to have an understanding of:
 - Unit tests
 
 ### Unit, integration and regression tests
-- Explaining difference between unit, integration and regression tests (using: http://katyhuff.github.io/python-testing/index.html)  
+
+- Unit tests isolate each part of the program and show that the individual parts are correct.
+
+- Integration tests combine individual software modules and test as a group. 
+
+- Regression tests verify that software previously developed and tested still 
+  performs correctly even after it was changed or interfaced with other software. 
+  For regression tests you don't have to knows what the expected result should be, 
+  the assumption is that the past results were correct. 
+
+- Resources: http://katyhuff.github.io/python-testing/index.html, 
+             https://en.wikipedia.org/wiki/Unit_testing,
+             https://en.wikipedia.org/wiki/Integration_testing,
+	     https://en.wikipedia.org/wiki/Regression_testing
+
 
 ### Python testing frameworks
-- A short introduction of popular Python testing frameworks: unittest, nose, pytest (using: http://pythontesting.net/start-here/)
+- Python has a few popular testing frameworks:
+  * unittest library: a standard module that offers xUnit style framework.
+  * nose library: a python unit test framework, no boilerplate, can run doctests, unittests.  
+  * pytest library: a powerful python test framework, no boilerplate, easy to start working, 
+    covers extensive options and testing features. 
+
+_ a very good introduction to all Python test framework: http://pythontesting.net/start-here/
 
 ### Overview of Continuous Integration
 - Motivation and introduction to Continuous Integration workflow (using: http://katyhuff.github.io/python-testing/08-ci.html, using: https://earldouglas.com/articles/python-ci.html)
