@@ -119,6 +119,12 @@ $ pytest
 
 
 ### Overview of Continuous Integration
+"Continuous Integration is a software development practice where members of a team integrate their 
+work frequently, usually each person integrates at least daily - leading to multiple integrations per day. 
+Each integration is verified by an automated build (including test) to detect integration errors as 
+quickly as possible." (https://www.martinfowler.com/articles/continuousIntegration.html)
+
+
 - Motivation and introduction to Continuous Integration workflow (using: http://katyhuff.github.io/python-testing/08-ci.html, using: https://earldouglas.com/articles/python-ci.html)
 
 ### Travis CI with GitHub
