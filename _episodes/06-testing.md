@@ -176,18 +176,55 @@ For a full list of CI principles with detailed explanaition please check online 
 - a short blog post by Darryl Bowler: http://blogs.collab.net/devopsci/ten-best-practices-for-continuous-integration
 
 
-- Motivation and introduction to Continuous Integration workflow (using: http://katyhuff.github.io/python-testing/08-ci.html, using: https://earldouglas.com/articles/python-ci.html)
+### Travis CI 
 
-### Travis CI with GitHub
-- Intro to travis.yml file (using: https://docs.travis-ci.com/user/getting-started/ ; https://docs.travis-ci.com/user/customizing-the-build/)
-- Travis.yml file for Python projects (using: https://docs.travis-ci.com/user/languages/python/,
-https://www.smartfile.com/blog/testing-python-with-travis-ci/)
+Travis CI is a continuous integration service used to build and test software 
+projects hosted at GitHub.
+It’s commonly used for open source Python projects, that can use the service at no charge
 
-### CircleCI with GitHub
-- Intro to circle.yml file (using: https://circleci.com/docs/gettingstarted/)
-- circle.yml file for Python projects (using: https://circleci.com/docs/language-python/)
-- Using Docker containers with Circle (using: https://circleci.com/docs/docker/)
+In order to use Travis CI you have to sign in to the service with your GitHub account 
+and link Travis CI with the GitHub projects you want to test. 
+Please follow the instruction on the [Travis website] 
+(https://docs.travis-ci.com/user/getting-started/) 
+or from [a blog post](https://www.smartfile.com/blog/testing-python-with-travis-ci/).
+
+In order to configure a Travis CI worflow a YAML format text file `.travis.yml`
+has to be added to the root directory of your repository. 
+The file specifies software environments you want to use to build and test your code.
+The simplest `.travis.yml` for testing your project in Python 2.7 environment looks:
+~~~
+language: python
+python:
+  - "2.7"
+
+script: py.test
+~~~
+
+If you want to add Python 3.5 environment and install dependencies included 
+in your requiremnet file:
+~~~
+language: python
+python:
+  - "2.7"
+  - "3.5"
+
+install:
+  - pip install -r requirements.txt
+
+script: py.test
+~~~
+ 
+Please check the [Python projects specific guide](https://docs.travis-ci.com/user/languages/python/)
+for more examples.
+Travis CI can also run and build Docker images, please check the 
+[Travis website](https://docs.travis-ci.com/user/docker/) for more information.
+
+ * Travis CI is not the only continuous integration service that can be used with 
+a GitHub project. You might want to check  [Circle CI](https://circleci.com/)
+or [Codeship](https://codeship.com/) platforms. 
+If you're interested, you can find blog posts that compare these tools, e.g by
+[Alex Gorbatchev](http://npmawesome.com/posts/2015-01-22-continuous-integration-in-the-cloud-comparing-travis-circle-and-codeship/).
 
 
 ### Other resources:
-- A software carpentry lesson about testing: http://katyhuff.github.io/python-testing/index.html
+- An easy to follow software carpentry [lesson about testing](http://katyhuff.github.io/python-testing/index.html).
