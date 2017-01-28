@@ -119,10 +119,61 @@ $ pytest
 
 
 ### Overview of Continuous Integration
-"Continuous Integration is a software development practice where members of a team integrate their 
-work frequently, usually each person integrates at least daily - leading to multiple integrations per day. 
-Each integration is verified by an automated build (including test) to detect integration errors as 
-quickly as possible." (https://www.martinfowler.com/articles/continuousIntegration.html)
+Continuous Integration is a software development practice where members of a team test and integrate their work frequently against a controlled source code repository. The main benefit of CI are reduced risk of long integration process at the end of a project and easier to find and remove bugs.
+
+The best CI practices evolve over time as new technology and techniques are introduced, 
+but these are selected principles of CI:
+
+ * Maintain a code repository
+The team should use a version control system, 
+that allows for easy tracking all changes of the project's source code. 
+Most open source projects use Git as a version control system and Github as a web hosting service
+(TODO link to Yarik's part).
+
+
+ * Automate the build and testing
+Building of the system, that includes compaling, linking and other processes that are required 
+to execute the program, should be triggered by a single command line. 
+Build tools, such as `make`, can help to automate the build.
+
+In practice, if you use Python or other interpreted languages, 
+code does not need to be compiled. 
+You still might need to remember about the software dependencies. (TODO: is it the place for mentioning requirements?)
+For Python projects requirements files, that contain a list of items to be installed,
+are often used. A typical structure of a file called `requirements.txt` is:
+
+~~~
+numpy>=1.6.2
+scipy>=0.11
+nibabel>=2.0.1
+simplejson>=3.8.0 
+pytest>=3.0
+~~~
+
+Once you have a requiremnet file, you can easily install all dependencies by running
+`pip install -r requirements.txt`
+
+
+In addition to the traditional build, that only assure the program runs,
+unit testing should be incorporate into the build process to confirm that
+the program behaves as we expect.
+If you're using `pytest` for your Python project, you can add `py.test` command to
+the building process.
+
+* Commit changes and integrate with the main code frequently
+
+As a developer you should try to commit at least once per dayin order to keep track 
+of your changes.
+By doing this frequently, you can find out if there's a conflict between your work 
+and other developers work.
+If the main branch is automatically build and tested, 
+you can easily  detect conflicts in compilation and excecution of your code. 
+
+
+For a full list of CI principles with detailed explanaition please check online resources:
+- Wikipedia: https://en.wikipedia.org/wiki/Continuous_integration
+- a nice review by Martin Fowler: https://www.martinfowler.com/articles/continuousIntegration.html
+- a short blog post by Darryl Bowler: http://blogs.collab.net/devopsci/ten-best-practices-for-continuous-integration
 
 
 - Motivation and introduction to Continuous Integration workflow (using: http://katyhuff.github.io/python-testing/08-ci.html, using: https://earldouglas.com/articles/python-ci.html)
@@ -136,3 +187,7 @@ https://www.smartfile.com/blog/testing-python-with-travis-ci/)
 - Intro to circle.yml file (using: https://circleci.com/docs/gettingstarted/)
 - circle.yml file for Python projects (using: https://circleci.com/docs/language-python/)
 - Using Docker containers with Circle (using: https://circleci.com/docs/docker/)
+
+
+### Other resources:
+- A software carpentry lesson about testing: http://katyhuff.github.io/python-testing/index.html
