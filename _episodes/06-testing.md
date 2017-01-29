@@ -280,3 +280,4 @@ of cat/dog owners.
 >  expect when file contain incorrect or incomplete data (you might want to create new text files 
 >  with examples you want to test). Run pytest and improve your code until all test pass. 
 >  - Add new tests to repository and run them using Travis.
+>  - You migh want to create a Docker container and use it with the Travis platform.
