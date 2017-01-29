@@ -262,21 +262,21 @@ number of dogs, number of cats, female(1)/male(0), age
 >  - Create `pets.py` file and function `mean(filename, pet_type)` that returns average age 
 of cat/dog owners.  
 >  - Create a `test_pets.py` and a test function that checks proper results of 
->   the `mean` function for `pet_type=dog` and `pet_type=cat`. 
->   You can try to use [`pytest.mark.parametrize` option](http://doc.pytest.org/en/latest/parametrize.html).
-> - Run `pytest` locally and correct your `mean` function until all tests pass. 
-> - Create `requiremnts.txt` to ask for pytest library (not older than 3.0 version) 
+>  the `mean` function for `pet_type=dog` and `pet_type=cat`. 
+>  You can try to use [`pytest.mark.parametrize` option](http://doc.pytest.org/en/latest/parametrize.html).
+>  - Run `pytest` locally and correct your `mean` function until all tests pass. 
+>  - Create `requiremnts.txt` to ask for pytest library (not older than 3.0 version) 
 > and other libraries you might want to use. 
-> - Create `.travis.yml` file, ask for at least two different python version, 
+>  - Create `.travis.yml` file, ask for at least two different python version, 
 > install all libraries from `requiremnts.txt`, and run pytest to test your code. 
-> - Add everything to the repository and push to your GitHub. 
+>  - Add everything to the repository and push to your GitHub. 
 > If Travis is set correctly, you should see that it builds various python environments 
 > and tests your code in each of them.
-> - If everything works you can come back to your local version of the repository, 
+>  - If everything works you can come back to your local version of the repository, 
 >  and think how would you like your code to behave if file doesn't contain data you expect
 >  (e.g. raise exception if a file doesn't contain "number of dogs" or contain negative numbers,
 >  remove a row that is incomplete)
-> -  Create `test_input.py` and a few testing function that tests if your code behaves as you 
+>  - Create `test_input.py` and a few testing function that tests if your code behaves as you 
 >  expect when file contain incorrect or incomplete data (you might want to create new text files 
 >  with examples you want to test). Run pytest and improve your code until all test pass. 
-> - Add new tests to repository and run them using Travis.
+>  - Add new tests to repository and run them using Travis.
