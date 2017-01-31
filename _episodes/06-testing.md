@@ -45,7 +45,7 @@ Although not essential it is helpful to have an understanding of:
 - Unit tests
 
 
-### Unit, integration and regression tests
+### Element 1: Unit, integration and regression tests
 
 - [Unit tests](https://en.wikipedia.org/wiki/Unit_testing) isolate each part of the program and show that the individual parts are correct.
 
@@ -61,7 +61,7 @@ Although not essential it is helpful to have an understanding of:
 
 
 
-### Python testing frameworks
+### Element 2: Python testing frameworks
 - Python has a few popular testing frameworks:
   * [unittest library](https://docs.python.org/2/library/unittest.html): 
 a standard module that offers xUnit style framework.
@@ -81,9 +81,12 @@ The pytest framework makes it easy to write simple tests and allows you to use
 the standard python assert for verifying your result.
 At the same time pytest scales well to support complex testing for whole libraries.
 
-- Examples of simple tests:
+  * Usage examples can be found [here](http://doc.pytest.org/en/latest/usage.html).
+  * Rules for standard test discovery can be found [here](http://doc.pytest.org/en/latest/goodpractices.html).
+
+
+- Examples of simple unit tests:
   
-  * testing output of a function 
 ~~~
 def half(a):
     return a/2
@@ -92,39 +95,51 @@ def test_div():
     assert half(3) == 1.5
 ~~~
 
-  * checking list's elements
-~~~
-states = ["CA", "CO", "FL"]
-def test_list():
-    assert "MA" in states
-~~~
-
-  * checking type of an object
+  
 ~~~
 import numpy as np
-a = np.array([[2, 3, 4], [12, 13, 5])]
+
+def mean_col(array):
+    return np.nanmean(array, axis=0)
+
 def test_array_type():
-    assert a.dtype == 'float64'
+a = np.array([[2, 3, 4], [12, 13, np.nan])]
+    assert (mean_col(a) == np.array([ 7.,  8.,  4.])).all()
 ~~~
 
+- Examples of simple reggresion tests (file format is taken from [Simple Workflow](https://github.com/ReproNim/simple_workflow)):
 
-- The simplest execution:
 ~~~
-$ pytest
-or
-$ py.test
+import json
+import numpy as np
+import subprocess as sp
+
+def test_comparison():
+    # calling python script from command line 
+    sp.call(["python", "run_demo_workflow.py", "--key", "11an55u9t2TAf0EV2pHN0vOd8Ww2Gie-tHp9xGULh_dA", "-n", "1"])
+
+    # a new file created by the script
+    new_filename = "output/AnnArbor_sub16960/segstats.json"
+    # the referential file (that has been probably created using different environment) 
+    expected_filename = "expected_output/AnnArbor_sub16960/segstats.json"
+
+    with open(new_filename, 'r') as fp:
+        new_output = json.load(fp)
+
+    with open(expected_filename, 'r') as fp:
+        expected_output = json.load(fp)
+
+    # comparing results from both files using numpy allclose function
+    for key, val in new_output.items():
+        assert np.allclose(expected_output[key], val, rtol=1e-02)
 ~~~
-  * More oubout usage and options can find [here](http://doc.pytest.org/en/latest/usage.html).
-  * Rules for standard test discovery can find [here](http://doc.pytest.org/en/latest/goodpractices.html).
 
-
-- Once you're familiar with basic examples, we recommend checking more advance examples. 
-The good sources are:
+- More advance examples of test written using pytes can be found: 
   * [Brian Okken website](http://pythontesting.net/framework/pytest/pytest-introduction/)
   * [Pytest website](http://doc.pytest.org/en/latest/example/index.html)
 
 
-### Overview of Continuous Integration
+### Element 3: Overview of Continuous Integration
 Continuous Integration is a software development practice where members of a team test 
 and integrate their work frequently against a controlled source code repository. 
 The main benefit of CI are reduced risk of long integration process at the end 
@@ -134,13 +149,15 @@ The best CI practices evolve over time as new technology and techniques are intr
 but these are selected principles of CI:
 
  * Maintain a code repository
+
 The team should use a version control system, 
 that allows for easy tracking all changes of the project's source code. 
 Most open source projects use Git as a version control system and Github as a web hosting service
 (TODO link to Yarik's part).
 
 
- * Automate the build and testing
+ * Automate the build and testing using various environments
+
 Building of the system, that includes compiling, linking and other processes that are required 
 to execute the program, should be triggered by a single command line. 
 Build tools, such as `make`, can help to automate the build.
@@ -166,16 +183,19 @@ $ `pip install -r requirements.txt`
 ~~~
 
 In addition to the traditional build, that only assure the program runs,
-unit testing should be incorporate into the build process to confirm that
+unit and regressiontesting should be incorporate into the build process to confirm that
 the program behaves as we expect.
 If you're using `pytest` for your Python project, you can add `py.test` command to
 the building process.
+
+Building and testing should be done using various environments you want to support, 
+e.g. Python 2.7 and Python 3.5.
 
 * Commit changes and integrate with the main code frequently
 
 As a developer you should try to commit at least once per day in order to keep track 
 of your changes.
-You should also integrate your changes with the main code frequently.
+It is also good to integrate your changes with the main code frequently.
 By doing this, you can find out if there's a conflict between your work 
 and other developers work.
 If the main branch is automatically build and tested, 
@@ -188,11 +208,11 @@ For a full list of CI principles with detailed explanation you can check online 
 - A short blog post by [Darryl Bowler](http://blogs.collab.net/devopsci/ten-best-practices-for-continuous-integration)
 
 
-### Continuous Integration Service: Travis CI 
+### Element 4: Continuous Integration Service: Travis CI 
 
 [Travis CI](https://travis-ci.org/) is a continuous integration service used to build 
 and test software projects hosted at GitHub.
-It’s commonly used for open source Python projects that can use the service at no charge
+It’s commonly used for open source Python projects that can use the service at no charge.
 
 In order to use Travis CI you have to sign in to the service with your GitHub account 
 and link Travis CI with the GitHub projects you want to test. 
