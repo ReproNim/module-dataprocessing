@@ -107,7 +107,7 @@ a = np.array([[2, 3, 4], [12, 13, np.nan])]
     assert (mean_col(a) == np.array([ 7.,  8.,  4.])).all()
 ~~~
 
-- Examples of simple reggresion tests (file format is taken from [Simple Workflow](https://github.com/ReproNim/simple_workflow)):
+- Examples of simple reggresion tests based on [Simple Workflow](https://github.com/ReproNim/simple_workflow):
 
 ~~~
 import json
