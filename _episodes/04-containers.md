@@ -56,7 +56,8 @@ understanding of:
  2. How to determine which of these components can have a direct impact on results
  3. How to recreate the environment in which the analysis was done
 
-There are many ways to re-create an
+There are many ways to re-create a complete environment. Usually it is done via 
+construction of environment "images" or "containers".
 
 #### Understanding container technologies
 
@@ -79,19 +80,19 @@ brain imaging.
 
 #### Using pre-built containers for brain imaging
 
-1. **Vagrant:** A neuroimaging environment based on [Neurodebian](http://neuro.debian.net/) can be initialized quickly 
+1. **Vagrant:** A neuroimaging environment based on [NeuroDebian](http://neuro.debian.net/) can be initialized quickly 
 using a single command: 
    
    ```
    vagrant init hlaubish/NeuroDebian_64; vagrant up --provider virtualbox
    ```
    
-   Another example of reusable environment is this [virtual machine](https://s3.amazonaws.com/openfmri/virtual-machines/precise64_neuro.box).
-This virtual machine can be used to reproduce the analyses from [this paper](http://www.nature.com/articles/ncomms9885).
-
    A general introduction to Vagrant is [available here](https://www.vagrantup.com/docs/getting-started/)
 and a video tutorial is below. 
 <script type="text/javascript" src="https://asciinema.org/a/11428.js" id="asciicast-11428" async></script>
+   
+   Vagrant is based on VirtualBox, and another example of reusable environment is this [virtual machine](https://s3.amazonaws.com/openfmri/virtual-machines/precise64_neuro.box).
+This virtual machine can be used to reproduce the analyses from [this paper](http://www.nature.com/articles/ncomms9885).
 
 2. **NITRC-CE:** TODO
 
