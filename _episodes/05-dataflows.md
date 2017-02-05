@@ -34,7 +34,7 @@ HPC cluster.
 Although not essential it is helpful to have an understanding of:
  
 - Neuroimaging analysis algorithms
-- The lessons on [data](03-data) and [containers](04-containers) in this module
+- The lessons on [data](/03-data) and [containers](/04-containers) in this module
 
 ### Overview
 
