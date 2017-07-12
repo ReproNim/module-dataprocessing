@@ -25,7 +25,8 @@ keypoints:
 This lesson uses the [Simple Workflow](https://github.com/repronim/simple_workflow)
 Github repository to illustrate core concepts of reproducible analysis
 and pitfalls associated with complex data, software, and computing
-environments.
+environments. The complete simple workflow paper is available 
+[here](https://f1000research.com/articles/6-124/).
 
 ### Lesson outline
 
@@ -43,9 +44,10 @@ environments.
 
 ### Lesson requirements
 
-Although not essential it is helpful to have an understanding of:
+It is helpful to have an understanding of:
  
-- Version control (See git/github lesson in module X)
+- [Unix shell](http://swcarpentry.github.io/shell-novice/)
+- [Version control](http://www.reproducibleimaging.org/module-reproducible-basics/02-vcs/)
 
 <a name="overview" />
 
@@ -79,8 +81,9 @@ preferably machine accessible.
 > one shares with colleagues and collaborators. However, such 
 > information requires significant human resources to interpret and 
 > translate into code. An alternate approach is to encode the metadata
-> using structured markup (e.g., RDF, JSON, XML). Often such markup can be 
-> standardized to provide machine accessibility.
+> using structured markup (e.g., [RDF](https://www.w3.org/TR/rdf11-concepts/), 
+> [JSON](http://www.json.org/), [XML](https://www.w3schools.com/xml/)). Often 
+> such markup can be standardized to provide machine accessibility.
 {: .callout}
 
 In this example the data and metdata are stored in a 
@@ -99,7 +102,7 @@ images of the human brain and that the age of participants is in years.
 Most datasets use PDFs or other human readable documents. Using consistent and 
 self-describing data structures make the data more accessible. 
 
-Lesson 2 covers many different aspects of data annotation, 
+[Lesson 2](../03-data) covers many different aspects of data annotation, 
 harmonization, cleaning, storage, and sharing.
 
 > ## Hands on exercise:
@@ -147,14 +150,17 @@ that creates the necessary computational environment for analysis.
 {: .callout}
 
 Alternatives that reproduce environments with minimal software 
-dependencies are technologies like virtual machines (VirtualVox, VMWare, 
-NITRC CE), containers (Docker, Singularity) and installers (e.g., 
-Vagrant, Ansible). These can be very useful to replicate existing 
+dependencies are technologies like virtual machines ([VirtualBox](https://www.virtualbox.org/), 
+[VMWare](https://www.vmware.com/products/desktop-virtualization.html), 
+[NITRC CE](https://www.nitrc.org/projects/nitrc_es/)), containers 
+([Docker](https://www.docker.com/), [Singularity](http://singularity.lbl.gov/)) 
+and installers (e.g., [Vagrant](https://www.vagrantup.com/), 
+[Packer](https://www.packer.io/)). These can be very useful to replicate existing 
 environments and therefore simplify the installation problem 
 significantly. However, at present some of these technologies are not 
 installed by default on computing clusters you may have access to.
 
-Lesson 3 covers container technologies and how to create, use, modify, 
+[Lesson 3](../04-containers) covers container technologies and how to create, use, modify, 
 and reuse containers.
 
 > ## Exercise:
@@ -177,10 +183,12 @@ and reuse containers.
 Once the environment is setup, one can execute the analysis. Each time
 the analysis is run the provenance of the workflow is captured and 
 stored using a [PROV](https://www.w3.org/TR/prov-dm/) model for workflows. 
-All of this happens inside a single executable script. The script itself uses 
-the [Nipype dataflow framework](http://nipy.org/nipype) to ensure a consistent 
-representation of the execution graph using Python as the dataflow language, and 
-therefore benefits from all the advantages a dataflow framework brings to analyses.
+All of this happens inside a 
+[single executable script](https://github.com/ReproNim/simple_workflow/blob/master/run_demo_workflow.py). 
+The script itself uses the [Nipype dataflow framework](http://nipy.org/nipype) 
+to ensure a consistent representation of the execution graph using Python as the 
+dataflow language, and therefore benefits from all the advantages a dataflow 
+framework brings to analyses.
 
 > ## Using dataflow technologies for analysis instead of shell scripts
 > There are many dataflow platforms out there. These typically enable a
@@ -201,7 +209,7 @@ used to create the provenance document and the expected outputs data.
 When another user runs this workflow, their output can be compared to 
 the expected to output.
 
-Lesson 4 covers data flow technologies, specifically how to create
+[Lesson 4](../05-dataflows) covers data flow technologies, specifically how to create
 analysis pipelines and applications and capture provenance when running 
 these pipelines. 
 
@@ -228,9 +236,9 @@ Once the data and environment are setup appropriately and the analysis
 is run, it would be good to know if the same results are obtained when
 a different dataset containing the same data or a slightly different 
 workflow is used. These can be carried out using continuous integration
-services, such as Travis, CircleCI, Jenkins, which allow executing 
-an analysis and performing a test comparison automatically as versions 
-of data or software change.
+services, such as [Travis](https://travis-ci.org/), [CircleCI](https://circleci.com/), 
+[Jenkins](https://jenkins.io/), which allow executing an analysis and performing 
+a test comparison automatically as versions of data or software change.
 
 > ## Continuous integration testing
 > In typical brain imaging analyses there is a complex interaction 
@@ -248,8 +256,8 @@ or when a new dataset is available. The intent of this simple workflow
 framework is to move the community towards such comprehensive data 
 preservation and testing integration.
 
-Lesson 5 covers how to use continuous integration services like Travis 
-and CircleCI, but also how container technologies can be used to run 
+[Lesson 5](../06-testing) covers how to use continuous integration services like 
+Travis and CircleCI, but also how container technologies can be used to run 
 your own integration testing.
 
 > ## Exercise:
@@ -273,14 +281,14 @@ your own integration testing.
 
 It turns out that this Workflow is not reproducible across different 
 versions of software and operating system. [The observed inconsistencies (see Table 1)](https://f1000research.com/articles/6-124/) 
-point to issues of randomization and/or initialization within the algorithms that are run. 
-While its easy to detect deviation of execution in different 
+point to issues of randomization and/or initialization within the algorithms that 
+are run. While its easy to detect deviation of execution in different 
 environments it is harder to determine the cause of the deviation. This
 is where rich provenance capture can help establish where along an
 execution graph an analysis diverged and help zero in on the possible 
 culprits. 
 
-Lesson 6 covers details of how provenance can be captured.
+[Lesson 6](../07-provenance) covers details of how provenance can be captured.
 
 > ## Hands on exercise:
 >
