@@ -169,7 +169,8 @@ and reuse containers.
 >
 > > ## Solution
 > >
-> > A reproducible computational environment must contain all the necessary data,
+> > A reproducible computational environment must contain all the necessary data 
+> > (any inputs or other internal software package data such as brain templates),
 > > environment variables, and software necessary for carrying out the ascribed 
 > > computation. Ideally, such an environment itself should be reproducible. 
 > {: .solution}
