@@ -208,7 +208,7 @@ of the different brain tissue classes are extracted and stored in a JSON
 document. A specific run of this workflow on a specific platform was 
 used to create the provenance document and the expected outputs data. 
 When another user runs this workflow, their output can be compared to 
-the expected to output.
+the expected output.
 
 [Lesson 4](../05-dataflows) covers data flow technologies, specifically how to create
 analysis pipelines and applications and capture provenance when running 
@@ -234,8 +234,8 @@ these pipelines.
 ### Element 4: Checking output consistency using continuous integration
 
 Once the data and environment are setup appropriately and the analysis 
-is run, it would be good to know if the same results are obtained when
-a different dataset containing the same data or a slightly different 
+is run, it would be good to know if the same results, within some threshold, are 
+obtained when a dataset containing the similar data or a similar 
 workflow is used. These can be carried out using continuous integration
 services, such as [Travis](https://travis-ci.org/), [CircleCI](https://circleci.com/), 
 [Jenkins](https://jenkins.io/), which allow executing an analysis and performing 
@@ -270,8 +270,9 @@ your own integration testing.
 > > During the lifetime of a project, the data and software may change. Setting 
 > > up testing environments allow ensuring that changes in results can be 
 > > attributed to changes in data and software. Results that remain the same across
-> > different software and data sets are more generalizable than results that 
-> > are specific to a particular dataset and a particular software environment.
+> > different software and similar data sets are more generalizable than results 
+> > that are specific to a particular dataset and a particular software 
+> > environment.
 > {: .solution}
 {: .challenge}
 
@@ -312,7 +313,7 @@ culprits.
 > > 
 > > Researchers have to be careful about variations coming from numerical software.
 > > Software engineers have to test their software for numerical variation across 
-> > different Operating systems and software environments. The only way to scale 
+> > different operating systems and software environments. The only way to scale 
 > > this is using continuous integration approaches.
 > {: .solution}
 {: .challenge}
