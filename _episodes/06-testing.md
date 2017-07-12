@@ -23,9 +23,9 @@ keypoints:
 >  - How to run Docker container with CI platform?
 
 
-This lesson extends the software testing subject 
-and introduces Continuous Integration workflow. Examples of Python testing frameworks 
-and CI platforms will be used.   
+This lesson extends the software testing subject and introduces Continuous Integration 
+workflow. 
+Examples of Python testing frameworks and CI platforms will be used.   
 
 ### Lesson outline
 
@@ -47,36 +47,38 @@ Although not essential it is helpful to have an understanding of:
 
 ### Element 1: Unit, integration and regression tests
 
-- [Unit tests](https://en.wikipedia.org/wiki/Unit_testing) isolate each part of the program and show that the individual parts are correct.
+- [Unit tests](https://en.wikipedia.org/wiki/Unit_testing) isolate each part of the program 
+and show that the individual parts are correct.
+  - work on isolated parts (units) of the program
+  - verify that units operate correctly in various scenarios
+  - usually compare observed results to well known expected results
 
 - [Integration tests](https://en.wikipedia.org/wiki/Integration_testing) combine individual software modules and test as a group. 
+  - combine individual software modules and test as a group
+  - similar structure as unit tests: compare observed results to expected results, 
+     but the expected result can be more complicated to represent
+
+
 
 - [Regression tests](https://en.wikipedia.org/wiki/Regression_testing) verify that software previously developed and tested still 
   performs correctly even after it was changed or interfaced with other software. 
   For regression tests you don't have to knows what the expected result should be, 
   the assumption is that the past results were correct. 
-
+  - verify that software previously developed and tested still performs correctly even after it 
+    was changed or interfaced with other software
+  - you don't have to knows the expected result, the assumption is that the past results were correct.
 
 - Resources: More about unit, integration and regression test you might find at the software carpentry [lesson](http://katyhuff.github.io/python-testing/index.html).
 
 
 
-### Element 2: Python testing frameworks
-- Python has a few popular testing frameworks:
-  * [unittest library](https://docs.python.org/2/library/unittest.html): 
-a standard module that offers xUnit style framework.
-  * [nose library](http://nose.readthedocs.io/en/latest/): 
-a python unit test framework, no boilerplate, can run doctests, unittests.  
-  * [pytest library](http://doc.pytest.org/en/latest/): 
-a powerful python test framework, no boilerplate, easy to start working, 
-    covers extensive options and testing features. 
+### Element 2: Testing Python code with Pytest
 
-- Resources: a very good introduction to all Python test frameworks by 
-[Brian Okken](http://pythontesting.net/start-here/).
+A very good introduction to all Python test frameworks you can find
+[in Brian Okken introduction](http://pythontesting.net/start-here/).
 
-
-### Pytest 
-If you don't have any specific reason to use other library we recomemnd using pytest. 
+If you don't have any specific reason to use other library we recomemnd using
+ [pytest library](http://doc.pytest.org/en/latest/). 
 The pytest framework makes it easy to write simple tests and allows you to use 
 the standard python assert for verifying your result.
 At the same time pytest scales well to support complex testing for whole libraries.
