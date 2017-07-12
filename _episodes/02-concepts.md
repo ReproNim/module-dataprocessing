@@ -1,7 +1,7 @@
 ---
 title: "Lesson 1: Core concepts using an analysis example"
-teaching: 15
-exercises: 30
+teaching: 30
+exercises: 60
 questions:
 - "What are the different considerations for reproducible analysis?"
 objectives:
@@ -53,7 +53,9 @@ Although not essential it is helpful to have an understanding of:
 This basic workflow extracts a collection of brain images and associated 
 phenotypic (e.g., age) information from a spreadsheet, and runs a Nipype
 workflow that takes the anatomical brain images and performs some simple
-anatomical image processing.
+anatomical image processing. The workflow itself can take a bit of time to run 
+depending on the power of your machine or cluster. For learning purposes and to 
+minimize the time you can run the workflow on one participant.
 
 > ## Hands on exercise:
 >
