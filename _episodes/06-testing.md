@@ -68,7 +68,7 @@ an operating system, a specific version of library, etc.
 If your results differ when you're changing computer environment, you should understand the 
 source of the changes. 
 The first step would be automatically check the results with various environments
-whenever we're making changes.
+whenever you make any changes.
 You can achive this by combining your regression tests with a CI platform.
 
 Regression tests (as well as unit and any other type of tests) can help you with future 
@@ -80,8 +80,9 @@ Moreover, writing regression tests that are based on your published results allo
 scientists to verify easily their scientific approach, software used, or similar data set.
 
 - Resources: 
-  - more about unit, integration and regression test you might find at the software carpentry [lesson](http://katyhuff.github.io/python-testing/index.html).
-  - [presentation from Nipype workshop](http://nipy.org/workshops/2017-03-boston/lectures/lesson-testing/#1).
+  - the software carpentry provide more materials on 
+[unit](http://katyhuff.github.io/python-testing/04-units/), 
+[integration and regression test](http://katyhuff.github.io/python-testing/07-integration/)
 
 
 ### Element 2: Testing Python code with Pytest
@@ -182,7 +183,7 @@ e.g. Python 2.7 and Python 3.5.
 
 A common practice is that every single pull request to the main branch of
 the project repository is automatically build and tested before merging. 
-That way, the team can easily  detect conflicts in compilation and execution of your code. 
+That way, the team can easily  detect conflicts in compilation and execution of the code. 
 
 
 For a list of CI principles with detailed explanation you can check online resources:
@@ -199,7 +200,7 @@ It’s commonly used for open source Python projects that can use the service at
 
 In order to use Travis CI you have to sign in to the service with your GitHub account 
 and link Travis CI with the GitHub projects you want to test. 
-Please follow the instruction on the [Travis website] 
+Follow the instruction on the [Travis website] 
 (https://docs.travis-ci.com/user/getting-started/) 
 or from [a blog post](https://www.smartfile.com/blog/testing-python-with-travis-ci/).
 
@@ -229,9 +230,9 @@ install:
 script: py.test
 ~~~
  
-Please check the [Python projects specific guide](https://docs.travis-ci.com/user/languages/python/)
+Check the [Python projects specific guide](https://docs.travis-ci.com/user/languages/python/)
 for more examples.
-Travis CI can also run and build Docker images, please check the 
+Travis CI can also run and build Docker images, check the 
 [Travis website](https://docs.travis-ci.com/user/docker/) for more information.
 
  * Travis CI is not the only continuous integration service that can be used with 
@@ -244,12 +245,14 @@ If you're interested, you can find blog posts that compare these tools, e.g by
 
 ### Other resources:
 - An easy to follow software carpentry [lesson about testing](http://katyhuff.github.io/python-testing/index.html).
+- [presentation from Nipype workshop](http://nipy.org/workshops/2017-03-boston/lectures/lesson-testing/#1).
+
 
 > ## Hands on exercise:
 >
 >  - Create a GitHub account if you don't have one.
->  - Fort the Simple Workflow repository and clone your own fork to your computer.
->  - Create a test directory and write a few unit tests for the function from `run_demo_workflow.py`. Rund the test locally on your computer. 
+>  - Fork the Simple Workflow repository and clone your own fork to your computer.
+>  - Create a test directory and write a few unit tests for the function from `run_demo_workflow.py`. Run the test locally on your computer. 
 >  - Write some regression tests and compare your results to the results from `expected_output`. Run the test locally.
 >  - Login to Travis and link your repository.
 >  - Create `.travis.yml` file and run your tests using the Travis platform.
