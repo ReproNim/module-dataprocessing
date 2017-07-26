@@ -23,13 +23,13 @@ keypoints:
 >  - How to run Docker container with CI platform?
 
 
-This lesson extends the software testing subject and introduces Continuous Integration 
+This lesson extends the software testing topic and introduces Continuous Integration 
 workflow. 
 Examples of Python testing frameworks and CI platforms will be used.   
 
 ### Lesson outline
 
-- Element 1: Unit, integration and regression tests
+- Element 1: Introduction to regression tests
 - Element 2: Python testing frameworks
 - Element 3: Regression tests for Simple Workflow
 - Element 4: Continuous Integration practice
@@ -40,44 +40,45 @@ Examples of Python testing frameworks and CI platforms will be used.
 
 It is essential to have a basic understanding of:
 - Python
-- Git and GitHub
+- Git and GitHub (TODO: Yarik's part)
 
 Although not essential it is helpful to have an understanding of:
-- Unit tests
+- Unit tests: you can read Software Carpentry [materials](http://katyhuff.github.io/python-testing/04-units/)
 
 
-### Element 1: Unit, integration and regression tests
+### Element 1: Introduction to regression tests
 
-- [Unit tests](https://en.wikipedia.org/wiki/Unit_testing) 
-or [Integration tests](https://en.wikipedia.org/wiki/Integration_testing):
-  - work on isolated parts (units) or group of units (integretion tests),
-  - verify that software operate correctly in various scenarios,
-  - usually compare observed results to well known expected results.
-
-- [Regression tests](https://en.wikipedia.org/wiki/Regression_testing):
-  - verify that software previously developed and tested still performs correctly even after it 
-    was changed or interfaced with other software
-  - you don't have to knows the expected result, the assumption is that the past results were correct.
-
+[Regression tests]((https://en.wikipedia.org/wiki/Regression_testing)  verify that 
+software previously developed and tested still performs correctly 
+even after it was changed or interfaced with other software.
+As opposed to writing [unit tests](https://en.wikipedia.org/wiki/Unit_testing) you don't have to 
+knows the correct result, the assumption is that the past results are correct.
 
 In science, regression tests perform a special role. 
 Scientists often don't know what is the correct answer before doing the research, 
-therefore results can't be compared to the priory known results.
+therefore results can't be compared to the prior known results.
 However, you still want to be sure that your published results are not sensitive to 
 an operating system, a specific version of library, etc.
 If your results differ when you're changing computer environment, you should understand the 
 source of the changes. 
-The first step would be automatically check the results with various environments
+The first step would be to automatically check the results with various environments
 whenever you make any changes.
 You can achive this by combining your regression tests with a CI platform.
 
-Regression tests (as well as unit and any other type of tests) can help you with future 
-development process. 
-Whenever you're changing your code, by adding new functionality or improving performance, 
-you can check if you're still able to reproduce your previous results.
+> ## Regression tests and future development
+> Regression tests (as well as unit and any other type of tests) can help you with future
+> development process.
+> Whenever you're changing your code, by adding new functionality or improving performance,
+> you can check if you're still able to reproduce your previous results.
+> The results might change if you're improving the part of the code that is involved 
+> in the analysis, but it's important to understand what aspect of the code change created 
+> a change in output. 
+> Thus regression tests can help associate changes in the output with changes in code,
+> so guard you against inexplicable changes in your results.
 
-Moreover, writing regression tests that are based on your published results allow other 
-scientists to verify easily their scientific approach, software used, or similar data set.
+> Moreover, writing regression tests that are based on your published results allow other
+> scientists to verify easily their scientific approach, software used, or similar data set.
+{: .callout}
 
 - Resources: 
   - the software carpentry provide more materials on 
@@ -87,7 +88,7 @@ scientists to verify easily their scientific approach, software used, or similar
 
 ### Element 2: Testing Python code with Pytest
 
-A very good introduction to all Python test frameworks you can find
+You can find a very good introduction to all Python test frameworks you can find
 [in Brian Okken introduction](http://pythontesting.net/start-here/).
 
 If you don't have any specific reason to use other library we recommend using
@@ -101,6 +102,29 @@ At the same time pytest scales well to support complex testing for whole librari
   * [Examples of tests using Pytest](http://doc.pytest.org/en/latest/example/index.html)
   * [More examples from Brian Okken website](http://pythontesting.net/framework/pytest/pytest-introduction/)
 
+> ## Hands on exercise:
+>
+>  Write a simple regression test to compare results with expected results for one subject.
+>
+> > ## Exemplary solution
+> >
+> > The following solution is written using Python and use instructions from
+> > [README file](https://github.com/ReproNim/simple_workflow/blob/master/README.md).
+> >
+> > ~~~
+> > import json
+> > import numpy as np
+> > import subprocess as sp
+> >
+> > def test_comparison():
+> >     # calling python script from command line
+> >     sp.call(["python", "run_demo_workflow.py", "--key", "11an55u9t2TAf0EV2pHN0vOd8Ww2Gie-tHp9xGULh_dA", "\
+-n", "1", "-o", "my_output"])
+> >
+> {: .solution}
+{: .challenge}
+
+
 
 ### Element 3: Regression tests for Simple Workflow
 
@@ -113,30 +137,42 @@ subject with the results provided in the repository.
 For comparing results of numerical computation we often do not check if the
 numbers match exactly, but we specify absolute and/or relative tolerance. 
 
-~~~
-import json
-import numpy as np
-import subprocess as sp
 
-def test_comparison():
-    # calling python script from command line 
-    sp.call(["python", "run_demo_workflow.py", "--key", "11an55u9t2TAf0EV2pHN0vOd8Ww2Gie-tHp9xGULh_dA", "-n", "1", "-o", "my_output"])
-
-    # a new file created by the script
-    new_filename = "my_output/AnnArbor_sub16960/segstats.json"
-    # the referential file (that has been probably created using different environment) 
-    expected_filename = "expected_output/AnnArbor_sub16960/segstats.json"
-
-    with open(new_filename, 'r') as fp:
-        new_output = json.load(fp)
-
-    with open(expected_filename, 'r') as fp:
-        expected_output = json.load(fp)
-
-    # comparing results from both files using numpy allclose function
-    for key, val in new_output.items():
-        assert np.allclose(expected_output[key], val, rtol=5e-02)
-~~~
+> ## Hands on exercise:
+>
+>  Write a simple regression test to compare results with expected results for one subject. 
+>
+> > ## Exemplary solution
+> >
+> > The following solution is written using Python and use instructions from  
+> > [README file](https://github.com/ReproNim/simple_workflow/blob/master/README.md).
+> > 
+> > ~~~
+> > import json
+> > import numpy as np
+> > import subprocess as sp
+> > 
+> > def test_comparison():
+> >     # calling python script from command line 
+> >     sp.call(["python", "run_demo_workflow.py", "--key", "11an55u9t2TAf0EV2pHN0vOd8Ww2Gie-tHp9xGULh_dA", "-n", "1", "-o", "my_output"])
+> > 
+> >     # a new file created by the script
+> >     new_filename = "my_output/AnnArbor_sub16960/segstats.json"
+> >     # the referential file (that has been probably created using different environment) 
+> >     expected_filename = "expected_output/AnnArbor_sub16960/segstats.json"
+> > 
+> >     with open(new_filename, 'r') as fp:
+> >         new_output = json.load(fp)
+> > 
+> >     with open(expected_filename, 'r') as fp:
+> >         expected_output = json.load(fp)
+> > 
+> >     # comparing results from both files using numpy allclose function
+> >     for key, val in new_output.items():
+> >         assert np.allclose(expected_output[key], val, rtol=5e-02)
+> > ~~~
+> {: .solution}
+{: .challenge}
 
 ### Element 4: Overview of Continuous Integration
 Continuous Integration is a practice commonly used by members of software development teams
@@ -182,7 +218,7 @@ e.g. Python 2.7 and Python 3.5.
 
 
 A common practice is that every single pull request to the main branch of
-the project repository is automatically build and tested before merging. 
+the project repository is automatically built and tested before merging. 
 That way, the team can easily  detect conflicts in compilation and execution of the code. 
 
 
@@ -240,7 +276,7 @@ a GitHub repository.
 You might want to check  [Circle CI](https://circleci.com/)
 or [Codeship](https://codeship.com/) platforms. 
 If you're interested, you can find blog posts that compare these tools, e.g by
-[Alex Gorbatchev](http://npmawesome.com/posts/2015-01-22-continuous-integration-in-the-cloud-comparing-travis-circle-and-codeship/).
+[Alex Gorbatchev](https://strongloop.com/strongblog/node-js-travis-circle-codeship-compare/).
 
 
 ### Other resources:
