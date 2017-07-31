@@ -39,7 +39,7 @@ Examples of Python testing frameworks and CI platforms will be used.
 ### Lesson requirements
 
 It is essential to have a basic understanding of:
-- Python
+- Python (TODO: do we general resources for Python)
 - Git and GitHub (TODO: Yarik's part)
 
 Although not essential it is helpful to have an understanding of:
@@ -48,11 +48,11 @@ Although not essential it is helpful to have an understanding of:
 
 ### Element 1: Introduction to regression tests
 
-[Regression tests]((https://en.wikipedia.org/wiki/Regression_testing)  verify that 
+[Regression tests](https://en.wikipedia.org/wiki/Regression_testing)  verify that 
 software previously developed and tested still performs correctly 
 even after it was changed or interfaced with other software.
 As opposed to writing [unit tests](https://en.wikipedia.org/wiki/Unit_testing) you don't have to 
-knows the correct result, the assumption is that the past results are correct.
+knows the correct output, the assumption is that the past results are correct.
 
 In science, regression tests perform a special role. 
 Scientists often don't know what is the correct answer before doing the research, 
@@ -63,7 +63,7 @@ If your results differ when you're changing computer environment, you should und
 source of the changes. 
 The first step would be to automatically check the results with various environments
 whenever you make any changes.
-You can achive this by combining your regression tests with a CI platform.
+You can achieve this by combining your regression tests with a CI platform.
 
 > ## Regression tests and future development
 > Regression tests (as well as unit and any other type of tests) can help you with future
@@ -71,7 +71,7 @@ You can achive this by combining your regression tests with a CI platform.
 > Whenever you're changing your code, by adding new functionality or improving performance,
 > you can check if you're still able to reproduce your previous results.
 > The results might change if you're improving the part of the code that is involved 
-> in the analysis, but it's important to understand what aspect of the code change created 
+> in the analysis, but it's important to understand what aspect of the code change leads to 
 > a change in output. 
 > Thus regression tests can help associate changes in the output with changes in code,
 > so guard you against inexplicable changes in your results.
@@ -88,8 +88,8 @@ You can achive this by combining your regression tests with a CI platform.
 
 ### Element 2: Testing Python code with Pytest
 
-You can find a very good introduction to all Python test frameworks you can find
-[in Brian Okken introduction](http://pythontesting.net/start-here/).
+You can find a very good introduction to all Python test frameworks in
+[Brian Okken introduction](http://pythontesting.net/start-here/).
 
 If you don't have any specific reason to use other library we recommend using
  [pytest library](http://doc.pytest.org/en/latest/). 
@@ -104,26 +104,64 @@ At the same time pytest scales well to support complex testing for whole librari
 
 > ## Hands on exercise:
 >
->  Write a simple regression test to compare results with expected results for one subject.
+>  Write a simple unit test for `creating dataframe` function from `check_output.py` or any other function 
+>  from  Simple Workflow.
 >
 > > ## Exemplary solution
-> >
-> > The following solution is written using Python and use instructions from
-> > [README file](https://github.com/ReproNim/simple_workflow/blob/master/README.md).
-> >
+> > 
+> > Create an exemplary directory `output_1` with subdirectories `sub_a`, `sub_b` and `sub_c`. 
+> > Each of these subdirectories should contain a `data.json` file with a dictionary that has at least 
+> > one element: `{"first": [1, 11]}`.
+> > 
 > > ~~~
-> > import json
-> > import numpy as np
-> > import subprocess as sp
-> >
-> > def test_comparison():
-> >     # calling python script from command line
-> >     sp.call(["python", "run_demo_workflow.py", "--key", "11an55u9t2TAf0EV2pHN0vOd8Ww2Gie-tHp9xGULh_dA", "\
--n", "1", "-o", "my_output"])
+> > import sys, os, glob
+> > import pandas as pd
+> > from check_output import creating_dataframe
+> > 
+> > def test_creating_dataframe():
+> >     filename_list = sorted(glob.glob('output_1/*/data.json'))
+> > 
+> >     data_frame = creating_dataframe(filename_list)
+> > 
+> >     assert (data_frame.first_volume.keys() == ['sub_a', 'sub_b', 'sub_c']).all()
+> >     assert (data_frame.first_volume == [11., 33, 55]).all()
+> >     assert (data_frame.first_voxels == [1., 3, 5]).all()
 > >
 > {: .solution}
 {: .challenge}
 
+
+> ## Hands on exercise:
+>
+>  Change the previous test so it checks the results for more than one directory,
+> use `@pytest.mark.parametrize` decorator.
+>
+> > ## Exemplary solution
+> >
+> > Create an exemplary directory `output_1` with subdirectories `sub_a`, `sub_b` and `sub_c`.
+> > Each of these subdirectories should contain a `data.json` file with a dictionary that has at least
+> > one element: `{"first": [1, 11]}`.
+> >
+> > ~~~
+> > import sys, os, glob
+> > import pandas as pd
+> > from check_output import creating_dataframe
+> >
+> > @pytest.mark.parametrize(directory_name, keys, volume_list, voxel_list, [
+> >                           ("output_1", ['sub_a', 'sub_b', 'sub_c'], [11, 33, 55], [1, 3, 5]),
+> >                           ("output_2", ['subject_1', 'subject_2'], [8.5, 3.], [11.4, 3.5]),
+> >                          ])			      
+> > def test_creating_dataframe(directory_name, keys, volume_list, voxel_list):
+> >     filename_list = sorted(glob.glob(os.path.join(directory_name, '/*/data.json')))
+> >
+> >     data_frame = creating_dataframe(filename_list)
+> >
+> >     assert (data_frame.first_volume.keys() == keys).all()
+> >     assert (data_frame.first_volume == volume_list).all()
+> >     assert (data_frame.first_voxels == voxel_list).all()
+> >
+> {: .solution}
+{: .challenge}
 
 
 ### Element 3: Regression tests for Simple Workflow
@@ -134,9 +172,6 @@ repository you can find directory with the
 Having the expected output allows to write a simple regression tests that compares result for one 
 subject with the results provided in the repository.
 
-For comparing results of numerical computation we often do not check if the
-numbers match exactly, but we specify absolute and/or relative tolerance. 
-
 
 > ## Hands on exercise:
 >
@@ -146,6 +181,9 @@ numbers match exactly, but we specify absolute and/or relative tolerance.
 > >
 > > The following solution is written using Python and use instructions from  
 > > [README file](https://github.com/ReproNim/simple_workflow/blob/master/README.md).
+> >
+> > Note that for comparing results of numerical computation we often do not check if the
+> > numbers match exactly, but we specify absolute and/or relative tolerance.
 > > 
 > > ~~~
 > > import json
@@ -187,7 +225,7 @@ Most open source projects use Git as a version control system and Github as a we
 (TODO link to Yarik's part).
 
 In order to automate the testing, the building process should be easy and fully automated,
-that can be achive by using tools like `make`.
+that can be achieve by using tools like `make`.
 If you use Python or other interpreted languages, the code does not need to be compiled, but 
 you still have to remember about the software dependencies. 
 For Python projects, requirements files that contain a list of items to be installed
@@ -207,8 +245,34 @@ Once you have a requirement file, you can easily install all dependencies by run
 $ `pip install -r requirements.txt`
 ~~~
 
+More about `pip` and `requiremnts.txt` you can find on [pip website](https://pip.pypa.io/en/stable/user_guide/)
+
+Alternatively, you might want to use [conda](https://conda.io/docs/index.html) that is 
+an open source package management system and environment management system. 
+Then, you can create an environment file `environment.yml` that specifies name, channels
+and dependencies. 
+The simplest examples of the environment file can look like this:
+
+~~~
+name: stats
+dependencies:
+  - numpy
+  - pandas
+~~~
+
+The environment file from Simple Workflow can be found [here](https://github.com/ReproNim/simple_workflow/blob/master/environment.yml).
+
+In order to create a conda environment based on the requirements you should run:
+
+~~~
+conda env create -f environment.yml
+~~~
+
+More about the conda environments can be found [here](https://conda.io/docs/using/envs.html).
+
+
 In addition to the traditional build, that only assure the program runs,
-unit and regression testing should be incorporate into the build process to confirm that
+unit and regression tests should be incorporate into the build process to confirm that
 the program behaves as we expect.
 If you're using `pytest` for your Python project, you can add `py.test` command to
 the building process.
@@ -265,16 +329,37 @@ install:
 
 script: py.test
 ~~~
- 
+
 Check the [Python projects specific guide](https://docs.travis-ci.com/user/languages/python/)
 for more examples.
 Travis CI can also run and build Docker images, check the 
 [Travis website](https://docs.travis-ci.com/user/docker/) for more information.
 
+> ## Hands on exercise:
+>
+> Create a github repository (create an account first if you don't have one) with a simple file
+> that containes `creating_dataframe` function and the test you wrote in previous parts.
+> Next, create a `requiremnts.txt` and `.travis.yml` files, that runs the test.
+> Afterward, open a Travis account and add your repository, so the tests are run automatically.
+>
+> > ## Exemplary solution
+> >
+> > `requiremnts.txt` can look like this:
+> >
+> > ~~~
+> > json
+> > pandas
+> > pytest
+> > ~~~
+> >
+> {: .solution}
+{: .challenge}
+
+
  * Travis CI is not the only continuous integration service that can be used with 
 a GitHub repository. 
-You might want to check  [Circle CI](https://circleci.com/)
-or [Codeship](https://codeship.com/) platforms. 
+Simple Workflow project uses [Circle CI servis](https://circleci.com/). 
+You might also want to check [Codeship](https://codeship.com/) platforms. 
 If you're interested, you can find blog posts that compare these tools, e.g by
 [Alex Gorbatchev](https://strongloop.com/strongblog/node-js-travis-circle-codeship-compare/).
 
@@ -286,11 +371,7 @@ If you're interested, you can find blog posts that compare these tools, e.g by
 
 > ## Hands on exercise:
 >
->  - Create a GitHub account if you don't have one.
 >  - Fork the Simple Workflow repository and clone your own fork to your computer.
->  - Create a test directory and write a few unit tests for the function from `run_demo_workflow.py`. Run the test locally on your computer. 
->  - Write some regression tests and compare your results to the results from `expected_output`. Run the test locally.
->  - Login to Travis and link your repository.
->  - Create `.travis.yml` file and run your tests using the Travis platform.
->  - Try to use other CI platforms, e.g. CircleCI to do the same.
->  - Try to run your tests using a Docker container (see the [README](https://github.com/ReproNim/simple_workflow#1-to-execute-demo-with-docker)) on a CI platform (note that various CI platform have various memory and time limitations).
+>  - Add your tests to the repository
+>  - Understand `circle.yml` file and change it to incorporate your tests into the test part.
+
