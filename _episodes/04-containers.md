@@ -25,9 +25,10 @@ focus on components relevant to brain imaging analyses.
 
 ### Lesson outline
 
-- Understanding container technologies
-- Using reproducible computational environments
-- Creating reproducible computational environments
+- Element 1: Overview
+- Element 2: Understanding container technologies
+- Element 3: Using reproducible computational environments
+- Element 4: Creating reproducible computational environments
 
 ### Lesson requirements
 
@@ -36,7 +37,7 @@ It is essential to have a basic understanding of:
 - Package managers (e.g., apt, yum, brew, linuxbrew, conda, npm)
 - Git/Github
 
-###  Overview
+###  Element 1: Overview
 
 Carrying out reproducible data processing requires understanding details of the
 software environment used in the analysis. An analysis is the outcome of data,
@@ -59,7 +60,7 @@ understanding of:
 There are many ways to re-create a complete environment. Usually it is done via 
 construction of environment "images" or "containers".
 
-#### Understanding container technologies
+### Element 2: Understanding container technologies
 
 Container technologies provide a mechanism to encapsulate analysis environments
 for redistribution. Many of these technologies also allow creating an executable
@@ -78,7 +79,7 @@ between these technologies.
 You can use each of the technologies above to setup analysis environments for 
 brain imaging.
 
-#### Using pre-built containers for brain imaging
+### Element 3: Using pre-built containers for brain imaging
 
 1. **Vagrant:** A neuroimaging environment based on [NeuroDebian](http://neuro.debian.net/) can be initialized quickly 
 using a single command: 
@@ -86,6 +87,8 @@ using a single command:
    ```
    vagrant init hlaubish/NeuroDebian_64; vagrant up --provider virtualbox
    ```
+
+   You can read more about NeuroDebian VM [here](http://neuro.debian.net/vm.html)
    
    A general introduction to Vagrant is [available here](https://www.vagrantup.com/docs/getting-started/)
 and a video tutorial is below. 
@@ -96,9 +99,17 @@ This virtual machine can be used to reproduce the analyses from [this paper](htt
 
 2. **NITRC-CE:** TODO
 
-3. **Docker**: An set of example brain imaging docker containers can be found as
-part of the [BIDS-Apps](http://bids-apps.neuroimaging.io/) project. The project
-provides a basic tutorial to get started with the app.
+3. **Docker**: 
+
+There are many existing images available on [Docker Hub](https://hub.docker.com/). 
+You can find images for [Ubuntu](https://hub.docker.com/_/ubuntu/) as well as images that contain
+more specific software, e.g. [Nipype](https://hub.docker.com/r/nipype/nipype/).
+Simple examples of how to pull and run can be found in this 
+[presentation](http://nipy.org/workshops/2017-03-boston/lectures/lesson-container/#29).
+
+An set of example brain imaging docker images can be also found as
+part of the [BIDS-Apps](http://bids-apps.neuroimaging.io/apps/) project. The project
+provides a basic [tutorial](http://bids-apps.neuroimaging.io/tutorial/) to get started with the app.
 
 4. **Singularity**: Singularity is useful in HPC centers where docker is not 
 allowed. Any docker image can be pulled in as a singularity container. Therefore,
@@ -109,9 +120,12 @@ command:
    singularity shell docker://bids/freesurfer
    ```
    
-For more details see the following [tutorial](http://singularity.lbl.gov/singularity-tutorial)
+For more details on how to run an image you can find 
+[here](http://singularity.lbl.gov/singularity-tutorial#make-and-run-containers).
 
-#### Creating a Vagrant VM for distribution
+### Element 3: Creating reproducible computational environments
+
+#### 1. Creating a **Vagrant VM** for distribution
 Vagrant supports VirtualBox and VMWare virtual machines. [Using Vagrant with 
 VirtualBox](https://www.vagrantup.com/docs/getting-started/) is a matter of 
 creating a Vagrantfile and using it download and configure an execution 
@@ -129,7 +143,9 @@ vagrant ssh -c /bin/sh <<EOF
 EOF
 ```
 
-#### Docker
+#### 2.  **NITRC-CE:** TODO
+
+#### 3. Create a **Docker** image
 Docker provides a slew of services to make building and distributing containers
 easier. This includes integration with GitHub and the ability to **`pull`**
 pre-built containers from Docker hub. In addition docker containers can 
@@ -138,7 +154,7 @@ orchestrated together with **`docker-compose`** to generate interacting services
 1. [Gentle introduction to docker for scientists](https://neurohackweek.github.io/docker-for-scientists/)
 2. [More extensive tutorial for docker](https://prakhar.me/docker-curriculum/) 
 
-#### Singularity
+#### Create a **Singularity** image
 Singularity offers an alternative to docker on HPC clusters. Creating singularity
 containers requires root privileges on a machine virtual or physical. However,
 using singularity does not. The [Singularity User Guide](http://singularity.lbl.gov/user-guide)
