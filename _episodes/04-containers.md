@@ -67,17 +67,48 @@ for redistribution. Many of these technologies also allow creating an executable
 environment based on a script, thus allowing ease of reproducing analysis 
 environments. Some popular virtual machine and container technologies are:
 
-  1. Virtual Machines and [Vagrant](https://www.vagrantup.com/)
-  2. [Amazon AMIs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html#creating-an-ami)
+1. [Virtual Machines](https://en.wikipedia.org/wiki/Virtual_machine) 
+and [Vagrant](https://www.vagrantup.com/)
+
+A Virtual Machine (VM) is an emulation of a computer system. 
+Virtual machines are based on computer architectures and provide functionality of 
+a physical computer. 
+And Vagrant is a tool that simplifies process of building and managing 
+virtual machine environments. 
+
+2. [Amazon AMIs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html#creating-an-ami)
      a. [NITRC Computational Environment: NITRC-CE](http://www.nitrc.org/plugins/mwiki/index.php/nitrc:User_Guide_-_NITRC_Computational_Environment)
-  3. [Docker](https://www.docker.com/)
-  4. [Singularity](http://singularity.lbl.gov/)
 
-There are [technical differences](https://medium.freecodecamp.com/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b#.kchrpokfz) 
+3. [Docker](https://www.docker.com/)
+
+Docker provides a slew of services to make building and distributing containers
+easier. This includes integration with GitHub and the ability to **`pull`**
+pre-built containers from Docker hub. In addition docker containers can
+orchestrated together with **`docker-compose`** to generate interacting services.
+
+- [Gentle introduction to docker and other containers for scientists](http://nipy.org/workshops/2017-03-boston/lectures/lesson-container/#1)
+- [More extensive tutorial for docker (including building and deploying new webapps)](https://prakhar.me/docker-curriculum/)
+
+4. [Singularity](http://singularity.lbl.gov/)
+
+Docker is a vefy popular container solution in DevOps world. 
+Unfortunatelly, Docker can not be easily used on traditional HPC resources. 
+One of the main reason is privilige escalation via Docker, 
+i.e. users can get root access to the host system.
+Singularity is a container solution for researchers that is becoming popular in HPC centers.
+Singularity doesn’t open up security risks, and it integrates into existing process 
+and resource manager workflows, supports GPU and MPI.
+looking for “mobility of compute” so they can run their workflows anywhere. 
+You can read more on [Singularity FAQ](http://singularity.lbl.gov/faq).
+
+You can use each of the technologies above to setup analysis environments for
+brain imaging, but there are important technical differences between them.
+
+ - [Nice introduction to containers and technical differences between VM and Docker](https://medium.freecodecamp.com/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b#.kchrpokfz) 
 between these technologies.
+ - [Features comparison between Docker and Singularity](https://tin6150.github.io/psg/blogger_container_hpc.html).
+ - [More technical comparison of Docker and Singularity](http://www.admin-magazine.com/HPC/Articles/Singularity-A-Container-for-HPC)   
 
-You can use each of the technologies above to setup analysis environments for 
-brain imaging.
 
 ### Element 3: Using pre-built containers for brain imaging
 
@@ -104,14 +135,17 @@ This virtual machine can be used to reproduce the analyses from [this paper](htt
 There are many existing images available on [Docker Hub](https://hub.docker.com/). 
 You can find images for [Ubuntu](https://hub.docker.com/_/ubuntu/) as well as images that contain
 more specific software, e.g. [Nipype](https://hub.docker.com/r/nipype/nipype/).
-Simple examples of how to pull and run can be found in this 
+Simple examples of how to pull and run an image can be found in this 
 [presentation](http://nipy.org/workshops/2017-03-boston/lectures/lesson-container/#29).
 
 An set of example brain imaging docker images can be also found as
-part of the [BIDS-Apps](http://bids-apps.neuroimaging.io/apps/) project. The project
-provides a basic [tutorial](http://bids-apps.neuroimaging.io/tutorial/) to get started with the app.
+part of the [BIDS-Apps](http://bids-apps.neuroimaging.io/apps/) project. 
+The project provides a basic [tutorial](http://bids-apps.neuroimaging.io/tutorial/) 
+to get started with the app.
 
-4. **Singularity**: Singularity is useful in HPC centers where docker is not 
+4. **Singularity**: 
+
+Singularity is useful in HPC centers where docker is not 
 allowed. Any docker image can be pulled in as a singularity container. Therefore,
 you can retrieve any of the bids-apps above as a singularity image using the 
 command:
@@ -119,6 +153,8 @@ command:
    ```
    singularity shell docker://bids/freesurfer
    ```
+
+Singularity also has an online registry for images -- [Singularity Hub](https://singularity-hub.org/). 
    
 For more details on how to run an image you can find 
 [here](http://singularity.lbl.gov/singularity-tutorial#make-and-run-containers).
@@ -146,13 +182,8 @@ EOF
 #### 2.  **NITRC-CE:** TODO
 
 #### 3. Create a **Docker** image
-Docker provides a slew of services to make building and distributing containers
-easier. This includes integration with GitHub and the ability to **`pull`**
-pre-built containers from Docker hub. In addition docker containers can 
-orchestrated together with **`docker-compose`** to generate interacting services.
 
-1. [Gentle introduction to docker for scientists](https://neurohackweek.github.io/docker-for-scientists/)
-2. [More extensive tutorial for docker](https://prakhar.me/docker-curriculum/) 
+
 
 #### Create a **Singularity** image
 Singularity offers an alternative to docker on HPC clusters. Creating singularity
