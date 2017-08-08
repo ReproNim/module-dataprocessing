@@ -25,9 +25,11 @@ focus on components relevant to brain imaging analyses.
 
 ### Lesson outline
 
-- Understanding container technologies
-- Using reproducible computational environments
-- Creating reproducible computational environments
+- Element 1: Overview
+- Element 2: Understanding container technologies
+- Element 3: Using reproducible computational environments
+- Element 4: Creating reproducible computational environments
+- Element 5: Capturing the essential pieces needed for an analysis
 
 ### Lesson requirements
 
@@ -36,7 +38,7 @@ It is essential to have a basic understanding of:
 - Package managers (e.g., apt, yum, brew, linuxbrew, conda, npm)
 - Git/Github
 
-###  Overview
+###  Element 1: Overview
 
 Carrying out reproducible data processing requires understanding details of the
 software environment used in the analysis. An analysis is the outcome of data,
@@ -59,26 +61,84 @@ understanding of:
 There are many ways to re-create a complete environment. Usually it is done via 
 construction of environment "images" or "containers".
 
-#### Understanding container technologies
+### Element 2: Understanding container technologies
 
 Container technologies provide a mechanism to encapsulate analysis environments
 for redistribution. Many of these technologies also allow creating an executable
 environment based on a script, thus allowing ease of reproducing analysis 
 environments. Some popular virtual machine and container technologies are:
 
-  1. Virtual Machines and [Vagrant](https://www.vagrantup.com/)
-  2. [Amazon AMIs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html#creating-an-ami)
+1. [Virtual Machines](https://en.wikipedia.org/wiki/Virtual_machine) 
+and [Vagrant](https://www.vagrantup.com/)
+
+A Virtual Machine (VM) is an emulation of a computer system. 
+Virtual machines are based on computer architectures and provide functionality of 
+a physical computer. 
+And Vagrant is a tool that simplifies process of building and managing 
+virtual machine environments. 
+
+Follow [instructions](https://www.vagrantup.com/downloads.html) to install Vagrant.
+
+2. [Amazon AMIs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html#creating-an-ami)
      a. [NITRC Computational Environment: NITRC-CE](http://www.nitrc.org/plugins/mwiki/index.php/nitrc:User_Guide_-_NITRC_Computational_Environment)
-  3. [Docker](https://www.docker.com/)
-  4. [Singularity](http://singularity.lbl.gov/)
 
-There are [technical differences](https://medium.freecodecamp.com/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b#.kchrpokfz) 
+3. [Docker](https://www.docker.com/)
+
+Docker provides a slew of services to make building and distributing containers
+easier. This includes integration with GitHub and the ability to **`pull`**
+pre-built containers from Docker hub. In addition docker containers can
+orchestrated together with **`docker-compose`** to generate interacting services.
+
+Unfortunatelly, Docker can not be easily used on traditional HPC resources.
+One of the main reason is privilige escalation via Docker,
+i.e. users can get root access to the host system.
+
+There are various versions of Docker depending on the system you're using, 
+reade more [here](https://docs.docker.com/) and follow to instruction 
+to install an appropriate version. 
+
+
+- [Gentle introduction to docker and other containers for scientists](http://nipy.org/workshops/2017-03-boston/lectures/lesson-container/#1)
+- [More extensive tutorial for docker (including building and deploying new webapps)](https://prakhar.me/docker-curriculum/)
+
+4. [Singularity](http://singularity.lbl.gov/)
+
+Singularity offers an alternative to docker on HPC clusters. Creating singularity
+containers requires root privileges on a machine virtual or physical. However,
+using singularity does not. The [Singularity User Guide](http://singularity.lbl.gov/user-guide)
+describes how to use the different components of singularity. One of the big
+advantages of Singularity is support for native drivers and libraries (e.g., GPU,
+MPI, etc.,.). 
+
+If you have Linux you can directly [install](http://singularity.lbl.gov/install-linux)
+and run on your OS. 
+For other systems, you should use Vagrant and VM, follow the instruction for 
+[Mac](http://singularity.lbl.gov/install-mac) or [Windows](http://singularity.lbl.gov/install-windows).
+
+You can use each of the technologies above to setup analysis environments for
+brain imaging, but there are important technical differences between them.
+
+ - [Nice introduction to containers and technical differences between VM and Docker](https://medium.freecodecamp.com/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b#.kchrpokfz) 
 between these technologies.
+ - [Features comparison between Docker and Singularity](https://tin6150.github.io/psg/blogger_container_hpc.html).
+ - [More technical comparison of Docker and Singularity](http://www.admin-magazine.com/HPC/Articles/Singularity-A-Container-for-HPC)   
 
-You can use each of the technologies above to setup analysis environments for 
-brain imaging.
 
-#### Using pre-built containers for brain imaging
+> ## Question:
+>
+>  Which container technologies can be used in HPC centers?
+>
+> > ## Answer
+> > 
+> > VM with Vagrant
+> > Singularity
+> >
+> {: .solution}
+{: .challenge}
+
+
+
+### Element 3: Using pre-built containers for brain imaging
 
 1. **Vagrant:** A neuroimaging environment based on [NeuroDebian](http://neuro.debian.net/) can be initialized quickly 
 using a single command: 
@@ -86,6 +146,8 @@ using a single command:
    ```
    vagrant init hlaubish/NeuroDebian_64; vagrant up --provider virtualbox
    ```
+
+   You can read more about NeuroDebian VM [here](http://neuro.debian.net/vm.html)
    
    A general introduction to Vagrant is [available here](https://www.vagrantup.com/docs/getting-started/)
 and a video tutorial is below. 
@@ -96,11 +158,22 @@ This virtual machine can be used to reproduce the analyses from [this paper](htt
 
 2. **NITRC-CE:** TODO
 
-3. **Docker**: An set of example brain imaging docker containers can be found as
-part of the [BIDS-Apps](http://bids-apps.neuroimaging.io/) project. The project
-provides a basic tutorial to get started with the app.
+3. **Docker**: 
 
-4. **Singularity**: Singularity is useful in HPC centers where docker is not 
+There are many existing images available on [Docker Hub](https://hub.docker.com/). 
+You can find images for [Ubuntu](https://hub.docker.com/_/ubuntu/) as well as images that contain
+more specific software, e.g. [Nipype](https://hub.docker.com/r/nipype/nipype/).
+Simple examples of how to pull and run an image can be found in this 
+[presentation](http://nipy.org/workshops/2017-03-boston/lectures/lesson-container/#29).
+
+A set of example brain imaging docker images can be also found as
+part of the [BIDS-Apps](http://bids-apps.neuroimaging.io/apps/) project. 
+The project provides a basic [tutorial](http://bids-apps.neuroimaging.io/tutorial/) 
+to get started with the app.
+
+4. **Singularity**: 
+
+Singularity is useful in HPC centers where docker is not 
 allowed. Any docker image can be pulled in as a singularity container. Therefore,
 you can retrieve any of the bids-apps above as a singularity image using the 
 command:
@@ -108,10 +181,63 @@ command:
    ```
    singularity shell docker://bids/freesurfer
    ```
-   
-For more details see the following [tutorial](http://singularity.lbl.gov/singularity-tutorial)
 
-#### Creating a Vagrant VM for distribution
+Singularity also has an online registry for images -- [Singularity Hub](https://singularity-hub.org/).
+You can pull images directly from either Docker Hub or Singularity Hub, more about `pull` 
+command you can find [here](http://singularity.lbl.gov/docs-pull). 
+   
+More details on how to run an image you can find 
+[here](http://singularity.lbl.gov/singularity-tutorial#make-and-run-containers).
+
+> ## Question:
+>
+>  Can you run a Docker image in HPC centers?
+>
+> > ## Answer
+> >
+> > Yes, if you have Singularity. 
+> > Singularity can run both Singularity and Docker images.
+> >
+> {: .solution}
+{: .challenge}
+
+> ## Hands on exercise:
+>
+> Pull satra/nih-workshop-2017 Docker image and check which python packages are installed.
+> Try to do it using Docker and Singularity.
+>
+> {: .solution}
+{: .challenge}
+
+> ## Hands on exercise:
+>
+> Repeat the previous exercise using Singularity.
+>
+> {: .solution}
+{: .challenge}
+
+
+> ## Hands on exercise:
+> 
+> Follow  [Simple Workflow README] (https://github.com/ReproNim/simple_workflow)
+> and run `run_demo_workflow.py` for one subject. 
+> Be sure to mount the directory to save your output.
+>
+> {: .solution}
+{: .challenge}
+
+> ## Hands on exercise:
+>
+> Repeat the previous exercise using Singularity.
+>
+> {: .solution}
+{: .challenge}
+
+
+
+### Element 4: Creating reproducible computational environments
+
+#### 1. Creating a **Vagrant VM** for distribution
 Vagrant supports VirtualBox and VMWare virtual machines. [Using Vagrant with 
 VirtualBox](https://www.vagrantup.com/docs/getting-started/) is a matter of 
 creating a Vagrantfile and using it download and configure an execution 
@@ -129,23 +255,33 @@ vagrant ssh -c /bin/sh <<EOF
 EOF
 ```
 
-#### Docker
-Docker provides a slew of services to make building and distributing containers
-easier. This includes integration with GitHub and the ability to **`pull`**
-pre-built containers from Docker hub. In addition docker containers can 
-orchestrated together with **`docker-compose`** to generate interacting services.
+#### 2.  **NITRC-CE:** TODO
 
-1. [Gentle introduction to docker for scientists](https://neurohackweek.github.io/docker-for-scientists/)
-2. [More extensive tutorial for docker](https://prakhar.me/docker-curriculum/) 
+#### 3. Create a **Docker** image
 
-#### Singularity
-Singularity offers an alternative to docker on HPC clusters. Creating singularity
-containers requires root privileges on a machine virtual or physical. However,
-using singularity does not. The [Singularity User Guide](http://singularity.lbl.gov/user-guide)
-describes how to use the different components of singularity. One of the big 
-advantages of Singularity is support for native drivers and libraries (e.g., GPU,
-MPI, etc.,.). One can also use vagrant to create a virtual machine with singularity that can 
-in turn be used to create another singularity container.
+In order to create a Docker Image, you should write a 
+[Dockerfile](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/).
+A simple example of writing Dockerfile and build an image you can find
+[here](http://nipy.org/workshops/2017-03-boston/lectures/lesson-container/#31).
+
+If you want to create a new image for neuroimaging, you should check 
+[Nuerodocker project](https://github.com/kaczmarj/neurodocker) that allows you 
+to  generate custom Dockerfiles and minifies existing Docker images.
+ 
+
+#### Create a **Singularity** image
+
+In order to create an empty image or import layers from Docker image, you don't 
+need root privileges. You can do it using 
+[`create` and `import` commands](http://singularity.lbl.gov/quickstart#command-quick-start).
+
+However, if you want to install additional software or create an image from scratch,
+you need to have root privileges on a machine. 
+It doesn't have to be a physical machine, if you're using HPC account, you can use Vagrant 
+to create a Virtual Machine with Singularity  that can in turn be used to create a new image.
+
+This is a similar situation to running Singularity on Mac or Windows. 
+You can follow the instruction from previous part or try to build a Vagrant Box from scratch:
 
 ```
 vagrant init ubuntu/trusty64
@@ -163,10 +299,62 @@ vagrant ssh -c /bin/sh <<EOF
 EOF
 ```
 
-Here is a tutorial that uses such a virtual machine to create a Tensorflow 
+If you want to create a new image you're going to share, the recommended practice is to 
+create a bootstrap file.
+You can still start from a Docker image, but you can easily add environmental variables, 
+additional software etc.
+More on how to write bootstrap files and create a new image is 
+[here](http://singularity.lbl.gov/quickstart#bootstrap-recipes). 
+
+If you want to change already existing image (e.g. for testing purpose), 
+you can mount the image using 
+[`--writable` option](http://singularity.lbl.gov/docs-changing-containers)
+(yes, you need to have root privileges).
+
+
+Here is a tutorial that create a virtual machine in order tp create a Tensorflow 
 container with GPU support. <script type="text/javascript" src="https://asciinema.org/a/100998.js" id="asciicast-100998" async></script>
 
-### Capturing the essential pieces needed for an analysis
+> ## Question:
+>
+> Which Singularity commands require root privileges?
+>
+> > ## Answer
+> >
+> > bootstrap
+> > most commands with `--writable` options
+> >
+> {: .solution}
+{: .challenge}
+
+> ## Hands on exercise:
+>
+> Create a Docker image using Neurodocker with a specific version of FSL
+> and a Python 3.6 conda environment. 
+>
+> {: .solution}
+{: .challenge}
+
+> ## Hands on exercise:
+>
+> Create a Singularity image by importing previously created Docker image.
+>
+> {: .solution}
+{: .challenge}
+
+
+> ## Hands on exercise:
+>
+> Create a bootsrap file that starts from your Docker image.
+> In addition to FSL install git and your favourite text editor (e.g. emacs). 
+> Create directories for your data and output.
+>
+> {: .solution}
+{: .challenge}
+
+
+
+### Element 5: Capturing the essential pieces needed for an analysis
 
 Many packages, such as FSL, FreeSurfer, AFNI, do many different kinds of 
 computation. Not all of the components are necessary for a specific analysis, 
