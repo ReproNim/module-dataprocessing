@@ -23,148 +23,211 @@ keypoints:
 >  - How to run Docker container with CI platform?
 
 
-This lesson extends the software testing subject 
-and introduces Continuous Integration workflow. Examples of Python testing frameworks 
-and CI platforms will be used.   
+This lesson extends the software testing topic and introduces Continuous Integration 
+workflow. 
+Examples of Python testing frameworks and CI platforms will be used.   
 
 ### Lesson outline
 
-- Element 1: Unit, integration and regression tests
+- Element 1: Introduction to regression tests
 - Element 2: Python testing frameworks
-- Element 3: Continuous Integration practice
-- Element 4: Continuous Integration Service: Travis CI
+- Element 3: Regression tests for Simple Workflow
+- Element 4: Continuous Integration practice
+- Element 5: Continuous Integration Service: Travis CI
 
 
 ### Lesson requirements
 
 It is essential to have a basic understanding of:
-- Python
-- Git and GitHub
+- Python (TODO: do we general resources for Python)
+- Git and GitHub (TODO: Yarik's part)
 
 Although not essential it is helpful to have an understanding of:
-- Unit tests
+- Unit tests: you can read Software Carpentry [materials](http://katyhuff.github.io/python-testing/04-units/)
 
 
-### Element 1: Unit, integration and regression tests
+### Element 1: Introduction to regression tests
 
-- [Unit tests](https://en.wikipedia.org/wiki/Unit_testing) isolate each part of the program and show that the individual parts are correct.
+[Regression tests](https://en.wikipedia.org/wiki/Regression_testing)  verify that 
+software previously developed and tested still performs correctly 
+even after it was changed or interfaced with other software.
+As opposed to writing [unit tests](https://en.wikipedia.org/wiki/Unit_testing) you don't have to 
+knows the correct output, the assumption is that the past results are correct.
 
-- [Integration tests](https://en.wikipedia.org/wiki/Integration_testing) combine individual software modules and test as a group. 
+In science, regression tests perform a special role. 
+Scientists often don't know what is the correct answer before doing the research, 
+therefore results can't be compared to the prior known results.
+However, you still want to be sure that your published results are not sensitive to 
+an operating system, a specific version of library, etc.
+If your results differ when you're changing computer environment, you should understand the 
+source of the changes. 
+The first step would be to automatically check the results with various environments
+whenever you make any changes.
+You can achieve this by combining your regression tests with a CI platform.
 
-- [Regression tests](https://en.wikipedia.org/wiki/Regression_testing) verify that software previously developed and tested still 
-  performs correctly even after it was changed or interfaced with other software. 
-  For regression tests you don't have to knows what the expected result should be, 
-  the assumption is that the past results were correct. 
+> ## Regression tests and future development
+> Regression tests (as well as unit and any other type of tests) can help you with future
+> development process.
+> Whenever you're changing your code, by adding new functionality or improving performance,
+> you can check if you're still able to reproduce your previous results.
+> The results might change if you're improving the part of the code that is involved 
+> in the analysis, but it's important to understand what aspect of the code change leads to 
+> a change in output. 
+> Thus regression tests can help associate changes in the output with changes in code,
+> so guard you against inexplicable changes in your results.
+
+> Moreover, writing regression tests that are based on your published results allow other
+> scientists to verify easily their scientific approach, software used, or similar data set.
+{: .callout}
+
+- Resources: 
+  - the software carpentry provide more materials on 
+[unit](http://katyhuff.github.io/python-testing/04-units/), 
+[integration and regression test](http://katyhuff.github.io/python-testing/07-integration/)
 
 
-- Resources: More about unit, integration and regression test you might find at the software carpentry [lesson](http://katyhuff.github.io/python-testing/index.html).
+### Element 2: Testing Python code with Pytest
 
+You can find a very good introduction to all Python test frameworks in
+[Brian Okken introduction](http://pythontesting.net/start-here/).
 
-
-### Element 2: Python testing frameworks
-- Python has a few popular testing frameworks:
-  * [unittest library](https://docs.python.org/2/library/unittest.html): 
-a standard module that offers xUnit style framework.
-  * [nose library](http://nose.readthedocs.io/en/latest/): 
-a python unit test framework, no boilerplate, can run doctests, unittests.  
-  * [pytest library](http://doc.pytest.org/en/latest/): 
-a powerful python test framework, no boilerplate, easy to start working, 
-    covers extensive options and testing features. 
-
-- Resources: a very good introduction to all Python test frameworks by 
-[Brian Okken](http://pythontesting.net/start-here/).
-
-
-### Pytest 
-If you don't have any specific reason to use other library we recomemnd using pytest. 
+If you don't have any specific reason to use other library we recommend using
+ [pytest library](http://doc.pytest.org/en/latest/). 
 The pytest framework makes it easy to write simple tests and allows you to use 
 the standard python assert for verifying your result.
 At the same time pytest scales well to support complex testing for whole libraries.
 
   * Usage examples can be found [here](http://doc.pytest.org/en/latest/usage.html).
   * Rules for standard test discovery can be found [here](http://doc.pytest.org/en/latest/goodpractices.html).
+  * [Examples of tests using Pytest](http://doc.pytest.org/en/latest/example/index.html)
+  * [More examples from Brian Okken website](http://pythontesting.net/framework/pytest/pytest-introduction/)
+
+> ## Hands on exercise:
+>
+>  Write a simple unit test for `creating dataframe` function from `check_output.py` or any other function 
+>  from  Simple Workflow.
+>
+> > ## Exemplary solution
+> > 
+> > Create an exemplary directory `output_1` with subdirectories `sub_a`, `sub_b` and `sub_c`. 
+> > Each of these subdirectories should contain a `data.json` file with a dictionary that has at least 
+> > one element: `{"first": [1, 11]}`.
+> > 
+> > ~~~
+> > import sys, os, glob
+> > import pandas as pd
+> > from check_output import creating_dataframe
+> > 
+> > def test_creating_dataframe():
+> >     filename_list = sorted(glob.glob('output_1/*/data.json'))
+> > 
+> >     data_frame = creating_dataframe(filename_list)
+> > 
+> >     assert (data_frame.first_volume.keys() == ['sub_a', 'sub_b', 'sub_c']).all()
+> >     assert (data_frame.first_volume == [11., 33, 55]).all()
+> >     assert (data_frame.first_voxels == [1., 3, 5]).all()
+> >
+> {: .solution}
+{: .challenge}
 
 
-- Examples of simple unit tests:
-  
-~~~
-def half(a):
-    return a/2
-
-def test_div():
-    assert half(3) == 1.5
-~~~
-
-  
-~~~
-import numpy as np
-
-def mean_col(array):
-    return np.nanmean(array, axis=0)
-
-def test_array_type():
-a = np.array([[2, 3, 4], [12, 13, np.nan])]
-    assert (mean_col(a) == np.array([ 7.,  8.,  4.])).all()
-~~~
-
-- Examples of simple reggresion tests based on [Simple Workflow](https://github.com/ReproNim/simple_workflow):
-
-~~~
-import json
-import numpy as np
-import subprocess as sp
-
-def test_comparison():
-    # calling python script from command line 
-    sp.call(["python", "run_demo_workflow.py", "--key", "11an55u9t2TAf0EV2pHN0vOd8Ww2Gie-tHp9xGULh_dA", "-n", "1"])
-
-    # a new file created by the script
-    new_filename = "output/AnnArbor_sub16960/segstats.json"
-    # the referential file (that has been probably created using different environment) 
-    expected_filename = "expected_output/AnnArbor_sub16960/segstats.json"
-
-    with open(new_filename, 'r') as fp:
-        new_output = json.load(fp)
-
-    with open(expected_filename, 'r') as fp:
-        expected_output = json.load(fp)
-
-    # comparing results from both files using numpy allclose function
-    for key, val in new_output.items():
-        assert np.allclose(expected_output[key], val, rtol=1e-02)
-~~~
-
-- More advance examples of test written using pytes can be found: 
-  * [Brian Okken website](http://pythontesting.net/framework/pytest/pytest-introduction/)
-  * [Pytest website](http://doc.pytest.org/en/latest/example/index.html)
+> ## Hands on exercise:
+>
+>  Change the previous test so it checks the results for more than one directory,
+> use `@pytest.mark.parametrize` decorator.
+>
+> > ## Exemplary solution
+> >
+> > Create an exemplary directory `output_1` with subdirectories `sub_a`, `sub_b` and `sub_c`.
+> > Each of these subdirectories should contain a `data.json` file with a dictionary that has at least
+> > one element: `{"first": [1, 11]}`.
+> >
+> > ~~~
+> > import sys, os, glob
+> > import pandas as pd
+> > from check_output import creating_dataframe
+> >
+> > @pytest.mark.parametrize(directory_name, keys, volume_list, voxel_list, [
+> >                           ("output_1", ['sub_a', 'sub_b', 'sub_c'], [11, 33, 55], [1, 3, 5]),
+> >                           ("output_2", ['subject_1', 'subject_2'], [8.5, 3.], [11.4, 3.5]),
+> >                          ])			      
+> > def test_creating_dataframe(directory_name, keys, volume_list, voxel_list):
+> >     filename_list = sorted(glob.glob(os.path.join(directory_name, '/*/data.json')))
+> >
+> >     data_frame = creating_dataframe(filename_list)
+> >
+> >     assert (data_frame.first_volume.keys() == keys).all()
+> >     assert (data_frame.first_volume == volume_list).all()
+> >     assert (data_frame.first_voxels == voxel_list).all()
+> >
+> {: .solution}
+{: .challenge}
 
 
-### Element 3: Overview of Continuous Integration
-Continuous Integration is a software development practice where members of a team test 
-and integrate their work frequently against a controlled source code repository. 
+### Element 3: Regression tests for Simple Workflow
+
+In the [Simple Workflow](https://github.com/ReproNim/simple_workflow) 
+repository you can find directory with the 
+[expected output](https://github.com/ReproNim/simple_workflow/tree/master/expected_output).
+Having the expected output allows to write a simple regression tests that compares result for one 
+subject with the results provided in the repository.
+
+
+> ## Hands on exercise:
+>
+>  Write a simple regression test to compare results with expected results for one subject. 
+>
+> > ## Exemplary solution
+> >
+> > The following solution is written using Python and use instructions from  
+> > [README file](https://github.com/ReproNim/simple_workflow/blob/master/README.md).
+> >
+> > Note that for comparing results of numerical computation we often do not check if the
+> > numbers match exactly, but we specify absolute and/or relative tolerance.
+> > 
+> > ~~~
+> > import json
+> > import numpy as np
+> > import subprocess as sp
+> > 
+> > def test_comparison():
+> >     # calling python script from command line 
+> >     sp.call(["python", "run_demo_workflow.py", "--key", "11an55u9t2TAf0EV2pHN0vOd8Ww2Gie-tHp9xGULh_dA", "-n", "1", "-o", "my_output"])
+> > 
+> >     # a new file created by the script
+> >     new_filename = "my_output/AnnArbor_sub16960/segstats.json"
+> >     # the referential file (that has been probably created using different environment) 
+> >     expected_filename = "expected_output/AnnArbor_sub16960/segstats.json"
+> > 
+> >     with open(new_filename, 'r') as fp:
+> >         new_output = json.load(fp)
+> > 
+> >     with open(expected_filename, 'r') as fp:
+> >         expected_output = json.load(fp)
+> > 
+> >     # comparing results from both files using numpy allclose function
+> >     for key, val in new_output.items():
+> >         assert np.allclose(expected_output[key], val, rtol=5e-02)
+> > ~~~
+> {: .solution}
+{: .challenge}
+
+### Element 4: Overview of Continuous Integration
+Continuous Integration is a practice commonly used by members of software development teams
+ that contains testing and integrating their work frequently against a controlled source code repository. 
 The main benefit of CI are reduced risk of long integration process at the end 
-of a project and easier to find and remove bugs.
+of a project, and easier to find and remove bugs.
 
-The best CI practices evolve over time as new technology and techniques are introduced, 
-but these are selected principles of CI:
 
- * Maintain a code repository
-
-The team should use a version control system, 
+CI requires to use a version control system, 
 that allows for easy tracking all changes of the project's source code. 
 Most open source projects use Git as a version control system and Github as a web hosting service
 (TODO link to Yarik's part).
 
-
- * Automate the build and testing using various environments
-
-Building of the system, that includes compiling, linking and other processes that are required 
-to execute the program, should be triggered by a single command line. 
-Build tools, such as `make`, can help to automate the build.
-
-In practice, if you use Python or other interpreted languages, 
-code does not need to be compiled. 
-You still might need to remember about the software dependencies. (TODO: is it the place for mentioning requirements?)
+In order to automate the testing, the building process should be easy and fully automated,
+that can be achieve by using tools like `make`.
+If you use Python or other interpreted languages, the code does not need to be compiled, but 
+you still have to remember about the software dependencies. 
 For Python projects, requirements files that contain a list of items to be installed
 are often used. A typical structure of a file called `requirements.txt` is:
 
@@ -182,8 +245,34 @@ Once you have a requirement file, you can easily install all dependencies by run
 $ `pip install -r requirements.txt`
 ~~~
 
+More about `pip` and `requiremnts.txt` you can find on [pip website](https://pip.pypa.io/en/stable/user_guide/)
+
+Alternatively, you might want to use [conda](https://conda.io/docs/index.html) that is 
+an open source package management system and environment management system. 
+Then, you can create an environment file `environment.yml` that specifies name, channels
+and dependencies. 
+The simplest examples of the environment file can look like this:
+
+~~~
+name: stats
+dependencies:
+  - numpy
+  - pandas
+~~~
+
+The environment file from Simple Workflow can be found [here](https://github.com/ReproNim/simple_workflow/blob/master/environment.yml).
+
+In order to create a conda environment based on the requirements you should run:
+
+~~~
+conda env create -f environment.yml
+~~~
+
+More about the conda environments can be found [here](https://conda.io/docs/using/envs.html).
+
+
 In addition to the traditional build, that only assure the program runs,
-unit and regressiontesting should be incorporate into the build process to confirm that
+unit and regression tests should be incorporate into the build process to confirm that
 the program behaves as we expect.
 If you're using `pytest` for your Python project, you can add `py.test` command to
 the building process.
@@ -191,24 +280,19 @@ the building process.
 Building and testing should be done using various environments you want to support, 
 e.g. Python 2.7 and Python 3.5.
 
-* Commit changes and integrate with the main code frequently
 
-As a developer you should try to commit at least once per day in order to keep track 
-of your changes.
-It is also good to integrate your changes with the main code frequently.
-By doing this, you can find out if there's a conflict between your work 
-and other developers work.
-If the main branch is automatically build and tested, 
-you can easily  detect conflicts in compilation and execution of your code. 
+A common practice is that every single pull request to the main branch of
+the project repository is automatically built and tested before merging. 
+That way, the team can easily  detect conflicts in compilation and execution of the code. 
 
 
-For a full list of CI principles with detailed explanation you can check online resources:
+For a list of CI principles with detailed explanation you can check online resources:
 - [Wikipedia](https://en.wikipedia.org/wiki/Continuous_integration)
 - A nice review by [Martin Fowler](https://www.martinfowler.com/articles/continuousIntegration.html)
 - A short blog post by [Darryl Bowler](http://blogs.collab.net/devopsci/ten-best-practices-for-continuous-integration)
 
 
-### Element 4: Continuous Integration Service: Travis CI 
+### Element 5: Continuous Integration Service: Travis CI 
 
 [Travis CI](https://travis-ci.org/) is a continuous integration service used to build 
 and test software projects hosted at GitHub.
@@ -216,7 +300,7 @@ It’s commonly used for open source Python projects that can use the service at
 
 In order to use Travis CI you have to sign in to the service with your GitHub account 
 and link Travis CI with the GitHub projects you want to test. 
-Please follow the instruction on the [Travis website] 
+Follow the instruction on the [Travis website] 
 (https://docs.travis-ci.com/user/getting-started/) 
 or from [a blog post](https://www.smartfile.com/blog/testing-python-with-travis-ci/).
 
@@ -245,59 +329,49 @@ install:
 
 script: py.test
 ~~~
- 
-Please check the [Python projects specific guide](https://docs.travis-ci.com/user/languages/python/)
+
+Check the [Python projects specific guide](https://docs.travis-ci.com/user/languages/python/)
 for more examples.
-Travis CI can also run and build Docker images, please check the 
+Travis CI can also run and build Docker images, check the 
 [Travis website](https://docs.travis-ci.com/user/docker/) for more information.
+
+> ## Hands on exercise:
+>
+> Create a github repository (create an account first if you don't have one) with a simple file
+> that containes `creating_dataframe` function and the test you wrote in previous parts.
+> Next, create a `requiremnts.txt` and `.travis.yml` files, that runs the test.
+> Afterward, open a Travis account and add your repository, so the tests are run automatically.
+>
+> > ## Exemplary solution
+> >
+> > `requiremnts.txt` can look like this:
+> >
+> > ~~~
+> > json
+> > pandas
+> > pytest
+> > ~~~
+> >
+> {: .solution}
+{: .challenge}
+
 
  * Travis CI is not the only continuous integration service that can be used with 
 a GitHub repository. 
-You might want to check  [Circle CI](https://circleci.com/)
-or [Codeship](https://codeship.com/) platforms. 
+Simple Workflow project uses [Circle CI servis](https://circleci.com/). 
+You might also want to check [Codeship](https://codeship.com/) platforms. 
 If you're interested, you can find blog posts that compare these tools, e.g by
-[Alex Gorbatchev](http://npmawesome.com/posts/2015-01-22-continuous-integration-in-the-cloud-comparing-travis-circle-and-codeship/).
+[Alex Gorbatchev](https://strongloop.com/strongblog/node-js-travis-circle-codeship-compare/).
 
 
 ### Other resources:
 - An easy to follow software carpentry [lesson about testing](http://katyhuff.github.io/python-testing/index.html).
+- [presentation from Nipype workshop](http://nipy.org/workshops/2017-03-boston/lectures/lesson-testing/#1).
+
 
 > ## Hands on exercise:
 >
->  - Create a GitHub account if you don't have one.
->  - Create a new repository and clone it, so you have a local version.
->  - Login to Travis and link your repository. 
->  - Create a text file with a simple data, you can copy our example:
-~~~
-number of dogs, number of cats, female(1)/male(0), age
-4, 0, 1, 33
-0, 4, 1, 44
-1, 1, 1, 21
-0, 0, 0, 66
-1, 0, 1, 47
-2, 1, 0, 31
-0, 2, 0, 22
-2, 0, 1, 51
-~~~
->  - Create `pets.py` file and function `mean(filename, pet_type)` that returns average age 
-of cat/dog owners.  
->  - Create a `test_pets.py` and a test function that checks proper results of 
->  the `mean` function for `pet_type=dog` and `pet_type=cat`. 
->  You can try to use [`pytest.mark.parametrize` option](http://doc.pytest.org/en/latest/parametrize.html).
->  - Run `pytest` locally and correct your `mean` function until all tests pass. 
->  - Create `requiremnts.txt` to ask for pytest library (not older than 3.0 version) 
-> and other libraries you might want to use. 
->  - Create `.travis.yml` file, ask for at least two different python version, 
-> install all libraries from `requiremnts.txt`, and run pytest to test your code. 
->  - Add everything to the repository and push to your GitHub. 
-> If Travis is set correctly, you should see that it builds various python environments 
-> and tests your code in each of them.
->  - If everything works you can come back to your local version of the repository, 
->  and think how would you like your code to behave if file doesn't contain data you expect
->  (e.g. raise exception if a file doesn't contain "number of dogs" or contain negative numbers,
->  remove a row that is incomplete)
->  - Create `test_input.py` and a few testing function that tests if your code behaves as you 
->  expect when file contain incorrect or incomplete data (you might want to create new text files 
->  with examples you want to test). Run pytest and improve your code until all test pass. 
->  - Add new tests to repository and run them using Travis.
->  - You migh want to create a Docker container and use it with the Travis platform.
+>  - Fork the Simple Workflow repository and clone your own fork to your computer.
+>  - Add your tests to the repository
+>  - Understand `circle.yml` file and change it to incorporate your tests into the test part.
+
