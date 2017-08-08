@@ -1,7 +1,7 @@
 ---
 title: "Lesson 2: Annotate, harmonize, clean, and version data"
-teaching: 15
-exercises: 30
+teaching: 60
+exercises: 60
 questions:
 - "How to work with and preserve data of different types?"
 objectives:
@@ -20,14 +20,14 @@ keypoints:
 >  - Do you know how to use DataLad to version data?
 {: .challenge}
 
-This lesson focuses on data, and how you can preserve data for yourself and for 
+This lesson focuses on how you can preserve data for yourself and for 
 your collaborators. In particular, understanding the technologies in this lesson
 will help you maintain and communicate information about your dataset explicitly.
 
 ### Lesson outline
 
-- Information stored in different types of data used in brain imaging research
-- Different data standards to capture information in structured form
+- [Information stored in different types of data used in brain imaging research](#datatypes)
+- [Different data standards to capture information in structured form](#standards)
 - How to clean data
 - How to store and publish data using versioning
 
@@ -37,7 +37,10 @@ Although not essential it is helpful to have an understanding of:
  
 - How brain imaging data are exported from a scanner
 - How to use a software tool (e.g., AFNI, FSL, SPM) to process data
-- Git and version control
+- [Git](http://swcarpentry.github.io/git-novice/)
+- [Git-Annex](https://git-annex.branchable.com/)
+
+<a name="datatypes" />
 
 ### Information stored in different data types in brain imaging
 
@@ -57,10 +60,14 @@ about participants. These include demographic data, data from
 neuropsychological and clinical assessments, and phsyiological measurements. 
 Typically such data are stored in CSV, TSV, or [JSON](json.org) files. But some
 types of measurements such as eye-tracking, respiration, GSR, may be stored in 
-proprietary file formants. In many cases data are also stored in Excel 
-spreadsheets or databases (e.g., RedCap, COINS, XNAT, LORIS, etc.,.). It is 
-important to consider what information is stored in each file before converting
-or extracting the information.
+proprietary file formats. In many cases data are also stored in Excel 
+spreadsheets or databases (e.g., RedCap, COINS, XNAT, LORIS, etc.,.). 
+
+It is important to consider what information is stored in each file or database 
+before converting or extracting the information. This includes understanding the 
+variables that are represented, their datatypes (string, integer, float, double),
+ their range  (e.g., age > 0) or set membership (e.g., diagnosis part of DSM-V 
+or ICD-10), and their units (e.g., years, mm).
 
 2. **MRI data:** Most scanners output data in [DICOM](http://dicom.nema.org/standard.html) 
 format. However, DICOM supports any medical imaging device and can store 2D, 3D,
@@ -83,11 +90,20 @@ introspect these files.
    - Nrrd (Slicer/ITK community)
    - Analyze (Mostly not in use any more)
    ```
+
+All of these formats store metadata (e.g., coordinate space information, resolution, 
+etc.,.) in the **header** component of the file and the 3D spatial intensity or 4D
+time series data in the **binary** component of the file. Each format uses their
+own definition for the header and store different types of information. This reduces
+the ease of converting from one type to another and in harmonizing the metadata.
    
 3. **Coordinate systems:** An MRI scan is an image of a physical object in 3D space. 
 Therefore, brains of different participants even within the same scanner may be
 in different physical positions. The DICOM files contain information describing
-the orientation of the image slices or volumes with respect to the scanner.
+the orientation of the image slices or volumes with respect to the scanner. 
+Similarly, EEG setups often use the [10-20 system](https://en.wikipedia.org/wiki/10%E2%80%9320_system_(EEG)).
+These systems help relate physical positions of the participant to a common 
+reference frame that can be understood by analysis software.
 
 4. **Other types of data.** Brain imaging experiments may also include genetic data,
 electrophysiology recordings (such as EEG, MEG, ECoG). Most of the raw data are
@@ -112,6 +128,24 @@ stored in proprietary formats depending on the device used to acquire the data.
 > between each brain.
 {: .callout}
 
+> ## Exercise:
+>
+>  List 3 examples of information lost when converting from DICOM to NifTi?
+>
+> > ## Solution
+> >
+> > The NifTi file keeps an extremely small subset of the DICOM metadata, unless 
+> > specific converters are used that store DICOM metadata in extensions. While
+> > this is often useful for anonymization of metadata, it loses most sequence 
+> > related information, when that is available from dicoms. Three specific 
+> > examples are: Number of channels in head coil, slice timing information, and
+> > phase encoding direction. 
+> > 
+> {: .solution}
+{: .challenge}
+
+<a name="standards" />
+
 ### Data and metadata standards
 
 #### NIMH Data Archive (NDA)
@@ -121,6 +155,35 @@ submit data to the NDA, your data needs to be converted to specific types using
 their data dictionaries. To learn how to submit data to the NDA view the 
 [training videos](https://ndar.nih.gov/training.html). You can simplify the 
 submission process by storing your data in [BIDS](bids.neuroimaging.io) format.
+
+> ## Hands on Exercise:
+>
+> Use the [NDA api](https://ndar.nih.gov/swagger/#/) to search for the different
+> sources and categories of information in the NDA.  
+>
+> > ## Solution
+> >
+> > Click on datadictionary and then use the two GET operations:
+> >
+> > 1. GET /datadictionary/v2/datastructure/categories
+> > 2. GET /datadictionary/v2/datastructure/sources
+> >
+> > If you set application type to json, the results will be returned in JSON 
+> > format
+> > 
+> {: .solution}
+>
+> Use the [NDA api](https://ndar.nih.gov/swagger/#/) to retrieve the data
+> dictionary for mini mental state exam. What are some of the drawbacks of this
+> dictionary. 
+>
+> > ## Solution
+> >
+> > The dictionary uses undescriptive keys to refer to different components of 
+> > the exam and enforces encoding certain responses in a specific way.
+> > 
+> {: .solution}
+{: .challenge}
 
 #### RedCap 
 
@@ -198,7 +261,23 @@ use Git, the same versioning system that was created to track versions of the
 LINUX development effort and is now used across millions of software packages. 
 GitHub provides a user interface to track to track text files, analysis scripts, 
 and even small binary data files. Edits to analysis scripts should be versioned
-and GitHub can be used to do so. 
+and GitHub can be used to do so. To learn more about how to use datalad see [this 
+tutorial](http://nipy.org/workshops/2017-03-boston/lectures/version-control/#1).
+
+> ## Hands on Exercise:
+>
+> Numerous datasets are available from the [datalad index](http://datasets.datalad.org/). 
+> How many Openfmri datasets are currently available and what file layout scheme
+> is used to store the datasets?
+>
+> > ## Solution
+> >
+> > There are 80 datasets available as of Aug 7, 2017. These datasets are all
+> > stored using the BIDS layout. 
+> > 
+> {: .solution}
+{: .challenge}
+
 
 [Learn how to use GitHub to track your analysis](https://guides.github.com/)
 
