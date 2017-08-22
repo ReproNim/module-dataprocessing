@@ -303,17 +303,19 @@ If you want to create a new image you're going to share, the recommended practic
 create a bootstrap file.
 You can still start from a Docker image, but you can easily add environmental variables, 
 additional software etc.
-More on how to write bootstrap files and create a new image is 
-[here](http://singularity.lbl.gov/quickstart#bootstrap-recipes). 
+A short recipe for bootstrap files you can find here 
+[here](http://singularity.lbl.gov/quickstart#bootstrap-recipes), 
+for best practices and more details check [this](http://singularity.lbl.gov/bootstrap-image#best-practices-for-bootstrapping).
+
+For more information about creating a Singularity image, changing size, etc., you should 
+check [this Singularity website that contains nice short videos](http://singularity.lbl.gov/create-image).
+
 
 If you want to change already existing image (e.g. for testing purpose), 
 you can mount the image using 
 [`--writable` option](http://singularity.lbl.gov/docs-changing-containers)
 (yes, you need to have root privileges).
 
-
-Here is a tutorial that create a virtual machine in order tp create a Tensorflow 
-container with GPU support. <script type="text/javascript" src="https://asciinema.org/a/100998.js" id="asciicast-100998" async></script>
 
 > ## Question:
 >
