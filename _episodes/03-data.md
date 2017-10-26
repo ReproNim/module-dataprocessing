@@ -261,8 +261,9 @@ use Git, the same versioning system that was created to track versions of the
 LINUX development effort and is now used across millions of software packages. 
 GitHub provides a user interface to track to track text files, analysis scripts, 
 and even small binary data files. Edits to analysis scripts should be versioned
-and GitHub can be used to do so. To learn more about how to use datalad see [this 
-tutorial](http://nipy.org/workshops/2017-03-boston/lectures/version-control/#1).
+and GitHub can be used to do so. To learn more about datalad see
+[module Reproducible Basics:VCS:DataLad](http://www.reproducibleimaging.org/module-reproducible-basics/02-vcs/#datalad)
+unit.
 
 > ## Hands on Exercise:
 >
