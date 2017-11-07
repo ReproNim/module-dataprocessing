@@ -1,7 +1,7 @@
 ---
 title: "Lesson 3: Create and maintain reproducible computational environments"
-teaching: 30
-exercises: 30
+teaching: 60
+exercises: 120
 questions:
 - "Why and how to use containers and Virtual Machines?"
 objectives:
@@ -68,7 +68,7 @@ for redistribution. Many of these technologies also allow creating an executable
 environment based on a script, thus allowing ease of reproducing analysis 
 environments. Some popular virtual machine and container technologies are:
 
-1. [Virtual Machines](https://en.wikipedia.org/wiki/Virtual_machine) 
+#### 1. [Virtual Machines](https://en.wikipedia.org/wiki/Virtual_machine) 
 and [Vagrant](https://www.vagrantup.com/)
 
 A Virtual Machine (VM) is an emulation of a computer system. 
@@ -79,10 +79,10 @@ virtual machine environments.
 
 Follow [instructions](https://www.vagrantup.com/downloads.html) to install Vagrant.
 
-2. [Amazon AMIs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html#creating-an-ami)
+#### 2. [Amazon AMIs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html#creating-an-ami)
      a. [NITRC Computational Environment: NITRC-CE](http://www.nitrc.org/plugins/mwiki/index.php/nitrc:User_Guide_-_NITRC_Computational_Environment)
 
-3. [Docker](https://www.docker.com/)
+#### 3. [Docker](https://www.docker.com/)
 
 Docker provides a slew of services to make building and distributing containers
 easier. This includes integration with GitHub and the ability to **`pull`**
@@ -101,7 +101,7 @@ to install an appropriate version.
 - [Gentle introduction to docker and other containers for scientists](http://nipy.org/workshops/2017-03-boston/lectures/lesson-container/#1)
 - [More extensive tutorial for docker (including building and deploying new webapps)](https://prakhar.me/docker-curriculum/)
 
-4. [Singularity](http://singularity.lbl.gov/)
+#### 4. [Singularity](http://singularity.lbl.gov/)
 
 Singularity offers an alternative to docker on HPC clusters. Creating singularity
 containers requires root privileges on a machine virtual or physical. However,
@@ -140,7 +140,7 @@ between these technologies.
 
 ### Element 3: Using pre-built containers for brain imaging
 
-1. **Vagrant:** A neuroimaging environment based on [NeuroDebian](http://neuro.debian.net/) can be initialized quickly 
+#### 1. Vagrant: A neuroimaging environment based on [NeuroDebian](http://neuro.debian.net/) can be initialized quickly 
 using a single command: 
    
    ```
@@ -156,9 +156,9 @@ and a video tutorial is below.
    Vagrant is based on VirtualBox, and another example of reusable environment is this [virtual machine](https://s3.amazonaws.com/openfmri/virtual-machines/precise64_neuro.box).
 This virtual machine can be used to reproduce the analyses from [this paper](http://www.nature.com/articles/ncomms9885).
 
-2. **NITRC-CE:** TODO
+#### 2. NITRC-CE: TODO
 
-3. **Docker**: 
+#### 3. Docker: 
 
 There are many existing images available on [Docker Hub](https://hub.docker.com/). 
 You can find images for [Ubuntu](https://hub.docker.com/_/ubuntu/) as well as images that contain
@@ -171,7 +171,7 @@ part of the [BIDS-Apps](http://bids-apps.neuroimaging.io/apps/) project.
 The project provides a basic [tutorial](http://bids-apps.neuroimaging.io/tutorial/) 
 to get started with the app.
 
-4. **Singularity**: 
+#### 4. Singularity: 
 
 Singularity is useful in HPC centers where docker is not 
 allowed. Any docker image can be pulled in as a singularity container. Therefore,
@@ -204,7 +204,6 @@ More details on how to run an image you can find
 > ## Hands on exercise:
 >
 > Pull satra/nih-workshop-2017 Docker image and check which python packages are installed.
-> Try to do it using Docker and Singularity.
 >
 > {: .solution}
 {: .challenge}
@@ -267,9 +266,19 @@ A simple example of writing Dockerfile and build an image you can find
 If you want to create a new image for neuroimaging, you should check 
 [Nuerodocker project](https://github.com/kaczmarj/neurodocker) that allows you 
 to  generate custom Dockerfiles and minifies existing Docker images.
- 
+Neurodocker not only simplifies writing a new Dockerfile, but also incorporates 
+the best practice for installing software. 
+You can compare [a simple script to create a Docker image with `FSL`](https://github.com/djarecka/neurodocker/blob/examples/examples/fsl/create_dockerfile.sh) 
+to [a Dockerfile itself](https://github.com/djarecka/neurodocker/blob/examples/examples/fsl/Dockerfile)
+that contains much more details of proper installation and cleaning.
+Neurodocker can be also easily used to include Python and all Python libraries that can
+be installed using `conda` or `pip`. 
+This is a simple example of [neurodocker command](https://github.com/djarecka/neurodocker/blob/examples/examples/conda_python/create_dockerfile.sh)
+and [Dockerfile](https://github.com/djarecka/neurodocker/blob/examples/examples/conda_python/Dockerfile). 
+More examples can be found [here](https://github.com/djarecka/neurodocker/tree/examples/examples).
+  
 
-#### Create a **Singularity** image
+#### 4. Create a **Singularity** image
 
 In order to create an empty image or import layers from Docker image, you don't 
 need root privileges. You can do it using 
