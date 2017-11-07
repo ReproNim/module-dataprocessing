@@ -39,11 +39,11 @@ Examples of Python testing frameworks and CI platforms will be used.
 ### Lesson requirements
 
 It is essential to have a basic understanding of:
-- Python (TODO: do we general resources for Python)
-- Git and GitHub (TODO: Yarik's part)
+- Python: [Software Carpentry materials (full: 5h, familiarize: 1h)](http://swcarpentry.github.io/python-novice-inflammation/)
+- Git and GitHub: [Software Carpentry materials (full:3h, familiarize: 30min)](http://swcarpentry.github.io/git-novice/); 
 
 Although not essential it is helpful to have an understanding of:
-- Unit tests: you can read Software Carpentry [materials](http://katyhuff.github.io/python-testing/04-units/)
+- Unit tests: [Software Carpentry materials (full: 1:30h, familiarize: 20min)](http://katyhuff.github.io/python-testing/04-units/)
 
 
 ### Element 1: Introduction to regression tests
@@ -113,7 +113,7 @@ At the same time pytest scales well to support complex testing for whole librari
 > > Each of these subdirectories should contain a `data.json` file with a dictionary that has at least 
 > > one element: `{"first": [1, 11]}`.
 > > 
-> > ~~~
+> > ```python
 > > import sys, os, glob
 > > import pandas as pd
 > > from check_output import creating_dataframe
@@ -126,7 +126,7 @@ At the same time pytest scales well to support complex testing for whole librari
 > >     assert (data_frame.first_volume.keys() == ['sub_a', 'sub_b', 'sub_c']).all()
 > >     assert (data_frame.first_volume == [11., 33, 55]).all()
 > >     assert (data_frame.first_voxels == [1., 3, 5]).all()
-> >
+> >```
 > {: .solution}
 {: .challenge}
 
@@ -142,7 +142,7 @@ At the same time pytest scales well to support complex testing for whole librari
 > > Each of these subdirectories should contain a `data.json` file with a dictionary that has at least
 > > one element: `{"first": [1, 11]}`.
 > >
-> > ~~~
+> > ```python
 > > import sys, os, glob
 > > import pandas as pd
 > > from check_output import creating_dataframe
@@ -159,7 +159,7 @@ At the same time pytest scales well to support complex testing for whole librari
 > >     assert (data_frame.first_volume.keys() == keys).all()
 > >     assert (data_frame.first_volume == volume_list).all()
 > >     assert (data_frame.first_voxels == voxel_list).all()
-> >
+> >```
 > {: .solution}
 {: .challenge}
 
@@ -185,7 +185,7 @@ subject with the results provided in the repository.
 > > Note that for comparing results of numerical computation we often do not check if the
 > > numbers match exactly, but we specify absolute and/or relative tolerance.
 > > 
-> > ~~~
+> > ```python
 > > import json
 > > import numpy as np
 > > import subprocess as sp
@@ -208,7 +208,7 @@ subject with the results provided in the repository.
 > >     # comparing results from both files using numpy allclose function
 > >     for key, val in new_output.items():
 > >         assert np.allclose(expected_output[key], val, rtol=5e-02)
-> > ~~~
+> > ```
 > {: .solution}
 {: .challenge}
 
