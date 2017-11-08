@@ -1,7 +1,7 @@
 ---
 title: "Lesson 5: Use integration testing to revalidate analyses as data and software change"
-teaching: ??
-exercises: ??
+teaching: 2-5h
+exercises: 2-5h
 questions:
 - "Why and how do we use continuous integration?"
 objectives:
@@ -81,19 +81,19 @@ You can achieve this by combining your regression tests with a CI platform.
 > scientists to verify easily their scientific approach, software used, or similar data set.
 {: .callout}
 
-> ## External teaching materials
+> #### External teaching materials
 > 
->  - the software carpentry provide more materials on 
-> [unit (10 min)](http://katyhuff.github.io/python-testing/04-units/), 
-> [integration and regression test (10min)](http://katyhuff.github.io/python-testing/07-integration/)
+>  - the software carpentry provides more materials on 
+> [unit tests (10 min)](http://katyhuff.github.io/python-testing/04-units/), 
+> and [integration and regression tests (10min)](http://katyhuff.github.io/python-testing/07-integration/)
 {: .callout}
 
 ### Element 2: Introduction to writing tests:  testing Python code with Pytest
 
 Before we start writing regression tests we will show examples of simple Unit tests. 
-We will use Python with Pytest library as an example.  
+We will use Python with pytest library as an example.  
 If you are using Python we strongly recommend using
- [pytest library](http://doc.pytest.org/en/latest/) for testing. 
+ [pytest](http://doc.pytest.org/en/latest/) for testing. 
 If you are using other languages, you should check for appropriate testing libraries. 
 
 The pytest framework makes it easy to write simple tests and allows you to use
@@ -105,7 +105,8 @@ At the same time pytest scales well to support complex testing for whole librari
   * [Examples of tests using Pytest](http://doc.pytest.org/en/latest/example/index.html)
   * [More examples from Brian Okken website](http://pythontesting.net/framework/pytest/pytest-introduction/)
 
-Let say we want to write a function that calculates factorial. 
+Let say we want to write a function that calculates 
+[factorial](https://en.wikipedia.org/wiki/Factorial). 
 In Python we can start from something like that:
 
 ```python
@@ -118,7 +119,7 @@ def my_factorial(n):
 ```
 It is rather simple recursive function and it might be hard to think about mistakes, but we should still
 write some tests. 
-Let's choose a couple values of `n` that we know answers for:
+Let's choose a couple of values of `n` that we know answers for:
 
 ```python
 def test_factorial():
@@ -130,7 +131,7 @@ Our function should pass the test, but we can think if this is enough.
 It is always good idea to test various values of arguments and try to include limits.
 We already have the lowest limit, `1`, but if we want to use our function for large numbers
 (let say up to 10000), we should also check for those. 
-We might not be able to know the correct answer, but we can still check
+We might not know the correct answer, but we can still check
 if the function is working and the result is larger than 1:
 
 ```python
@@ -140,7 +141,7 @@ def test_factorial_large():
 
 If you run this test, it is very likely that it fails with 
 `RuntimeError: maximum recursion depth exceeded`, 
-even though our algorithm is correct. 
+even though the algorithm is correct. 
 This is simple due to the Python way of handling recursion.
 So we should think how to rewrite the code, so our tests pass. 
 One way would be to remove recursion, e.g.:
@@ -157,9 +158,9 @@ def my_factorial(n):
 Now, our function works for small and large values! 
 But what about negative values? 
 We don't want to calculate factorials for negative values, but we didn't include this
-information within our code and if we ask for `my_factorial(-10)` we will get `1`
+information within our code and if we ask for `my_factorial(-10)`, we will get `1`
 and this is not what we expect.
-In fact, we would like our function to raise an Exception and tell us 
+In fact, we would like our function to raise an exception and tell us 
 that we should not provide a negative values of `n`.
 This requirement can be also implemented within a test, e.g.:
 
@@ -172,7 +173,7 @@ def test_factorial_negative():
        my_factorial(-10)
 ```
 
-This test simply checks if any Exception is raised when we call the function for `-10`.
+This test simply checks if any exception is raised when we call the function for `-10`.
 If we try to run this test it should fail.
 We can fix it by checking the values of `n` at the beginning of the function:
 
@@ -188,7 +189,7 @@ def my_factorial(n):
     return result
 ```
 
-Now all the test should be passing, the current function is much better than the one 
+Now all the test should be passing, and the current function is much better than the one 
 we wrote at the very beginning.
 
 
@@ -254,10 +255,10 @@ we wrote at the very beginning.
 > {: .solution}
 {: .challenge}
 
-> ## External teaching materials
+> #### External teaching materials
 >
-> You can find a very good introduction to all Python test frameworks in
-> [Brian Okken introduction](http://pythontesting.net/start-here/) (full: 5h, familiarize pytest: 1h).
+> - You can find a very good introduction to all Python test frameworks in
+> - [Brian Okken introduction](http://pythontesting.net/start-here/) (full: 5h, familiarize pytest: 1h).
 {: .callout}
 
 
@@ -381,7 +382,7 @@ A common practice is that every single pull request to the main branch of
 the project repository is automatically built and tested before merging. 
 That way, the team can easily  detect conflicts in compilation and execution of the code. 
 
-> ## External reading
+> #### External readings
 >
 > For a list of CI principles with detailed explanation you can check online resources:
 > - [Wikipedia](https://en.wikipedia.org/wiki/Continuous_integration)
@@ -482,14 +483,15 @@ Travis CI can also run and build Docker images, check the
 a GitHub repository. 
 Simple Workflow project uses [Circle CI servis](https://circleci.com/). 
 You might also want to check [Codeship](https://codeship.com/) platforms. 
-If you're interested, you can find blog posts that compare these tools, e.g by
-[Alex Gorbatchev](https://strongloop.com/strongblog/node-js-travis-circle-codeship-compare/).
 
+> #### External readings
+> If you're interested, you can find blog posts that compare these tools, e.g by
+> [Alex Gorbatchev](https://strongloop.com/strongblog/node-js-travis-circle-codeship-compare/).
+{: .callout}
 
-> ## External teaching materials
-### Other resources:
-> An easy to follow software carpentry [lesson about testing](http://katyhuff.github.io/python-testing/index.html) (full: 1:30h, familiarize: 20min).
-> [presentation from Nipype workshop](http://nipy.org/workshops/2017-03-boston/lectures/lesson-testing/#1) (full: 1h, familiarize: 20min).
+> #### External teaching materials
+> - An easy to follow software carpentry [lesson about testing](http://katyhuff.github.io/python-testing/index.html) (full: 1:30h, familiarize: 20min).
+> - [Presentation from Nipype workshop](http://nipy.org/workshops/2017-03-boston/lectures/lesson-testing/#1) (full: 1h, familiarize: 20min).
 {: .callout}
 
 > ## Hands on exercise:
