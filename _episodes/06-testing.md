@@ -169,7 +169,7 @@ This requirement can be also implemented within a test, e.g.:
 import pytest
 
 def test_factorial_negative():
-    with pytest.raise(Exception):
+    with pytest.raises(Exception):
        my_factorial(-10)
 ```
 
@@ -436,7 +436,7 @@ Travis CI can also run and build Docker images, check the
 > ## Hands on exercise:
 >
 > Create a github repository with a file
-> that contains `my_factorial` function and the tests we wrote.
+> that contains `my_factorial` function and a file with the tests you wrote.
 > Next, create a `.travis.yml` file that runs the test.
 > Afterward, open a Travis account and add your repository, so the tests are run automatically.
 >
@@ -461,7 +461,7 @@ Travis CI can also run and build Docker images, check the
 > ## Hands on exercise:
 >
 > Create a github repository with a  file
-> that contains `creating_dataframe` function and the test you wrote in previous parts.
+> that contains `creating_dataframe` function and a file with the test you wrote in previous parts.
 > Next, create a `requiremnts.txt` and `.travis.yml` files, that runs the test.
 > Afterward, open a Travis account and add your repository, so the tests are run automatically.
 >
