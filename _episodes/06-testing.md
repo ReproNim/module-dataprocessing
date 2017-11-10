@@ -1,7 +1,7 @@
 ---
 title: "Lesson 5: Use integration testing to revalidate analyses as data and software change"
-teaching: ??
-exercises: ??
+teaching: 2-5h
+exercises: 2-5h
 questions:
 - "Why and how do we use continuous integration?"
 objectives:
@@ -39,11 +39,12 @@ Examples of Python testing frameworks and CI platforms will be used.
 ### Lesson requirements
 
 It is essential to have a basic understanding of:
-- Python (TODO: do we general resources for Python)
-- Git and GitHub (TODO: Yarik's part)
+- Git and GitHub: [Software Carpentry materials (full:3h, familiarize: 30min)](http://swcarpentry.github.io/git-novice/); 
+- Python (only some parts use Python): [Software Carpentry materials (full: 5h, familiarize: 1h)](http://swcarpentry.github.io/python-novice-inflammation/)
+
 
 Although not essential it is helpful to have an understanding of:
-- Unit tests: you can read Software Carpentry [materials](http://katyhuff.github.io/python-testing/04-units/)
+- Unit tests: [Software Carpentry materials (full: 1:30h, familiarize: 20min)](http://katyhuff.github.io/python-testing/04-units/)
 
 
 ### Element 1: Introduction to regression tests
@@ -80,27 +81,118 @@ You can achieve this by combining your regression tests with a CI platform.
 > scientists to verify easily their scientific approach, software used, or similar data set.
 {: .callout}
 
-- Resources: 
-  - the software carpentry provide more materials on 
-[unit](http://katyhuff.github.io/python-testing/04-units/), 
-[integration and regression test](http://katyhuff.github.io/python-testing/07-integration/)
+> #### External teaching materials
+> 
+>  - the software carpentry provides more materials on 
+> [unit tests (10 min)](http://katyhuff.github.io/python-testing/04-units/), 
+> and [integration and regression tests (10min)](http://katyhuff.github.io/python-testing/07-integration/)
+{: .callout}
 
+### Element 2: Introduction to writing tests:  testing Python code with Pytest
 
-### Element 2: Testing Python code with Pytest
+Before we start writing regression tests we will show examples of simple Unit tests. 
+We will use Python with pytest library as an example.  
+If you are using Python we strongly recommend using
+ [pytest](http://doc.pytest.org/en/latest/) for testing. 
+If you are using other languages, you should check for appropriate testing libraries. 
 
-You can find a very good introduction to all Python test frameworks in
-[Brian Okken introduction](http://pythontesting.net/start-here/).
-
-If you don't have any specific reason to use other library we recommend using
- [pytest library](http://doc.pytest.org/en/latest/). 
-The pytest framework makes it easy to write simple tests and allows you to use 
-the standard python assert for verifying your result.
+The pytest framework makes it easy to write simple tests and allows you to use
+the standard python assert for verifying your result. 
 At the same time pytest scales well to support complex testing for whole libraries.
 
   * Usage examples can be found [here](http://doc.pytest.org/en/latest/usage.html).
   * Rules for standard test discovery can be found [here](http://doc.pytest.org/en/latest/goodpractices.html).
   * [Examples of tests using Pytest](http://doc.pytest.org/en/latest/example/index.html)
   * [More examples from Brian Okken website](http://pythontesting.net/framework/pytest/pytest-introduction/)
+
+Let say we want to write a function that calculates 
+[factorial](https://en.wikipedia.org/wiki/Factorial). 
+In Python we can start from something like that:
+
+```python
+
+def my_factorial(n):
+    if n == 1 or n == 0:
+        return 1
+    else:
+        return n * my_factorial(n-1)
+```
+It is rather simple recursive function and it might be hard to think about mistakes, but we should still
+write some tests. 
+Let's choose a couple of values of `n` that we know answers for:
+
+```python
+def test_factorial():
+    assert my_factorial(1) == 1
+    assert my_factorial(5) == 120
+```
+
+Our function should pass the test, but we can think if this is enough. 
+It is always good idea to test various values of arguments and try to include limits.
+We already have the lowest limit, `1`, but if we want to use our function for large numbers
+(let say up to 10000), we should also check for those. 
+We might not know the correct answer, but we can still check
+if the function is working and the result is larger than 1:
+
+```python
+def test_factorial_large():
+    assert my_factorial(10000) > 0
+```
+
+If you run this test, it is very likely that it fails with 
+`RuntimeError: maximum recursion depth exceeded`, 
+even though the algorithm is correct. 
+This is simple due to the Python way of handling recursion.
+So we should think how to rewrite the code, so our tests pass. 
+One way would be to remove recursion, e.g.:
+
+```python
+
+def my_factorial(n):
+    result = 1
+    for i in range(1, n+1):
+	result = result * i
+    return result
+```
+
+Now, our function works for small and large values! 
+But what about negative values? 
+We don't want to calculate factorials for negative values, but we didn't include this
+information within our code and if we ask for `my_factorial(-10)`, we will get `1`
+and this is not what we expect.
+In fact, we would like our function to raise an exception and tell us 
+that we should not provide a negative values of `n`.
+This requirement can be also implemented within a test, e.g.:
+
+
+```python
+import pytest
+
+def test_factorial_negative():
+    with pytest.raises(Exception):
+       my_factorial(-10)
+```
+
+This test simply checks if any exception is raised when we call the function for `-10`.
+If we try to run this test it should fail.
+We can fix it by checking the values of `n` at the beginning of the function:
+
+```python
+
+def my_factorial(n):
+    if n < 0:
+        raise Exception("factorial can be calculated only for positive numbers")
+
+    result = 1
+    for i in range(1, n+1):
+        result = result * i
+    return result
+```
+
+Now all the test should be passing, and the current function is much better than the one 
+we wrote at the very beginning.
+
+
 
 > ## Hands on exercise:
 >
@@ -113,7 +205,7 @@ At the same time pytest scales well to support complex testing for whole librari
 > > Each of these subdirectories should contain a `data.json` file with a dictionary that has at least 
 > > one element: `{"first": [1, 11]}`.
 > > 
-> > ~~~
+> > ```python
 > > import sys, os, glob
 > > import pandas as pd
 > > from check_output import creating_dataframe
@@ -126,7 +218,7 @@ At the same time pytest scales well to support complex testing for whole librari
 > >     assert (data_frame.first_volume.keys() == ['sub_a', 'sub_b', 'sub_c']).all()
 > >     assert (data_frame.first_volume == [11., 33, 55]).all()
 > >     assert (data_frame.first_voxels == [1., 3, 5]).all()
-> >
+> >```
 > {: .solution}
 {: .challenge}
 
@@ -142,7 +234,7 @@ At the same time pytest scales well to support complex testing for whole librari
 > > Each of these subdirectories should contain a `data.json` file with a dictionary that has at least
 > > one element: `{"first": [1, 11]}`.
 > >
-> > ~~~
+> > ```python
 > > import sys, os, glob
 > > import pandas as pd
 > > from check_output import creating_dataframe
@@ -159,9 +251,15 @@ At the same time pytest scales well to support complex testing for whole librari
 > >     assert (data_frame.first_volume.keys() == keys).all()
 > >     assert (data_frame.first_volume == volume_list).all()
 > >     assert (data_frame.first_voxels == voxel_list).all()
-> >
+> >```
 > {: .solution}
 {: .challenge}
+
+> #### External teaching materials
+>
+> - You can find a very good introduction to all Python test frameworks in
+> - [Brian Okken introduction](http://pythontesting.net/start-here/) (full: 5h, familiarize pytest: 1h).
+{: .callout}
 
 
 ### Element 3: Regression tests for Simple Workflow
@@ -169,7 +267,7 @@ At the same time pytest scales well to support complex testing for whole librari
 In the [Simple Workflow](https://github.com/ReproNim/simple_workflow) 
 repository you can find directory with the 
 [expected output](https://github.com/ReproNim/simple_workflow/tree/master/expected_output).
-Having the expected output allows to write a simple regression tests that compares result for one 
+Having the expected output we can write a simple regression tests that compares result for one 
 subject with the results provided in the repository.
 
 
@@ -185,7 +283,7 @@ subject with the results provided in the repository.
 > > Note that for comparing results of numerical computation we often do not check if the
 > > numbers match exactly, but we specify absolute and/or relative tolerance.
 > > 
-> > ~~~
+> > ```python
 > > import json
 > > import numpy as np
 > > import subprocess as sp
@@ -208,7 +306,7 @@ subject with the results provided in the repository.
 > >     # comparing results from both files using numpy allclose function
 > >     for key, val in new_output.items():
 > >         assert np.allclose(expected_output[key], val, rtol=5e-02)
-> > ~~~
+> > ```
 > {: .solution}
 {: .challenge}
 
@@ -221,11 +319,10 @@ of a project, and easier to find and remove bugs.
 
 CI requires to use a version control system, 
 that allows for easy tracking all changes of the project's source code. 
-Most open source projects use Git as a version control system and Github as a web hosting service
-(TODO link to Yarik's part).
+Most open source projects use Git as a version control system and Github as a web hosting service.
 
 In order to automate the testing, the building process should be easy and fully automated,
-that can be achieve by using tools like `make`.
+that can be achieved by using tools like `make`.
 If you use Python or other interpreted languages, the code does not need to be compiled, but 
 you still have to remember about the software dependencies. 
 For Python projects, requirements files that contain a list of items to be installed
@@ -285,14 +382,15 @@ A common practice is that every single pull request to the main branch of
 the project repository is automatically built and tested before merging. 
 That way, the team can easily  detect conflicts in compilation and execution of the code. 
 
+> #### External readings
+>
+> For a list of CI principles with detailed explanation you can check online resources:
+> - [Wikipedia](https://en.wikipedia.org/wiki/Continuous_integration)
+> - A nice review by [Martin Fowler](https://www.martinfowler.com/articles/continuousIntegration.html)
+> - A short blog post by [Darryl Bowler](http://blogs.collab.net/devopsci/ten-best-practices-for-continuous-integration)
+{: .callout}
 
-For a list of CI principles with detailed explanation you can check online resources:
-- [Wikipedia](https://en.wikipedia.org/wiki/Continuous_integration)
-- A nice review by [Martin Fowler](https://www.martinfowler.com/articles/continuousIntegration.html)
-- A short blog post by [Darryl Bowler](http://blogs.collab.net/devopsci/ten-best-practices-for-continuous-integration)
-
-
-### Element 5: Continuous Integration Service: Travis CI 
+### Element 4: Continuous Integration Service: Travis CI 
 
 [Travis CI](https://travis-ci.org/) is a continuous integration service used to build 
 and test software projects hosted at GitHub.
@@ -337,8 +435,33 @@ Travis CI can also run and build Docker images, check the
 
 > ## Hands on exercise:
 >
-> Create a github repository (create an account first if you don't have one) with a simple file
-> that containes `creating_dataframe` function and the test you wrote in previous parts.
+> Create a github repository with a file
+> that contains `my_factorial` function and a file with the tests you wrote.
+> Next, create a `.travis.yml` file that runs the test.
+> Afterward, open a Travis account and add your repository, so the tests are run automatically.
+>
+> > ## Exemplary solution
+> >
+> > `.travis.yml` can look like:
+> > ~~~
+> > language: python
+> > python:
+> >   - "2.7"
+> >   - "3.5"
+> > 
+> > script: py.test
+> > ~~~
+> >
+> >
+> {: .solution}
+{: .challenge}
+
+
+
+> ## Hands on exercise:
+>
+> Create a github repository with a  file
+> that contains `creating_dataframe` function and a file with the test you wrote in previous parts.
 > Next, create a `requiremnts.txt` and `.travis.yml` files, that runs the test.
 > Afterward, open a Travis account and add your repository, so the tests are run automatically.
 >
@@ -360,14 +483,16 @@ Travis CI can also run and build Docker images, check the
 a GitHub repository. 
 Simple Workflow project uses [Circle CI servis](https://circleci.com/). 
 You might also want to check [Codeship](https://codeship.com/) platforms. 
-If you're interested, you can find blog posts that compare these tools, e.g by
-[Alex Gorbatchev](https://strongloop.com/strongblog/node-js-travis-circle-codeship-compare/).
 
+> #### External readings
+> If you're interested, you can find blog posts that compare these tools, e.g by
+> [Alex Gorbatchev](https://strongloop.com/strongblog/node-js-travis-circle-codeship-compare/).
+{: .callout}
 
-### Other resources:
-- An easy to follow software carpentry [lesson about testing](http://katyhuff.github.io/python-testing/index.html).
-- [presentation from Nipype workshop](http://nipy.org/workshops/2017-03-boston/lectures/lesson-testing/#1).
-
+> #### External teaching materials
+> - An easy to follow software carpentry [lesson about testing](http://katyhuff.github.io/python-testing/index.html) (full: 1:30h, familiarize: 20min).
+> - [Presentation from Nipype workshop](http://nipy.org/workshops/2017-03-boston/lectures/lesson-testing/#1) (full: 1h, familiarize: 20min).
+{: .callout}
 
 > ## Hands on exercise:
 >
