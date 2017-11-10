@@ -94,7 +94,7 @@ wf.run()
 - [Nipype tutorial](https://github.com/miykael/nipype_tutorial)
 
 An example general purpose workflow for functional preprocessing is available as
-a Dockerized application that works on BIDS datasets. You can work through the tutorials online using [Binder service](https://mybinder.org/v2/gh/miykael/nipype_tutorial/master?filepath=index.ipynb). 
+a Dockerized application that works on BIDS datasets. You can work through the tutorials online using [Binder service](https://mybinder.org/v2/gh/miykael/nipype_tutorial/master?filepath=nipype_tutorial%2Findex.ipynb). 
 
 - [Nipypelines for BIDS datasets](https://github.com/BIDS-Apps/nipypelines)
 
