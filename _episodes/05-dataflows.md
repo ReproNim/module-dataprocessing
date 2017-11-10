@@ -19,8 +19,8 @@ keypoints:
 {: .challenge}
 
 This lesson provides an approach to capturing analysis steps using dataflow
-tools that decouple specification of analysis from execution, and often from 
-data, across different computation platforms, whether a local environment or an 
+tools that decouple specification of analysis from execution, and often from
+data, across different computation platforms, whether a local environment or an
 HPC cluster.
 
 ### Lesson outline
@@ -32,38 +32,38 @@ HPC cluster.
 ### Lesson requirements
 
 Although not essential it is helpful to have an understanding of:
- 
+
 - Neuroimaging analysis algorithms
 - The lessons on [data](/03-data) and [containers](/04-containers) in this module
 
 ### Overview
 
-Most brain imaging analyses comprise common steps: preprocessing, quality control, 
+Most brain imaging analyses comprise common steps: preprocessing, quality control,
 registration, normalization, statistical estimation. However, there are many
 software and tools that implement many of these of algorithms. The performance
-of these algorithms often vary as a function of participant age, data quality, 
+of these algorithms often vary as a function of participant age, data quality,
 and computational environment. Each software brings with a set of strengths and
-weaknesses and as many analyses move towards multimodal data, it becomes 
+weaknesses and as many analyses move towards multimodal data, it becomes
 essential to be able to combine elements of different packages.
 
-However, such combination comes at a cost. It increases the complexity of 
-software environments, the additional learning necessary to combine software 
+However, such combination comes at a cost. It increases the complexity of
+software environments, the additional learning necessary to combine software
 packages, and often the ability to script and program one's analyses. But, once
-one masters the ability to perform these kinds of analyses, one can essentially 
-create any analyses. Further, by thinking about pieces of analyses, one can 
-optimally combine the most appropriate (e.g., least error, most robust) 
-algorithms for a task rather than being restricted to what is available in a 
+one masters the ability to perform these kinds of analyses, one can essentially
+create any analyses. Further, by thinking about pieces of analyses, one can
+optimally combine the most appropriate (e.g., least error, most robust)
+algorithms for a task rather than being restricted to what is available in a
 single package.
 
 The essence of dataflows are:
- 
+
 1. Separation of data, scripts, and execution.
-2. The scripts themselves should not be intricately tied to a particular data 
+2. The scripts themselves should not be intricately tied to a particular data
 set.
-3. The data should be abstracted into a consistent structured form that can be 
+3. The data should be abstracted into a consistent structured form that can be
 queried.
 
-Most dataflow frameworks rely on language abstractions to support the flow of 
+Most dataflow frameworks rely on language abstractions to support the flow of
 data. Algorithms or dataflows written using such abstractions can be reused on
 different datasets.
 
@@ -71,7 +71,7 @@ different datasets.
 
 ### Nipype: an example dataflow tool
 [Nipype](nipy.org/nipype) is a Python-based framework for writing dataflows. It
-provides access to many brain imaging algorithms and workflows using a 
+provides access to many brain imaging algorithms and workflows using a
 consistent API. It also provides isolation of data being worked on. Here is an
 example Nipype workflow.
 
@@ -94,15 +94,15 @@ wf.run()
 - [Nipype tutorial](https://github.com/miykael/nipype_tutorial)
 
 An example general purpose workflow for functional preprocessing is available as
-a Dockerized application that works on BIDS datasets.
+a Dockerized application that works on BIDS datasets. You can work through the tutorials online using [Binder service](https://mybinder.org/v2/gh/miykael/nipype_tutorial/master?filepath=index.ipynb). 
 
 - [Nipypelines for BIDS datasets](https://github.com/BIDS-Apps/nipypelines)
 
-Being a Nipype workflow, any user can modify it to replace one section of the 
+Being a Nipype workflow, any user can modify it to replace one section of the
 code with another or retrieve the details of any processing step.
 
 ### Other dataflow tools
-There are many other dataflow frameworks in use in brain imaging. Each one 
+There are many other dataflow frameworks in use in brain imaging. Each one
 provides their own semantics of creating such dataflows and how to execute them.
 
 - [AA](https://github.com/rhodricusack/automaticanalysis)
@@ -113,9 +113,8 @@ provides their own semantics of creating such dataflows and how to execute them.
 - [LONI Pipeline](http://pipeline.loni.usc.edu/)
 
 ### CWL and NIDM
-There are global efforts to represent computational workflows in more abstract 
+There are global efforts to represent computational workflows in more abstract
 form. Two such efforts are the [Common Workflow Language](http://www.commonwl.org/)
 and [NIDM](http://nidm.nidash.org/). While they may not support direct analyses
-at this point for brain imaging, they represent a way to capture the semantics 
+at this point for brain imaging, they represent a way to capture the semantics
 of computation in an implementation agnostic manner.
-

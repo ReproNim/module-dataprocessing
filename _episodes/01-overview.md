@@ -22,11 +22,11 @@ keypoints:
 >  - How can you recreate your analysis environment on any machine?
 {: .challenge}
 
-The typical brain imaging experiment uses data, software, and human 
+The typical brain imaging experiment uses data, software, and human
 interaction to test hypotheses and/or explore relations in data. These
-analyses can involve many different elements (data quality, 
+analyses can involve many different elements (data quality,
 software environment, algorithms, human input) that can introduce errors.
-It is therefore useful to capture the information necessary to repeat or 
+It is therefore useful to capture the information necessary to repeat or
 reproduce the analysis.
 
 ### An analysis workflow
@@ -43,15 +43,15 @@ Reproducing the analysis requires knowing descriptions of:
 - how to recreate the same or similar environment
 - how did the researcher validate the output
 
-These steps are needed for the researcher to preserve information for 
+These steps are needed for the researcher to preserve information for
 future use, to document the methods for dissemination, and to repeat the
 experiment.
 
 ### Prerequisites
 
-For this module, we expect the reader to be familiar with unix computing 
-concepts and have a general idea of brain image analysis. It is highly 
-recommended that you go through the overview lectures of the 
+For this module, we expect the reader to be familiar with unix computing
+concepts and have a general idea of brain image analysis. It is highly
+recommended that you go through the overview lectures of the
 reproducible basics and FAIR data principles modules.
 
 ### What will you learn
@@ -61,16 +61,16 @@ information, and how to share data and code with others.
 
 ### How long will it take
 
-This module consists of 6 lessons, each comprising multiple units. Each 
-unit in this module will take you between up to 10 hours of work.
+This module consists of 6 lessons, each comprising multiple units. Each
+unit in this module will take you up to 10 hours of work.
 
 ### Lessons included in this module
 
 1. [Lesson 1.]({{site.root}}/02-concepts) An example framework for reproducible analysis
 2. [Lesson 2.]({{site.root}}/03-data) How to annotate, harmonize, clean, and version brain imaging data
-3. [Lesson 3.]({{site.root}}/04-containers) How to create and maintain reproducible computational environments for 
+3. [Lesson 3.]({{site.root}}/04-containers) How to create and maintain reproducible computational environments for
 analysis
-4. [Lesson 4.]({{site.root}}/05-dataflows) How to use dataflow tools to capture detailed provenance and perform 
+4. [Lesson 4.]({{site.root}}/05-dataflows) How to use dataflow tools to capture detailed provenance and perform
 efficient analyses
 5. [Lesson 5.]({{site.root}}/06-testing) How to setup a testing framework to revalidate analyses as data and
 software change
