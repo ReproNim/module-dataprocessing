@@ -84,7 +84,7 @@ and sharing the computing environments.
 
 However, there are important differences between the two types, 
 that is pictured below:
-![Containers-vs-Virtual-Machines](../fig/Containers-vs-Virtual-Machines.jpg)
+<img src="../fig/Containers-vs-Virtual-Machines.jpg" width="50%" />
 
 Virtual Machines emulate whole computer system (software+hardware).
 They use hypervisor to share and manage hardware of the host, and execute 
@@ -151,15 +151,15 @@ between these technologies.
 If you are running a container on your laptop, it uses the same hardware, 
 but user spaces and libraries are independent.
 
-<img src="../fig/docker1in.jpeg" width="20%" />
+<img src="../fig/docker1in.jpeg" width="10%" />
 
 
-<img src="../fig/docker2in.jpeg" width="50%" />
+<img src="../fig/docker2in.jpeg" width="25%" />
 
 
 You can alway create additional bindings between the container and the host machine.
 
-<img src="../fig/docker3in.jpeg" width="70%" />
+<img src="../fig/docker3in.jpeg" width="35%" />
 
 
 There are many existing images available on [Docker Hub](https://hub.docker.com/) 
