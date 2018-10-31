@@ -59,67 +59,75 @@ understanding of:
  3. How to recreate the environment in which the analysis was done
 
 There are many ways to re-create a complete environment. Usually it is done via
-construction of environment "images" or "containers".
+construction of virtual environments.
 
-### Element 2: Understanding container technologies
+TODO: present 4-8
+
+
+###  Element 2: Types of containers
 
 Container technologies provide a mechanism to encapsulate analysis environments
 for redistribution. Many of these technologies also allow creating an executable
 environment based on a script, thus allowing ease of reproducing analysis
-environments. Some popular virtual machine and container technologies are:
+environments.
 
-#### 1. [Virtual Machines](https://en.wikipedia.org/wiki/Virtual_machine)
-and [Vagrant](https://www.vagrantup.com/)
+There are two main types of container technology -- [virtual machines](https://en.wikipedia.org/wiki/Virtual_machine) 
+and "Docker-type" containers. 
+VirtualBox, VMware, AWS, or Google Compute Engine are examples of Virtual Machines.
+The most common technology within the second type is Docker, but it is not 
+the only example.
+Among scientist that use High Performance Centers (HPCs) Singularity becomes more popular.
 
-A Virtual Machine (VM) is an emulation of a computer system.
-Virtual machines are based on computer architectures and provide functionality of
-a physical computer.
-And Vagrant is a tool that simplifies process of building and managing
-virtual machine environments.
+The main idea behing these two types is the same -- isolate the computing environment.
+Isolationg the environment subsequently allows regenerating 
+and sharing the computing environments.
 
-Follow [instructions](https://www.vagrantup.com/downloads.html) to install Vagrant.
+However, there are important differences between the two types, 
+that is pictured below:
+![Containers-vs-Virtual-Machines](../fig/Containers-vs-Virtual-Machines.jpg)
 
-#### 2. [Amazon AMIs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html#creating-an-ami)
-     a. [NITRC Computational Environment: NITRC-CE](http://www.nitrc.org/plugins/mwiki/index.php/nitrc:User_Guide_-_NITRC_Computational_Environment)
+Virtual Machines emulate whole computer system (software+hardware).
+They use hypervisor to share and manage hardware of the host, and execute 
+the guest operating system.
+All guest machines are completely isolated and have dedicated resources.
+On the other hand, Docker containers share the host system’s kernel with other containers,
+only bins and libs are created from scratch.
+Each container gets its own isolated user space.
+Comparing to Virtual Machine, containers are very lightweight and fast to start up.
 
-#### 3. [Docker](https://www.docker.com/)
+There is no one solution that always works, your choice should depend on:
+ - which hardware is available to you (also do you require GPU),
+ - where is your data stored.
 
-Docker provides a slew of services to make building and distributing containers
-easier. This includes integration with GitHub and the ability to **`pull`**
-pre-built containers from Docker hub. In addition docker containers can
-orchestrated together with **`docker-compose`** to generate interacting services.
+Docker might me the most portable technology right now, but most HPC
+do not support Docker. 
+However, the system administrator should agree to install Singularity.
 
-Unfortunatelly, Docker can not be easily used on traditional HPC resources.
-One of the main reason is privilige escalation via Docker,
-i.e. users can get root access to the host system.
+So what are the differences between Docker and Singularity?
+Docker is an open-source project and right now it's a leading software container platform.
+There are various versions of Docker depending on the system you’re using, 
+including Docker for Mac (for OSX users) and Docker for Windows (for Windows Pro users). 
+If you have the Home edition of Windows, you still can use Docker, but have to install VM first.
+Unfortunatelly, Docker can not be easily used on traditional HPC resources. 
+One of the main reason is privilige escalation via Docker, i.e. users can get root access to the host system.
 
-There are various versions of Docker depending on the system you're using,
-reade more [here](https://docs.docker.com/) and follow to instruction
-to install an appropriate version.
 
+Singularity offers an alternative to docker on HPC clusters. 
+A user inside a Singularity container is the same user as outside the container, so you can be a root
+only if you are root on the host system.
+Creating singularity containers requires root privileges on a machine virtual or physical. 
+However, using singularity does not. The Singularity User Guide describes how to use the different components of singularity. One of the big advantages of Singularity is support for native drivers and libraries (e.g., GPU, MPI, etc.,.).
+If you have Linux you can directly install and run on your OS. 
+For other systems, you should use Vagrant and VM, follow the instruction for Mac or Windows.
+If you are a Docker user, the good news is that a Singularity image can be created
+from an existing Docker image.
 
-- [Gentle introduction to docker and other containers for scientists](http://nipy.org/workshops/2017-03-boston/lectures/lesson-container/#1)
-- [More extensive tutorial for docker (including building and deploying new webapps)](https://prakhar.me/docker-curriculum/)
-
-#### 4. [Singularity](http://singularity.lbl.gov/)
-
-Singularity offers an alternative to docker on HPC clusters. Creating singularity
-containers requires root privileges on a machine virtual or physical. However,
-using singularity does not. The [Singularity User Guide](http://singularity.lbl.gov/user-guide)
-describes how to use the different components of singularity. One of the big
-advantages of Singularity is support for native drivers and libraries (e.g., GPU,
-MPI, etc.,.).
-
-If you have Linux you can directly [install](http://singularity.lbl.gov/install-linux)
-and run on your OS.
-For other systems, you should use Vagrant and VM, follow the instruction for
-[Mac](http://singularity.lbl.gov/install-mac) or [Windows](http://singularity.lbl.gov/install-windows).
-
-You can use each of the technologies above to setup analysis environments for
-brain imaging, but there are important technical differences between them.
+You can use each of the technologies above to setup analysis environments for brain imaging, but there are important technical differences between them.
 
  - [Nice introduction to containers and technical differences between VM and Docker](https://medium.freecodecamp.com/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b#.kchrpokfz)
 between these technologies.
+ - [Gentle introduction to docker and other containers for scientists](http://nipy.org/workshops/2017-03-boston/lectures/lesson-container/#1)
+ - [More extensive tutorial for docker (including building and deploying new webapps)](https://prakhar.me/docker-curriculum/)
  - [Features comparison between Docker and Singularity](https://tin6150.github.io/psg/blogger_container_hpc.html).
  - [More technical comparison of Docker and Singularity](http://www.admin-magazine.com/HPC/Articles/Singularity-A-Container-for-HPC)   
 
@@ -130,7 +138,7 @@ between these technologies.
 >
 > > ## Answer
 > >
-> > VM with Vagrant
+> > VM
 > > Singularity
 > >
 > {: .solution}
@@ -140,52 +148,29 @@ between these technologies.
 
 ### Element 3: Using pre-built containers for brain imaging
 
-#### 1. Vagrant: A neuroimaging environment based on [NeuroDebian](http://neuro.debian.net/) can be initialized quickly
-using a single command:
+If you are running a container on your laptop, it uses the same hardware, 
+but user spaces and libraries are independent.
 
-   ```
-   vagrant init hlaubish/NeuroDebian_64; vagrant up --provider virtualbox
-   ```
+<img src="img/docker1in.jpeg" width="20%" />
 
-   You can read more about NeuroDebian VM [here](http://neuro.debian.net/vm.html)
 
-   A general introduction to Vagrant is [available here](https://www.vagrantup.com/docs/getting-started/)
-and a video tutorial is below.
-<script type="text/javascript" src="https://asciinema.org/a/11428.js" id="asciicast-11428" async></script>
+<img src="img/docker2in.jpeg" width="50%" />
 
-   Vagrant is based on VirtualBox, and another example of reusable environment is this [virtual machine](https://s3.amazonaws.com/openfmri/virtual-machines/precise64_neuro.box).
-This virtual machine can be used to reproduce the analyses from [this paper](http://www.nature.com/articles/ncomms9885).
 
-#### 2. NITRC-CE: TODO
+You can alway create additional bindings between the container and the host machine.
 
-#### 3. Docker:
+<img src="img/docker3in.jpeg" width="70%" />
 
-There are many existing images available on [Docker Hub](https://hub.docker.com/).
+
+There are many existing images available on [Docker Hub](https://hub.docker.com/) 
+or [Singularity Hub](https://singularity-hub.org/).
 You can find images for [Ubuntu](https://hub.docker.com/_/ubuntu/) as well as images that contain
 more specific software, e.g. [Nipype](https://hub.docker.com/r/nipype/nipype/).
-Simple examples of how to pull and run an image can be found in this
+Simple examples of how to pull and run a Docker image can be found in this
 [presentation](http://nipy.org/workshops/2017-03-boston/lectures/lesson-container/#29).
 
-A set of example brain imaging docker images can be also found as
-part of the [BIDS-Apps](http://bids-apps.neuroimaging.io/apps/) project.
-The project provides a basic [tutorial](http://bids-apps.neuroimaging.io/tutorial/)
-to get started with the app.
-
-#### 4. Singularity:
-
-Singularity is useful in HPC centers where docker is not
-allowed. Any docker image can be pulled in as a singularity container. Therefore,
-you can retrieve any of the bids-apps above as a singularity image using the
-command:
-
-   ```
-   singularity shell docker://bids/freesurfer
-   ```
-
-Singularity also has an online registry for images -- [Singularity Hub](https://singularity-hub.org/).
-You can pull images directly from either Docker Hub or Singularity Hub, more about `pull`
-command you can find [here](http://singularity.lbl.gov/docs-pull).
-
+Information about pulling an existing image from Singularity Hub 
+you can find [here](http://singularity.lbl.gov/docs-pull).
 More details on how to run an image you can find
 [here](http://singularity.lbl.gov/singularity-tutorial#make-and-run-containers).
 
