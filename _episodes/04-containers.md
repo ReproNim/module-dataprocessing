@@ -151,15 +151,15 @@ between these technologies.
 If you are running a container on your laptop, it uses the same hardware, 
 but user spaces and libraries are independent.
 
-<img src="img/docker1in.jpeg" width="20%" />
+<img src="../fig/docker1in.jpeg" width="20%" />
 
 
-<img src="img/docker2in.jpeg" width="50%" />
+<img src="../fig/docker2in.jpeg" width="50%" />
 
 
 You can alway create additional bindings between the container and the host machine.
 
-<img src="img/docker3in.jpeg" width="70%" />
+<img src="../fig/docker3in.jpeg" width="70%" />
 
 
 There are many existing images available on [Docker Hub](https://hub.docker.com/) 
