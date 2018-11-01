@@ -79,12 +79,13 @@ The most common technology within the second type is Docker, but it is not
 the only example.
 Among scientist that use High Performance Centers (HPCs) Singularity becomes more popular.
 
-The main idea behing these two types is the same -- isolate the computing environment.
-Isolationg the environment subsequently allows regenerating 
+The main idea behind these two types is the same -- isolate the computing environment.
+Isolating the environment subsequently allows regenerating 
 and sharing the computing environments.
 
 However, there are important differences between the two types, 
 that is pictured below:
+
 <img src="../fig/Containers-vs-Virtual-Machines.jpg" width="50%" />
 
 Virtual Machines emulate whole computer system (software+hardware).
@@ -109,8 +110,8 @@ Docker is an open-source project and right now it's a leading software container
 There are various versions of Docker depending on the system you’re using, 
 including Docker for Mac (for OSX users) and Docker for Windows (for Windows Pro users). 
 If you have the Home edition of Windows, you still can use Docker, but have to install VM first.
-Unfortunatelly, Docker can not be easily used on traditional HPC resources. 
-One of the main reason is privilige escalation via Docker, i.e. users can get root access to the host system.
+Unfortunately, Docker can not be easily used on traditional HPC resources. 
+One of the main reason is privilege escalation via Docker, i.e. users can get root access to the host system.
 
 
 Singularity offers an alternative to docker on HPC clusters. 
@@ -318,7 +319,7 @@ And now we can create the Dockerfile (we are using docker container with neurodo
   ```
 
 Creating a Dockerfile is only the first step, we have the "receipe", now we can ask 
-Docker to create an image using `docker build` commmand:
+Docker to create an image using `docker build` command:
 
 ```bash
 docker build -t my_fsl .
@@ -482,7 +483,7 @@ docker run -it my_fsl
 
 Now you are with docker container and you can type commands directly.
 
-<img src="../fig/docker5.jpeg" width="75%" />
+<img src="../fig/docker5.jpeg" width="40%" />
 
 > ## Question:
 >
