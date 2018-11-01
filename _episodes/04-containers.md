@@ -26,9 +26,10 @@ focus on components relevant to brain imaging analyses.
 ### Lesson outline
 
 - Element 1: Overview
-- Element 2: Understanding container technologies
+- Element 2: Types of containers
 - Element 3: Using reproducible computational environments
 - Element 4: Creating reproducible computational environments
+- Element 5: Running analysis within a container
 - Element 5: Capturing the essential pieces needed for an analysis
 
 ### Lesson requirements
@@ -201,6 +202,7 @@ More details on how to run an image you can find
 {: .challenge}
 
 
+TODO - move it 
 > ## Hands on exercise:
 >
 > Follow  [Simple Workflow README] (https://github.com/ReproNim/simple_workflow)
@@ -221,92 +223,154 @@ More details on how to run an image you can find
 
 ### Element 4: Creating reproducible computational environments
 
-#### 1. Creating a **Vagrant VM** for distribution
-Vagrant supports VirtualBox and VMWare virtual machines. [Using Vagrant with
-VirtualBox](https://www.vagrantup.com/docs/getting-started/) is a matter of
-creating a Vagrantfile and using it download and configure an execution
-environment. As an example, one can consider how to create an image with
-Neurodebian and install FSL tools into it:
 
-```
-vagrant init ubuntu/trusty64
-vagrant up
+#### **Docker** image
 
-vagrant ssh -c /bin/sh <<EOF
-   wget -O- http://neuro.debian.net/lists/trusty.us-nh.full | sudo tee /etc/apt/sources.list.d/neurodebian.sources.list
-   sudo apt-key adv --recv-keys --keyserver hkp://pgp.mit.edu:80 0xA5D32F012649A5A9    sudo apt-get update
-   sudo apt-get -y install fsl-complete
-EOF
-```
+In order to create a docker image we need to write a Dockerfile, that contains all the commands a user could call 
+on the command line to assemble an image.  Dockerfile provide a “recipe” for an image.
+A simple Dockerfile might look like this
 
-#### 2. Create a **Docker** image
+  ```bash
+  FROM ubuntu:latest
+  RUN apt-get update -y && apt-get install -y git emacs
+  ```
 
-In order to create a Docker Image, you should write a
-[Dockerfile](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/).
-A simple example of writing Dockerfile and build an image you can find
-[here](http://nipy.org/workshops/2017-03-boston/lectures/lesson-container/#31).
+But Dockerfile can me much more complicate, a Dockerfile with FSL might look like this:
+
+  ```bash
+  FROM neurodebian:stretch-non-free
+  ARG DEBIAN_FRONTEND="noninteractive"
+
+  ENV LANG="en_US.UTF-8" \
+      LC_ALL="en_US.UTF-8" \
+      ND_ENTRYPOINT="/neurodocker/startup.sh"
+  RUN export ND_ENTRYPOINT="/neurodocker/startup.sh" \
+      && apt-get update -qq \
+      && apt-get install -y -q --no-install-recommends \
+             apt-utils bzip2 ca-certificates \
+             curl locales unzip \
+      && apt-get clean \
+      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+      && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+      && dpkg-reconfigure --frontend=noninteractive locales \
+      && update-locale LANG="en_US.UTF-8" \
+      && chmod 777 /opt && chmod a+s /opt \
+      && mkdir -p /neurodocker \
+      && if [ ! -f "$ND_ENTRYPOINT" ]; then \
+           echo '#!/usr/bin/env bash' >> "$ND_ENTRYPOINT" \
+      &&   echo 'set -e' >> "$ND_ENTRYPOINT" \
+      &&   echo 'if [ -n "$1" ]; then "$@"; else /usr/bin/env bash; fi' >> "$ND_ENTRYPOINT"; \
+      fi \
+      && chmod -R 777 /neurodocker && chmod a+s /neurodocker
+  ENTRYPOINT ["/neurodocker/startup.sh"]
+  RUN apt-get update -qq \
+      && apt-get install -y -q --no-install-recommends \
+             fsl-5.0-core \
+             fsl-mni152-templates \
+      && apt-get clean \
+      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  RUN sed -i '$isource /etc/fsl/5.0/fsl.sh' $ND_ENTRYPOINT
+
+  ```
+
+> ## Question:
+>
+> What is a meaning of commands `FROM`, `ENV`, `ENTRYPOINT` and `RUN` in the FSL Dockerfile?
+>
+> > ## Answer
+> >
+> > Check the official 
+> > [Dockerfile Best Practice](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/).
+> >
+> {: .solution}
+{: .challenge}
+
+
+#### **Neurodocker** image
 
 If you want to create a new image for neuroimaging, you should check
 [Nuerodocker project](https://github.com/kaczmarj/neurodocker) that allows you
 to  generate custom Dockerfiles and minifies existing Docker images.
 Neurodocker not only simplifies writing a new Dockerfile, but also incorporates
 the best practice for installing software.
-You can compare [a simple script to create a Docker image with `FSL`](https://github.com/djarecka/neurodocker/blob/examples/examples/fsl/create_dockerfile.sh)
-to [a Dockerfile itself](https://github.com/djarecka/neurodocker/blob/examples/examples/fsl/Dockerfile)
-that contains much more details of proper installation and cleaning.
-Neurodocker can be also easily used to include Python and all Python libraries that can
-be installed using `conda` or `pip`.
-This is a simple example of [neurodocker command](https://github.com/djarecka/neurodocker/blob/examples/examples/conda_python/create_dockerfile.sh)
-and [Dockerfile](https://github.com/djarecka/neurodocker/blob/examples/examples/conda_python/Dockerfile).
-More examples can be found [here](https://github.com/djarecka/neurodocker/tree/examples/examples).
+It supports popular neuroimaging software: AFNI, ANTs, Convert3D, dcm2niix, FreeSurfer, 
+FSL, MINC, Miniconda (Python), MRtrix3, PETPVC, SPM.
+You can find full explanation of argument for `generate docker` command 
+[here](https://github.com/kaczmarj/neurodocker#generate-dockerfile).  
 
+Let's create an FSL Dockerfile using neurodocker. 
+We will start from creating a new directory:
 
-#### 3. Create a **Singularity** image
-
-In order to create an empty image or import layers from Docker image, you don't
-need root privileges. You can do it using
-[`create` and `import` commands](http://singularity.lbl.gov/quickstart#command-quick-start).
-
-However, if you want to install additional software or create an image from scratch,
-you need to have root privileges on a machine.
-It doesn't have to be a physical machine, if you're using HPC account, you can use Vagrant
-to create a Virtual Machine with Singularity  that can in turn be used to create a new image.
-
-This is a similar situation to running Singularity on Mac or Windows.
-You can follow the instruction from previous part or try to build a Vagrant Box from scratch:
-
-```
-vagrant init ubuntu/trusty64
-vagrant up
-
-vagrant ssh -c /bin/sh <<EOF
-   sudo apt-get update
-   sudo apt-get -y install build-essential curl git sudo man vim autoconf libtool
-   git clone https://github.com/singularityware/singularity.git
-   cd singularity
-   ./autogen.sh
-   ./configure --prefix=/usr/local
-   make
-   sudo make install
-EOF
+```bash
+mkdir my_docker
+cd my_docker
 ```
 
-If you want to create a new image you're going to share, the recommended practice is to
-create a bootstrap file.
-You can still start from a Docker image, but you can easily add environmental variables,
-additional software etc.
-A short recipe for bootstrap files you can find here
-[here](http://singularity.lbl.gov/quickstart#bootstrap-recipes),
-for best practices and more details check [this](http://singularity.lbl.gov/bootstrap-image#best-practices-for-bootstrapping).
+And now we can create the Dockerfile (we are using docker container with neurodocker already installed): 
 
-For more information about creating a Singularity image, changing size, etc., you should
-check [this Singularity website that contains nice short videos](http://singularity.lbl.gov/create-image).
+  ```bash
+  docker run --rm kaczmarj/neurodocker:master generate docker \
+  --base neurodebian:stretch-non-free \
+  --pkg-manager apt \
+  --install fsl-5.0-core fsl-mni152-templates \
+  --add-to-entrypoint "source /etc/fsl/5.0/fsl.sh"
+
+  ```
+
+Creating a Dockerfile is only the first step, we have the "receipe", now we can ask 
+Docker to create an image using `docker build` commmand:
+
+```bash
+docker build -t my_fsl .
+```
+
+We can check if the image is created:
+
+```bash
+docker images
+```
+
+> ## Question:
+>
+> How to create an image with a tag?
+> You can search Docker website or check help: `docker build --help`
+>
+> > ## Answer
+> >
+> > 
+> > docker build -t my_fsl:sfn18
+> >
+> {: .solution}
+{: .challenge}
+
+> ## Hands on exercise:
+>
+> Create a Docker image using Neurodocker with a specific version of FSL
+> and a Python 3.6 conda environment.
+>
+> {: .solution}
+{: .challenge}
 
 
-If you want to change already existing image (e.g. for testing purpose),
-you can mount the image using
-[`--writable` option](http://singularity.lbl.gov/docs-changing-containers)
-(yes, you need to have root privileges).
+
+
+
+#### **Singularity** image
+
+You can use Neurodocker also to create a Singularity file by using `generate singularity` command:
+
+```bash
+docker run --rm kaczmarj/neurodocker:master generate singularity \
+--base neurodebian:stretch-non-free \
+--pkg-manager apt \
+--install fsl-5.0-core fsl-mni152-templates \
+--add-to-entrypoint "source /etc/fsl/5.0/fsl.sh" > Singularity_fsl 
+```
+
+In order to build a Singularity image, you need to have root privileges on a machine:
+```bash
+sudo singularity build my_fsl.simg Singularity_fsl 
+```
 
 
 > ## Question:
@@ -321,32 +385,121 @@ you can mount the image using
 > {: .solution}
 {: .challenge}
 
-> ## Hands on exercise:
->
-> Create a Docker image using Neurodocker with a specific version of FSL
-> and a Python 3.6 conda environment.
->
-> {: .solution}
-{: .challenge}
+
+### Element 5: Running analysis within a container
+
+Once we have a Docker image with FSL we can try to run an FSL command, e.g. `bet`:
+
+The simplest way of executing the command:
+
+```bash
+docker run my_fsl bet
+```
+
+<img src="../fig/docker2.jpeg" width="50%" />
+
+
+We can see bet output on our screen and we are back in our host system.
+We have to have an input to run bet command, and we will download a T1w file using datalad 
+(please go to section TODO to learn about datalad if you are not familiar). 
+We will install `ds000114` dataset and download one file only:
+
+```bash
+mkdir data
+cd data
+datalad install -r ///workshops/nih-2017/ds000114
+datalad get ds000114/sub-01/ses-test/anat/sub-01_ses-test_T1w.nii.gz
+cd ..
+```
+
+In order to use the T1w file that is in the filesystem on the host machine, 
+we  should mount a local directory with data and run *bet* on the downloaded file:
+
+```bash
+docker run -v ~/ds000114:/data my_fsl bet \
+/data/sub-01/ses-test/anat/sub-01_ses-test_T1w.nii.gz sub-01_output
+```
+
+
+Once it's done, we can check the output:
+
+```bash
+ls -l
+```
+
+As we can see there is no bet output in our directory.
+This is because the output file `sub-01_output` was not created in a directory that was shared 
+with the host system.
+
+<img src="../fig/docker3.jpeg" width="50%" />
+
+We can fix it by creating a new directory for output:
+
+```bash
+mkdir output
+```
+
+and  mounting the output directory in addition to data directory:
+
+```bash
+docker run -v ~/ds000114:/data -v ~/output:/output my_fsl bet \
+/data/sub-01/ses-test/anat/sub-01_ses-test_T1w.nii.gz /output/sub-01_output
+```
+
+Now we should be able to see the output:
+```bash
+ls -l output
+```
+
+<img src="../fig/docker4.jpeg" width="50%" />
+
 
 > ## Hands on exercise:
 >
-> Create a Singularity image by importing previously created Docker image.
+> Repeat the analysis using the Singularity container
 >
+> {: .solution}
+> > Home directory is automatically mounted, so we don't have to specify (`-B` can be used to add more mounting points).
+> >
+> > ```bash
+> > singularity run images/fsl.simg bet \
+> > ~/ds000114/sub-01/ses-test/anat/sub-01_ses-test_T1w.nii.gz \
+> > ~/output/sub-01_output_sing
+> > ```
+> >
+> > Checking the output
+> > ```bash
+> > ls -l ~/output
+> > ```
+{: .challenge}
+
+
+We can also run an interactive session with Docker:
+
+```bash
+docker run -it my_fsl
+```
+
+Now you are with docker container and you can type commands directly.
+
+<img src="../fig/docker5.jpeg" width="75%" />
+
+> ## Question:
+>
+> Which Singularity commands is used to open an interactive session?
+>
+> > ## Answer
+> >
+> > ```bash
+> > singularity shell image
+> > ```
+> > Note: `shell` doesn't run automatically the file specified in `%runscript` or `ENTRYPOINT`.
 > {: .solution}
 {: .challenge}
 
 
-> ## Hands on exercise:
->
-> Create a bootsrap file that starts from your Docker image.
-> In addition to FSL install git and your favourite text editor (e.g. emacs).
-> Create directories for your data and output.
->
-> {: .solution}
-{: .challenge}
 
-### Element 5: Capturing the essential pieces needed for an analysis
+### Element 6: Capturing the essential pieces needed for an analysis
 
 Many packages, such as FSL, FreeSurfer, AFNI, do many different kinds of
 computation. Not all of the components are necessary for a specific analysis,
