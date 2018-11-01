@@ -66,57 +66,61 @@ construction of environment "images" or "containers".
 Container technologies provide a mechanism to encapsulate analysis environments
 for redistribution. Many of these technologies also allow creating an executable
 environment based on a script, thus allowing ease of reproducing analysis
-environments. Some popular virtual machine and container technologies are:
+environments.
 
-#### 1. [Virtual Machines](https://en.wikipedia.org/wiki/Virtual_machine)
-and [Vagrant](https://www.vagrantup.com/)
+There are two main types of container technology -- [virtual machines](https://en.wikipedia.org/wiki/Virtual_machine) 
+and "Docker-type" containers. 
+VirtualBox, VMware, AWS, or Google Compute Engine are examples of Virtual Machines.
+The most common technology within the second type is Docker, but it is not 
+the only example.
+Among scientist that use High Performance Centers (HPCs) Singularity becomes more popular.
 
-A Virtual Machine (VM) is an emulation of a computer system.
-Virtual machines are based on computer architectures and provide functionality of
-a physical computer.
-And Vagrant is a tool that simplifies process of building and managing
-virtual machine environments.
+The main idea behind these two types is the same -- isolate the computing environment.
+Isolating the environment subsequently allows regenerating 
+and sharing the computing environments.
 
-Follow [instructions](https://www.vagrantup.com/downloads.html) to install Vagrant.
+However, there are important differences between the two types, 
+that is pictured below:
 
-#### 2. [Amazon AMIs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html#creating-an-ami)
-     a. [NITRC Computational Environment: NITRC-CE](http://www.nitrc.org/plugins/mwiki/index.php/nitrc:User_Guide_-_NITRC_Computational_Environment)
+<img src="../fig/Containers-vs-Virtual-Machines.jpg" width="50%" />
 
-#### 3. [Docker](https://www.docker.com/)
+Virtual Machines emulate whole computer system (software+hardware).
+They use hypervisor to share and manage hardware of the host, and execute 
+the guest operating system.
+All guest machines are completely isolated and have dedicated resources.
+On the other hand, Docker containers share the host system’s kernel with other containers,
+only bins and libs are created from scratch.
+Each container gets its own isolated user space.
+Comparing to Virtual Machine, containers are very lightweight and fast to start up.
 
-Docker provides a slew of services to make building and distributing containers
-easier. This includes integration with GitHub and the ability to **`pull`**
-pre-built containers from Docker hub. In addition docker containers can
-orchestrated together with **`docker-compose`** to generate interacting services.
+There is no one solution that always works, your choice should depend on:
+ - which hardware is available to you (also do you require GPU),
+ - where is your data stored.
 
-Unfortunatelly, Docker can not be easily used on traditional HPC resources.
-One of the main reason is privilige escalation via Docker,
-i.e. users can get root access to the host system.
+Docker might me the most portable technology right now, but most HPC
+do not support Docker. 
+However, the system administrator should agree to install Singularity.
 
-There are various versions of Docker depending on the system you're using,
-reade more [here](https://docs.docker.com/) and follow to instruction
-to install an appropriate version.
+So what are the differences between Docker and Singularity?
+Docker is an open-source project and right now it's a leading software container platform.
+There are various versions of Docker depending on the system you’re using, 
+including Docker for Mac (for OSX users) and Docker for Windows (for Windows Pro users). 
+If you have the Home edition of Windows, you still can use Docker, but have to install VM first.
+Unfortunately, Docker can not be easily used on traditional HPC resources. 
+One of the main reason is privilege escalation via Docker, i.e. users can get root access to the host system.
 
 
-- [Gentle introduction to docker and other containers for scientists](http://nipy.org/workshops/2017-03-boston/lectures/lesson-container/#1)
-- [More extensive tutorial for docker (including building and deploying new webapps)](https://prakhar.me/docker-curriculum/)
+Singularity offers an alternative to docker on HPC clusters. 
+A user inside a Singularity container is the same user as outside the container, so you can be a root
+only if you are root on the host system.
+Creating singularity containers requires root privileges on a machine virtual or physical. 
+However, using singularity does not. The Singularity User Guide describes how to use the different components of singularity. One of the big advantages of Singularity is support for native drivers and libraries (e.g., GPU, MPI, etc.,.).
+If you have Linux you can directly install and run on your OS. 
+For other systems, you should use Vagrant and VM, follow the instruction for Mac or Windows.
+If you are a Docker user, the good news is that a Singularity image can be created
+from an existing Docker image.
 
-#### 4. [Singularity](http://singularity.lbl.gov/)
-
-Singularity offers an alternative to docker on HPC clusters. Creating singularity
-containers requires root privileges on a machine virtual or physical. However,
-using singularity does not. The [Singularity User Guide](http://singularity.lbl.gov/user-guide)
-describes how to use the different components of singularity. One of the big
-advantages of Singularity is support for native drivers and libraries (e.g., GPU,
-MPI, etc.,.).
-
-If you have Linux you can directly [install](http://singularity.lbl.gov/install-linux)
-and run on your OS.
-For other systems, you should use Vagrant and VM, follow the instruction for
-[Mac](http://singularity.lbl.gov/install-mac) or [Windows](http://singularity.lbl.gov/install-windows).
-
-You can use each of the technologies above to setup analysis environments for
-brain imaging, but there are important technical differences between them.
+You can use each of the technologies above to setup analysis environments for brain imaging, but there are important technical differences between them.
 
  - [Nice introduction to containers and technical differences between VM and Docker](https://medium.freecodecamp.com/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b#.kchrpokfz)
 between these technologies.
@@ -287,8 +291,8 @@ you need to have root privileges on a machine.
 It doesn't have to be a physical machine, if you're using HPC account, you can use Vagrant
 to create a Virtual Machine with Singularity  that can in turn be used to create a new image.
 
-This is a similar situation to running Singularity on Mac or Windows.
-You can follow the instruction from previous part or try to build a Vagrant Box from scratch:
+Creating a Dockerfile is only the first step, we have the "receipe", now we can ask 
+Docker to create an image using `docker build` command:
 
 ```
 vagrant init ubuntu/trusty64
@@ -344,7 +348,18 @@ you can mount the image using
 > {: .solution}
 {: .challenge}
 
-> ## Hands on exercise:
+
+We can also run an interactive session with Docker:
+
+```bash
+docker run -it my_fsl
+```
+
+Now you are with docker container and you can type commands directly.
+
+<img src="../fig/docker5.jpeg" width="40%" />
+
+> ## Question:
 >
 > Create a Singularity image by importing previously created Docker image.
 >
