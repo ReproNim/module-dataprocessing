@@ -2,7 +2,8 @@
 layout: lesson
 ---
 
-TODO: Here provide a very short (1 sentence) description of the module.
+This module will give you an overview of best practices and available tools to set up and conduct 
+a fully reproducible data processing and analysis workflow.  
 
 This module is a part of the training curriculum from
 the [ReproNim](http://www.reproducibleimaging.org) (Reproducible Neuroimaging) Center.
