@@ -26,9 +26,9 @@ Typical brain imaging analyses involve data, software, and human interaction
 to test hypotheses, explore relations in data and/or extract properties in
 data (e.g., data features). These analyses rely on numerous elements such as
 data quality, software environment, algorithms, and human input (e.g.,
-assesment and/or curation) that can introduce errors. It is therefore
-essential to record the information necessary to repeat or reproduce the
-analysis.
+assesment and/or curation) that can introduce errors. In order to repeat or
+reproduce any analysis, it is essential to record the information of each
+element.
 
 ### An analysis workflow
 
