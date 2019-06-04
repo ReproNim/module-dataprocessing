@@ -75,23 +75,26 @@ participant.
 
 ### Element 1: Storing data and metadata
 To ensure reproducibility all data and metadata must be accessible and
-preferably machine accessible.
+preferably be machine-accessible.
 
 > ## Machine accessibility
-> A typical approach to describing research is to write a document that
-> one shares with colleagues and collaborators. However, such
-> information requires significant human resources to interpret and
-> translate into code. An alternate approach is to encode the metadata
-> using structured markup (e.g., [RDF](https://www.w3.org/TR/rdf11-concepts/),
-> [JSON](http://www.json.org/), [XML](https://www.w3schools.com/xml/)). Often
-> such markup can be standardized to provide machine accessibility.
-{: .callout}
 
-In this example the data and metdata are stored in a
+> Machine accesibility means that information regarding an analysis or
+> research workflow (a.k.a., metadata) can be easily accesed by and parsed with automated tools.
+> Typically, the main approach to describe our research is to write a document
+> that is shared with colleagues and collaborators. However, extracting
+> relevant information regarding data acquisition, processing and/or
+> analysis, requires significant human resources, both to interpret and >
+> translate into code. An alternate approach is to encode the metadata > using
+> structured markup (e.g., [RDF](https://www.w3.org/TR/rdf11-concepts/), >
+> [JSON](http://www.json.org/), [XML](https://www.w3schools.com/xml/)). Often >
+> such markup can be standardized to provide machine accessibility. {: .callout}
+
+In this example data and metdata are stored in a
 [google spreadsheet](https://docs.google.com/spreadsheets/d/11an55u9t2TAf0EV2pHN0vOd8Ww2Gie-tHp9xGULh_dA).
-The phenotypic information are stored as literals. The imaging data are stored as
-pointers to files in the NITRC XNAT repository. However, this particular example
-does not have any semantic or type information associated with the input file.
+Phenotypic information is stored as characters/strings. The imaging data are stored as
+pointers/links to files in the NITRC XNAT repository. However, this particular example
+does not have any semantic or (data) type information associated with the input file.
 
 The column headers can be described in detail in a JSON document
 using [JSONLD](https://json-ld.org/) a format that supports semantic annotation.
