@@ -99,7 +99,7 @@ does not have any semantic or (data) type information associated with the input 
 The column headers can be described in detail in a JSON document using
 [JSONLD](https://json-ld.org/) a format that supports semantic annotation. The
 annotation provides information about the data contained in the column and
-allows harmonizing the information with other similar tables. For example, the
+allows for the harmonization of the information with other similar tables. For example, the
 JSONLD metadata key could tell us that the URLs correspond to anatomical
 T1-weighted images of the human brain and that the age of participants is
 expressed in years.
