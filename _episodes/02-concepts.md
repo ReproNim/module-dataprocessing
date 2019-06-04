@@ -52,12 +52,13 @@ You will make the most of this lession if you have an understanding of:
 <a name="overview" />
 
 ### Overview of workflow
-This basic workflow extracts a collection of brain images and associated
-phenotypic (e.g., age) information from a spreadsheet, and runs a Nipype
-workflow that takes the anatomical brain images and performs some simple
-anatomical image processing. The workflow itself can take a bit of time to run
-depending on the power of your machine or cluster. For learning purposes and to
-minimize the time you can run the workflow on one participant.
+The basic workflow presented here (i) extracts a collection of brain images
+and associated phenotypic trait (e.g., age) from a spreadsheet, and (ii) runs
+a Nipype workflow that takes the anatomical brain images and performs some
+simple anatomical image processing. Executing the whole workflow may take a
+bit of time to run depending on the power of your machine or cluster. For
+learning purposes and to minimize the time you can run the workflow on one
+participant.
 
 > ## Hands on exercise:
 >
