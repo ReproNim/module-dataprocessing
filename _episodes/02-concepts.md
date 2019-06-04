@@ -1,5 +1,5 @@
 ---
-title: "Lesson 1: Core concepts using an analysis example"
+title: "Lesson 1: Core concepts using an analysis workflow example"
 teaching: 30
 exercises: 60
 questions:
