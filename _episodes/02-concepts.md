@@ -167,7 +167,7 @@ and reuse containers.
 
 > ## Exercise:
 >
->  What should a reproducible computational environment contain?
+>  What must a reproducible computational environment contain?
 >
 > > ## Solution
 > >
