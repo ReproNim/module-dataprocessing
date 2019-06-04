@@ -44,7 +44,7 @@ environments. The complete simple workflow paper is available
 
 ### Lesson requirements
 
-It is helpful to have an understanding of:
+You will make the most of this lession if you have an understanding of:
 
 - [Unix shell](http://swcarpentry.github.io/shell-novice/)
 - [Version control](http://www.reproducibleimaging.org/module-reproducible-basics/02-vcs/)
