@@ -38,7 +38,7 @@ environments. The complete simple workflow paper is available
 - [Element 3: Running analysis and storing expected results and provenance](#element3)
    - Determine which execution outputs constitute test
 - [Element 4: Checking output consistency using continuous integration](#element4)
-   - Couple with continuous integration (CI) services such as [circle](https://circleci.com/) or [travis](https://travis-ci.org/), or
+   - Couple with continuous integration (CI) services such as [CircleCI](https://circleci.com/) or [travis](https://travis-ci.org/), or
     with your own CI servers running [jenkins](https://jenkins.io/).
 - [Results from running the Workflow](#results)
 
@@ -183,23 +183,22 @@ and reuse containers.
 
 ### Element 3: Running analysis and storing expected results and provenance
 
-Once the environment is setup, one can execute the analysis. Each time
-the analysis is run the provenance of the workflow is captured and
-stored using a [PROV](https://www.w3.org/TR/prov-dm/) model for workflows.
-All of this happens inside a
-[single executable script](https://github.com/ReproNim/simple_workflow/blob/master/run_demo_workflow.py).
-The script itself uses the [Nipype dataflow framework](http://nipy.org/nipype)
-to ensure a consistent representation of the execution graph using Python as the
-dataflow language, and therefore benefits from all the advantages a dataflow
-framework brings to analyses.
+Once the environment is set up, one can execute the analysis workflow. Each
+time the analysis is run the provenance of the workflow is captured and stored
+using a [PROV](https://www.w3.org/TR/prov-dm/) model for workflows. All of
+this happens inside a [single executable
+script](https://github.com/ReproNim/simple_workflow/blob/master/run_demo_workflow.py).
+The script `Simple_Prep.sh` uses [Nipype dataflows](http://nipy.org/nipype) to ensure a consistent representation of
+the execution graph, itself a representation of the steps followed during this part of the analysis workflow.
+
 
 > ## Using dataflow technologies for analysis instead of shell scripts
 > There are many dataflow platforms out there. These typically enable a
 > compact, abstract graph based representation of a dataflow, allowing
-> reuse and consistent of execution. They also enable running the same
+> for their reuse and consistent of execution. They also enable running the same
 > dataflow in different computing environments and not requiring the
 > user to keep track of complex data dependencies across nodes. While
-> Nipype was used in this example, other brain imaging data flow systems
+> Nipype was used in this example, other brain imaging dataflow systems
 > include Automated Analysis, PSOM, FASTR.
 {: .callout}
 
@@ -222,8 +221,8 @@ these pipelines.
 >
 > > ## Solution
 > >
-> > 1. Compact and structured representation of analysis
-> > 2. Can be reused with minimal changes
+> > 1. Compact and structured representation of analysis.
+> > 2. Can be reused with minimal changes.
 > > 3. Many dataflow tools can be used across different environments.
 > > 4. The tools take care of data management.
 > > 5. Many dataflow tools support distributed execution of steps.
@@ -240,8 +239,8 @@ is run, it would be good to know if the same results, within some threshold, are
 obtained when a dataset containing the similar data or a similar
 workflow is used. These can be carried out using continuous integration
 services, such as [Travis](https://travis-ci.org/), [CircleCI](https://circleci.com/),
-[Jenkins](https://jenkins.io/), which allow executing an analysis and performing
-a test comparison automatically as versions of data or software change.
+[Jenkins](https://jenkins.io/), which allow for the execution of an analysis workflow and, automated comparison tests  
+as versions of data or software change.
 
 > ## Continuous integration testing
 > In typical brain imaging analyses there is a complex interaction
