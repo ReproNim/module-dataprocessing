@@ -96,15 +96,14 @@ Phenotypic information is stored as characters/strings. The imaging data are sto
 pointers/links to files in the NITRC XNAT repository. However, this particular example
 does not have any semantic or (data) type information associated with the input file.
 
-The column headers can be described in detail in a JSON document
-using [JSONLD](https://json-ld.org/) a format that supports semantic annotation.
-The annotation provides information about the data contained in the column and
+The column headers can be described in detail in a JSON document using
+[JSONLD](https://json-ld.org/) a format that supports semantic annotation. The
+annotation provides information about the data contained in the column and
 allows harmonizing the information with other similar tables. For example, the
-JSONLD metadata key could tell us that the URLs correspond to anatomical T1-weighted
-images of the human brain and that the age of participants is in years.
+JSONLD metadata key could tell us that the URLs correspond to anatomical
+T1-weighted images of the human brain and that the age of participants is
+expressed in years.
 
-Most datasets use PDFs or other human readable documents. Using consistent and
-self-describing data structures make the data more accessible.
 
 [Lesson 2](../03-data) covers different aspects of data annotation,
 harmonization, cleaning, storage, and sharing.
