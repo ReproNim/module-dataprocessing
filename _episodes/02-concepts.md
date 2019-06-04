@@ -143,13 +143,12 @@ harmonization, cleaning, storage, and sharing.
 The second component of this example is a setup script and a Docker container
 that creates the necessary computational environment for analysis.
 
-> ## Problems with creating environments
-> 1. The default script assumes that you have access to certain software,
+> ## Problems with creating environments with a script
+> 1. The script assumes that you have access to certain software,
 >   such as bash and FSL, on your system. This means you have to run
 >   this on a unix-like system such as Linux or MacOS.
-> 2. All other software, python libraries and their dependencies are
->   installed by the script. The script itself does not care if these
->   installs conflict with your existing software environment.
+> 2. The script will install all other necessary software (e.g., python libraries and their dependencies) and
+>   will not handle any conflicts with your existing software environment.
 {: .callout}
 
 Alternatives that reproduce environments with minimal software
