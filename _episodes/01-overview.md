@@ -34,31 +34,38 @@ element.
 
 <img src="{{site.root}}/fig/EDC-annot.png" width="100%">
 
-Reproducing the analysis requires knowing descriptions of:
+Reproducing an analysis workflow **requires** knowing the details of:
 
-- data was used in the analysis
-- steps to collect or find such data
-- analysis steps that were needed (processing and statistics)
-- how to redo the analysis steps
-- what computing environment was used
-- how to recreate the same or similar environment
-- how did the researcher validate the output
+- Datasets used as input of the analysis, including
+    - steps followed to collect or find such data,
+    - status of data (e.g., raw/pre-processed).
+- Analysis steps performed 
+    - processing 
+    - statistics
+- Steps necessary to re-do/re-run the analysis
+- Software environment used, including
+    - OS,
+    - enviroment (e.g., Python version, compiler version),
+    - specific program (version),
+    - dependencies.
+- Steps necessary to recreate the same or similar environment
+- Validation procedure (e.g., ow did the researcher validate the output?)
 
-These steps are needed for the researcher to preserve information for
-future use, to document the methods for dissemination, and to repeat the
-experiment.
+These steps are essential for the preservation of information for future use,
+for the correct documentation of methods for widespread dissemination, and for
+the repeatability/reproducibility of the experiment by third parties. 
 
 ### Prerequisites
 
-For this module, we expect the reader to be familiar with unix computing
-concepts and have a general idea of brain image analysis. It is highly
-recommended that you go through the overview lectures of the
-reproducible basics and FAIR data principles modules.
+For this module, we expect the reader to be familiar with `unix` environments 
+and have a general idea of brain image analysis. We recommend  that you go
+through the overview lectures of the reproducible basics and FAIR data
+principles modules.
 
 ### What will you learn
 
-You will learn how to perform reproducible analysis, how to preserve the
-information, and how to share data and code with others.
+You will learn how to set up and conduct reproducible analysis workflows, how
+to preserve the information, and how to share data and code with others.
 
 ### How long will it take
 
