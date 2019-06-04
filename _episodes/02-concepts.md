@@ -38,8 +38,8 @@ environments. The complete simple workflow paper is available
 - [Element 3: Running analysis and storing expected results and provenance](#element3)
    - Determine which execution outputs constitute test
 - [Element 4: Checking output consistency using continuous integration](#element4)
-   - Couple with testing services such as circle or travis
-    (or setup your own jenkins)
+   - Couple with continuous integration (CI) services such as [circle](https://circleci.com/) or [travis](https://travis-ci.org/), or
+    with your own CI servers running [jenkins](https://jenkins.io/).
 - [Results from running the Workflow](#results)
 
 ### Lesson requirements
