@@ -253,14 +253,13 @@ as versions of data or software change.
 {: .callout}
 
 In brain imaging, most published results rarely come with data and code
-to allow retesting the outcome when either the software versions change
-or when a new dataset is available. The intent of this simple workflow
-framework is to move the community towards such comprehensive data
+to allow for the retesting of the outcome when either the software version changes
+or when new datasets are available. The intent of this simple workflow
+example is to move the community towards such comprehensive data
 preservation and testing integration.
 
-[Lesson 5](../06-testing) covers how to use continuous integration services like
-Travis and CircleCI, but also how container technologies can be used to run
-your own integration testing.
+[Lesson 5](../06-testing) covers how to use continuous integration services and 
+also how container technologies can be used to run your own integration testing.
 
 > ## Exercise:
 >
@@ -280,9 +279,9 @@ your own integration testing.
 
 <a name="results" />
 
-### Results from running the Workflow
+### Results from running the Simple Workflow example
 
-It turns out that this Workflow is not reproducible across different
+It turns out that this Simple Workflow is not reproducible across different
 versions of software and operating systems. [The observed inconsistencies (see Table 1)](https://f1000research.com/articles/6-124/)
 point to issues of randomization and/or initialization within the algorithms that
 are run. While its easy to detect deviation of execution in different
