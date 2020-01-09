@@ -27,3 +27,6 @@ then enter the name of the lesson/repository that you wish to create.
 # Acknowledgment
 
 Please see [LICENSE.md](LICENSE.md) for copyright, license, and how to acknowledge information.
+
+# Testing trafic check
+[![HitCount](http://hits.dwyl.io/djarecka/module-dataprocessing.svg)](http://hits.dwyl.io/djarecka/module-dataprocessing)
