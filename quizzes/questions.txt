@@ -1,0 +1,153 @@
+Qst| What can help with creating a re-executable analysis? (select the best answer)
+A| Using HPC center to run the analysis
+B| Using containers or virtual machines
+C| Using newer programming languages: e.g. Python
+Answer| B
+Type| Single
+
+#####
+
+qst| What are typical reasons for getting different results when running on various operating systems? (select all that apply)
+A| Using floating point numbers
+B| Using negative numbers
+C| Using random numbers to initialize algorithms
+D| Using big arrays
+Answer| a, c
+type| multi
+
+######
+
+qst| What does data wrangling do? (select all that apply)
+A| Performs analytics on data
+B| Harmonizes information across datasets
+C| Generates new data samples
+D| Gets data out from labs.
+Answer| b
+type| multi
+
+####
+
+qst| Where can you find terminologies for annotating neuroimaging data? (select all that apply)
+A| BIDS
+B| NIDM
+C| Cognitive Atlas
+D| Cognitive Paradigm Ontology
+Answer| A, B, C, D
+
+####
+qst| What is true about the Nifti format? (select all that apply)
+A| used to store brain imaging data
+B| Used to store participant behavioral data
+C| Most common data format used by scanners
+D| Stores data in binary form
+Answer| a, d
+
+#####
+
+qst| What might be the issues with running Docker in HPC? (select all that apply)
+A| Security issues with escalating privileges
+B| Too much memory needed
+C| Not available for most of the linux distributions
+D| Too slow
+Answer| a, c
+
+#####
+
+qst| What might be the alternative to Docker if the HPC doesn’t support it? (select the best option)
+A| Singularity
+B| Using conda environment
+C| runc
+D| proot
+Answer| a
+
+#####
+
+qst| What might be the alternative to Docker if the HPC doesn’t support it? (select the best option)
+A| Singularity
+B| Using conda environment
+C| runc
+D| proot
+Answer| a
+
+####
+
+qst| When do you need root privileges on a machine?  (select all that apply)
+A| To run a Singularity container
+B| To run a Docker container
+C| To create Singularity image from scratch
+D| To import Docker layers to a Singularity image
+Answer| b, c
+
+####
+
+qst| What is true about Dockerfiles/Singularity files? (select all that apply)
+A| It’s a text file that contains all the instructions needed to assemble an image
+B| When used with `docker build` will always return the same docker image
+C| Dockerfile can be used with Singularity
+Answer| a
+
+###
+
+qst| What is NOT true about Dataflow Technologies (select all that apply):
+A| Allow for a compact representation of analysis
+B| Many dataflow tools can be used across different environments
+C| Most dataflow technologies checks the correctness of the results
+Answer| c
+type| multi
+
+####
+
+qst| Why do we provide isolation of script and data being worked on in dataflow tools? (select all that apply)
+A| Helps writing more generalizable programs
+B| Makes the code easier to reuse by others
+C| Allows for faster execution
+Answer| a, b
+
+###
+
+qst| Which conditions need to be true for dataflow tools to make your analysis faster? (select all that apply)
+A| When operations can be executed in parallel
+B| When compiled languages like C/C++ are used
+C| When the computational environment supports parallel processes
+D| When you have more memory in the system
+Answer| a, c
+
+###
+
+qst| What are the objectives of Regression Testing? (select the correct answer)
+A| Checks if the output is correct
+B| Checks if the output doesn’t change over time
+C| Checks which version of the software works best
+Answer| b
+
+####
+
+qst| What are the  Continuous Integration principles? (select all that apply)
+A| Using a version control system
+B| automated builds of the software
+C| automated testing
+Answer| a, b, c
+
+####
+
+qst| The core concepts defined by the PROV Model are Entity, Activity and Agent. Which of the following can be treated as an Agent? (select all that apply)
+A| Software
+B| Data file
+C| Scientist
+Answer| a, c
+
+####
+
+qst| Most publications are required to capture and provide very detailed provenance of the analysis steps. (select the correct answer)
+A| True
+B| False
+Answer| b
+
+####
+
+qst| Capturing provenance improves: (select the best answer)
+A| software reliability
+B| reproducibility
+C| analysis skills
+D| statistical significance
+Answer| b
