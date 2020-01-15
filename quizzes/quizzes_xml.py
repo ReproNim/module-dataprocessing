@@ -63,12 +63,13 @@ def read_qstfile(filename):
                 if len(el.split("|")) != 2:
                     raise Exception(f"error in the line: {el}")
                 key, val = el.split("|")
-                key, val = key.lower().strip(), val.lower().strip()
+                key, val = key.lower().strip(), val.strip()
                 if key in ["qst", "question", "qst."]:
                     quiz["qst"] = val
                 elif key in ["ans", "ans.", "answer"]:
                     quiz["answer"] = [v.lower().strip() for v in val.split(',')]
                 elif key in ["type", "tp", "tp."]:
+                    val = val.lower()
                     if val in TYPES:
                         quiz["type"] = val
                 elif key in ["name", "nm", "nm."]:
@@ -166,7 +167,7 @@ def add_multi(question, quiz):
             fdb = ET.SubElement(ans, 'feedback')
             fdb_txt = ET.SubElement(fdb, 'text')
             if ans_el in correct_ans_l:
-                ans.set("fraction", str(correct_frac_l.pop))
+                ans.set("fraction", str(correct_frac_l.pop()))
                 fdb_txt.text = 'Correct answer!'
             else:
                 ans.set("fraction", "0")

@@ -4,26 +4,26 @@
   <qst>another child contains text.</qst>
   <question type="multichoice">
     <questiontext format="html">
-      <text>what can help with creating a re-executable analysis? (select the best answer)</text>
+      <text>What can help with creating a re-executable analysis? (select the best answer)</text>
     </questiontext>
     <name>
       <text>Question 1</text>
     </name>
     <single>true</single>
     <answer fraction="0">
-      <text>using hpc center to run the analysis</text>
+      <text>Using HPC center to run the analysis</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
     <answer fraction="100">
-      <text>using containers or virtual machines</text>
+      <text>Using containers or virtual machines</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>using newer programming languages: e.g. python</text>
+      <text>Using newer programming languages: e.g. Python</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
@@ -32,32 +32,32 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>what are typical reasons for getting different results when running on various operating systems? (select all that apply)</text>
+      <text>What are typical reasons for getting different results when running on various operating systems? (select all that apply)</text>
     </questiontext>
     <name>
       <text>Question 2</text>
     </name>
     <single>false</single>
-    <answer fraction="&lt;built-in method pop of list object at 0x109add108&gt;">
-      <text>using floating point numbers</text>
+    <answer fraction="50">
+      <text>Using floating point numbers</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>using negative numbers</text>
+      <text>Using negative numbers</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109add108&gt;">
-      <text>using random numbers to initialize algorithms</text>
+    <answer fraction="50">
+      <text>Using random numbers to initialize algorithms</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>using big arrays</text>
+      <text>Using big arrays</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
@@ -66,32 +66,32 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>what does data wrangling do? (select all that apply)</text>
+      <text>What does data wrangling do? (select all that apply)</text>
     </questiontext>
     <name>
       <text>Question 3</text>
     </name>
     <single>false</single>
     <answer fraction="0">
-      <text>performs analytics on data</text>
+      <text>Performs analytics on data</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac80c8&gt;">
-      <text>harmonizes information across datasets</text>
+    <answer fraction="100">
+      <text>Harmonizes information across datasets</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>generates new data samples</text>
+      <text>Generates new data samples</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>gets data out from labs.</text>
+      <text>Gets data out from labs.</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
@@ -100,32 +100,32 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>where can you find terminologies for annotating neuroimaging data? (select all that apply)</text>
+      <text>Where can you find terminologies for annotating neuroimaging data? (select all that apply)</text>
     </questiontext>
     <name>
       <text>Question 4</text>
     </name>
     <single>false</single>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8208&gt;">
-      <text>bids</text>
+    <answer fraction="25">
+      <text>BIDS</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8208&gt;">
-      <text>nidm</text>
+    <answer fraction="25">
+      <text>NIDM</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8208&gt;">
-      <text>cognitive atlas</text>
+    <answer fraction="25">
+      <text>Cognitive Atlas</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8208&gt;">
-      <text>cognitive paradigm ontology</text>
+    <answer fraction="25">
+      <text>Cognitive Paradigm Ontology</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
@@ -134,32 +134,32 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>what is true about the nifti format? (select all that apply)</text>
+      <text>What is true about the Nifti format? (select all that apply)</text>
     </questiontext>
     <name>
       <text>Question 5</text>
     </name>
     <single>false</single>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8308&gt;">
+    <answer fraction="50">
       <text>used to store brain imaging data</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>used to store participant behavioral data</text>
+      <text>Used to store participant behavioral data</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>most common data format used by scanners</text>
+      <text>Most common data format used by scanners</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8308&gt;">
-      <text>stores data in binary form</text>
+    <answer fraction="50">
+      <text>Stores data in binary form</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
@@ -168,32 +168,32 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>what might be the issues with running docker in hpc? (select all that apply)</text>
+      <text>What might be the issues with running Docker in HPC? (select all that apply)</text>
     </questiontext>
     <name>
       <text>Question 6</text>
     </name>
     <single>false</single>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8d08&gt;">
-      <text>security issues with escalating privileges</text>
+    <answer fraction="50">
+      <text>Security issues with escalating privileges</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>too much memory needed</text>
+      <text>Too much memory needed</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8d08&gt;">
-      <text>not available for most of the linux distributions</text>
+    <answer fraction="50">
+      <text>Not available for most of the linux distributions</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>too slow</text>
+      <text>Too slow</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
@@ -202,20 +202,20 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>what might be the alternative to docker if the hpc doesn’t support it? (select the best option)</text>
+      <text>What might be the alternative to Docker if the HPC doesn’t support it? (select the best option)</text>
     </questiontext>
     <name>
       <text>Question 7</text>
     </name>
     <single>true</single>
     <answer fraction="100">
-      <text>singularity</text>
+      <text>Singularity</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>using conda environment</text>
+      <text>Using conda environment</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
@@ -236,32 +236,32 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>when do you need root privileges on a machine?  (select all that apply)</text>
+      <text>When do you need root privileges on a machine?  (select all that apply)</text>
     </questiontext>
     <name>
       <text>Question 8</text>
     </name>
     <single>false</single>
     <answer fraction="0">
-      <text>to run a singularity container</text>
+      <text>To run a Singularity container</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8dc8&gt;">
-      <text>to run a docker container</text>
+    <answer fraction="50">
+      <text>To run a Docker container</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8dc8&gt;">
-      <text>to create singularity image from scratch</text>
+    <answer fraction="50">
+      <text>To create Singularity image from scratch</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>to import docker layers to a singularity image</text>
+      <text>To import Docker layers to a Singularity image</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
@@ -270,26 +270,26 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>what is true about dockerfiles/singularity files? (select all that apply)</text>
+      <text>What is true about Dockerfiles/Singularity files? (select all that apply)</text>
     </questiontext>
     <name>
       <text>Question 9</text>
     </name>
     <single>true</single>
     <answer fraction="100">
-      <text>it’s a text file that contains all the instructions needed to assemble an image</text>
+      <text>It’s a text file that contains all the instructions needed to assemble an image</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>when used with `docker build` will always return the same docker image</text>
+      <text>When used with `docker build` will always return the same docker image</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>dockerfile can be used with singularity</text>
+      <text>Dockerfile can be used with Singularity</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
@@ -298,26 +298,26 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>what is not true about dataflow technologies (select all that apply):</text>
+      <text>What is NOT true about Dataflow Technologies (select all that apply):</text>
     </questiontext>
     <name>
       <text>Question 10</text>
     </name>
     <single>false</single>
     <answer fraction="0">
-      <text>allow for a compact representation of analysis</text>
+      <text>Allow for a compact representation of analysis</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>many dataflow tools can be used across different environments</text>
+      <text>Many dataflow tools can be used across different environments</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac82c8&gt;">
-      <text>most dataflow technologies checks the correctness of the results</text>
+    <answer fraction="100">
+      <text>Most dataflow technologies checks the correctness of the results</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
@@ -326,26 +326,26 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>why do we provide isolation of script and data being worked on in dataflow tools? (select all that apply)</text>
+      <text>Why do we provide isolation of script and data being worked on in dataflow tools? (select all that apply)</text>
     </questiontext>
     <name>
       <text>Question 11</text>
     </name>
     <single>false</single>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8e88&gt;">
-      <text>helps writing more generalizable programs</text>
+    <answer fraction="50">
+      <text>Helps writing more generalizable programs</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8e88&gt;">
-      <text>makes the code easier to reuse by others</text>
+    <answer fraction="50">
+      <text>Makes the code easier to reuse by others</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>allows for faster execution</text>
+      <text>Allows for faster execution</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
@@ -354,32 +354,32 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>which conditions need to be true for dataflow tools to make your analysis faster? (select all that apply)</text>
+      <text>Which conditions need to be true for dataflow tools to make your analysis faster? (select all that apply)</text>
     </questiontext>
     <name>
       <text>Question 12</text>
     </name>
     <single>false</single>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8fc8&gt;">
-      <text>when operations can be executed in parallel</text>
+    <answer fraction="50">
+      <text>When operations can be executed in parallel</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>when compiled languages like c/c++ are used</text>
+      <text>When compiled languages like C/C++ are used</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8fc8&gt;">
-      <text>when the computational environment supports parallel processes</text>
+    <answer fraction="50">
+      <text>When the computational environment supports parallel processes</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>when you have more memory in the system</text>
+      <text>When you have more memory in the system</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
@@ -388,26 +388,26 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>what are the objectives of regression testing? (select the correct answer)</text>
+      <text>What are the objectives of Regression Testing? (select the correct answer)</text>
     </questiontext>
     <name>
       <text>Question 13</text>
     </name>
     <single>true</single>
     <answer fraction="0">
-      <text>checks if the output is correct</text>
+      <text>Checks if the output is correct</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
     <answer fraction="100">
-      <text>checks if the output doesn’t change over time</text>
+      <text>Checks if the output doesn’t change over time</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>checks which version of the software works best</text>
+      <text>Checks which version of the software works best</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
@@ -416,25 +416,25 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>what are the  continuous integration principles? (select all that apply)</text>
+      <text>What are the  Continuous Integration principles? (select all that apply)</text>
     </questiontext>
     <name>
       <text>Question 14</text>
     </name>
     <single>false</single>
-    <answer fraction="&lt;built-in method pop of list object at 0x109add088&gt;">
-      <text>using a version control system</text>
+    <answer fraction="33">
+      <text>Using a version control system</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109add088&gt;">
+    <answer fraction="33">
       <text>automated builds of the software</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109add088&gt;">
+    <answer fraction="34">
       <text>automated testing</text>
       <feedback>
         <text>Correct answer!</text>
@@ -444,26 +444,26 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>the core concepts defined by the prov model are entity, activity and agent. which of the following can be treated as an agent? (select all that apply)</text>
+      <text>The core concepts defined by the PROV Model are Entity, Activity and Agent. Which of the following can be treated as an Agent? (select all that apply)</text>
     </questiontext>
     <name>
       <text>Question 15</text>
     </name>
     <single>false</single>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8f48&gt;">
-      <text>software</text>
+    <answer fraction="50">
+      <text>Software</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
     </answer>
     <answer fraction="0">
-      <text>data file</text>
+      <text>Data file</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
-    <answer fraction="&lt;built-in method pop of list object at 0x109ac8f48&gt;">
-      <text>scientist</text>
+    <answer fraction="50">
+      <text>Scientist</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
@@ -472,20 +472,20 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>most publications are required to capture and provide very detailed provenance of the analysis steps. (select the correct answer)</text>
+      <text>Most publications are required to capture and provide very detailed provenance of the analysis steps. (select the correct answer)</text>
     </questiontext>
     <name>
       <text>Question 16</text>
     </name>
     <single>true</single>
     <answer fraction="0">
-      <text>true</text>
+      <text>True</text>
       <feedback>
         <text>Wrong answer</text>
       </feedback>
     </answer>
     <answer fraction="100">
-      <text>false</text>
+      <text>False</text>
       <feedback>
         <text>Correct answer!</text>
       </feedback>
@@ -494,7 +494,7 @@
 
   <question type="multichoice">
     <questiontext format="html">
-      <text>capturing provenance improves: (select the best answer)</text>
+      <text>Capturing provenance improves: (select the best answer)</text>
     </questiontext>
     <name>
       <text>Question 17</text>
