@@ -60,15 +60,6 @@ C| runc
 D| proot
 Answer| a
 
-#####
-
-qst| What might be the alternative to Docker if the HPC doesn’t support it? (select the best option)
-A| Singularity
-B| Using conda environment
-C| runc
-D| proot
-Answer| a
-
 ####
 
 qst| When do you need root privileges on a machine?  (select all that apply)
