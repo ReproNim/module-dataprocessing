@@ -3,12 +3,12 @@ title: "Module overview"
 teaching: 10
 exercises: 0
 questions:
-- "What do we need to know to conduct reproducible analysis?"
+- "What do we need to know to set up a reproducible analysis workflow?"
 objectives:
 - Understand the conceptual pieces that make up reproducible research.
 - Learn where to go for information
 keypoints:
-- Reproducible research requires understanding all pieces of the data flow
+- Reproducible research requires understanding all pieces of the (data) workflow
 - You should be familiar with the necessary elements and tools for reproducible analysis.
 
 ---
@@ -22,42 +22,50 @@ keypoints:
 >  - How can you recreate your analysis environment on any machine?
 {: .challenge}
 
-The typical brain imaging experiment uses data, software, and human
-interaction to test hypotheses and/or explore relations in data. These
-analyses can involve many different elements (data quality,
-software environment, algorithms, human input) that can introduce errors.
-It is therefore useful to capture the information necessary to repeat or
-reproduce the analysis.
+Typical brain imaging analyses involve data, software, and human interaction
+to test hypotheses, explore relations in data and/or extract properties in
+data (e.g., data features). These analyses rely on numerous elements such as
+data quality, software environment, algorithms, and human input (e.g.,
+assesment and/or curation) that can introduce errors. In order to repeat or
+reproduce any analysis, it is essential to record the information of each
+element.
 
 ### An analysis workflow
 
 <img src="{{site.root}}/fig/EDC-annot.png" width="100%">
 
-Reproducing the analysis requires knowing descriptions of:
+Reproducing an analysis workflow **requires** knowing the details of:
 
-- data was used in the analysis
-- steps to collect or find such data
-- analysis steps that were needed (processing and statistics)
-- how to redo the analysis steps
-- what computing environment was used
-- how to recreate the same or similar environment
-- how did the researcher validate the output
+- Datasets used as input of the analysis, including
+    - steps followed to collect or find such data,
+    - status of data (e.g., raw/pre-processed).
+- Analysis steps performed 
+    - processing 
+    - statistics
+- Steps necessary to re-do/re-run the analysis
+- Software environment used, including
+    - OS,
+    - enviroment (e.g., Python version, compiler version),
+    - specific program (version),
+    - dependencies.
+- Steps necessary to recreate the same or similar environment
+- Validation procedure (e.g., ow did the researcher validate the output?)
 
-These steps are needed for the researcher to preserve information for
-future use, to document the methods for dissemination, and to repeat the
-experiment.
+These steps are essential for the preservation of information for future use,
+for the correct documentation of methods for widespread dissemination, and for
+the repeatability/reproducibility of the experiment by third parties. 
 
 ### Prerequisites
 
-For this module, we expect the reader to be familiar with unix computing
-concepts and have a general idea of brain image analysis. It is highly
-recommended that you go through the overview lectures of the
-reproducible basics and FAIR data principles modules.
+For this module, we expect the reader to be familiar with `unix` environments 
+and have a general idea of brain image analysis. We recommend  that you go
+through the overview lectures of the reproducible basics and FAIR data
+principles modules.
 
 ### What will you learn
 
-You will learn how to perform reproducible analysis, how to preserve the
-information, and how to share data and code with others.
+You will learn how to set up and conduct reproducible analysis workflows, how
+to preserve the information, and how to share data and code with others.
 
 ### How long will it take
 
