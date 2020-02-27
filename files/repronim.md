@@ -24,51 +24,12 @@ footer: 'How would Repronim do data processing'
 ---
 ### Outline
 
-1. Heudiconv/ReproIn/BIDS
-2. DataLad
+1. DataLad
+2. Heudiconv/ReproIn/BIDS
 3. Containerized apps
 
 ---
-![bg](black)
-![](white)
 
-### BIDS
-
-![width:1000px center](https://bids.neuroimaging.io/assets/img/dicom-reorganization-transparent-white_1000x477.png)
-
----
-
-### Heudiconv/ReproIn
-
-Convert dicoms
-
-```shell
-$ heudiconv --files phantom-1 -f reproin -o output --bids 
-```
-
-- What is HeuDIConv?
-  - heuristic dicom converter
-
-- What is ReproIn?
-  - a protocol naming scheme
-
----
-### ReproIn
-
-![width:1100px](https://github.com/ReproNim/reproin/raw/master/docs/source/images/dbic-conversions.png)
-
----
-### ReproIn
-
-```shell
-$ heudiconv --files phantom-1 \
--f reproin -o output2 \
---bids --datalad
-```
-
-![bg right](https://github.com/ReproNim/reproin/raw/master/docs/source/images/dbic-conversions.png)
-
----
 ### DataLad: finding data
 
 [Datalad indexed datasets](https://datasets.datalad.org)
@@ -156,7 +117,7 @@ $ datalad get ds000003/sub-01/anat/sub-01_T1w.nii.gz
 
 ### Processing: Reusing software
 
-Kwyk is a deep neural network based anatomical segmentation software. Let's add a Docker container for kwyk to the dataset
+[Kwyk](https://www.frontiersin.org/articles/10.3389/fninf.2019.00067/full) is a deep neural network based anatomical segmentation software. Let's add a Docker container for kwyk to the dataset
 
 ```shell
 $ datalad containers-add -i kwyk-img \
@@ -190,10 +151,6 @@ $ datalad containers-run -n kwyk \
 
 ---
 
-![height:640px center](https://raw.githubusercontent.com/ReproNim/containers-artwork/master/repronim-containers-yoda_30dpi.png)
-
----
-
 <!--
 _class: lead
 -->
@@ -214,6 +171,49 @@ $ fsleyes ds000003/sub-01/anat/sub-01_T1w.nii.gz kwyk-output.nii.gz_means_orig.n
 ```shell
 $ git log
 ```
+
+---
+
+![height:640px center](https://raw.githubusercontent.com/ReproNim/containers-artwork/master/repronim-containers-yoda_30dpi.png)
+
+---
+![bg](black)
+![](white)
+
+### BIDS
+
+![width:1000px center](https://bids.neuroimaging.io/assets/img/dicom-reorganization-transparent-white_1000x477.png)
+
+---
+### Heudiconv/ReproIn
+
+Convert dicoms
+
+```shell
+$ heudiconv --files phantom-1 -f reproin -o output --bids 
+```
+
+- What is HeuDIConv?
+  - heuristic dicom converter
+
+- What is ReproIn?
+  - a protocol naming scheme
+
+---
+### ReproIn
+
+![width:1100px](https://github.com/ReproNim/reproin/raw/master/docs/source/images/dbic-conversions.png)
+
+---
+### ReproIn
+
+```shell
+$ heudiconv --files phantom-1 \
+-f reproin -o output2 \
+--bids --datalad
+```
+
+![bg right](https://github.com/ReproNim/reproin/raw/master/docs/source/images/dbic-conversions.png)
 
 ---
 
