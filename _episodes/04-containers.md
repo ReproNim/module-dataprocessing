@@ -68,24 +68,24 @@ for redistribution. Many of these technologies also allow creating an executable
 environment based on a script, thus allowing ease of reproducing analysis
 environments.
 
-There are two main types of container technology -- [virtual machines](https://en.wikipedia.org/wiki/Virtual_machine) 
-and "Docker-type" containers. 
+There are two main types of container technology -- [virtual machines](https://en.wikipedia.org/wiki/Virtual_machine)
+and "Docker-type" containers.
 VirtualBox, VMware, AWS, or Google Compute Engine are examples of Virtual Machines.
-The most common technology within the second type is Docker, but it is not 
+The most common technology within the second type is Docker, but it is not
 the only example.
 Among scientist that use High Performance Centers (HPCs) Singularity becomes more popular.
 
 The main idea behind these two types is the same -- isolate the computing environment.
-Isolating the environment subsequently allows regenerating 
+Isolating the environment subsequently allows regenerating
 and sharing the computing environments.
 
-However, there are important differences between the two types, 
+However, there are important differences between the two types,
 that is pictured below:
 
 <img src="../fig/Containers-vs-Virtual-Machines.jpg" width="50%" />
 
 Virtual Machines emulate whole computer system (software+hardware).
-They use hypervisor to share and manage hardware of the host, and execute 
+They use hypervisor to share and manage hardware of the host, and execute
 the guest operating system.
 All guest machines are completely isolated and have dedicated resources.
 On the other hand, Docker containers share the host system’s kernel with other containers,
@@ -98,24 +98,24 @@ There is no one solution that always works, your choice should depend on:
  - where is your data stored.
 
 Docker might me the most portable technology right now, but most HPC
-do not support Docker. 
+do not support Docker.
 However, the system administrator should agree to install Singularity.
 
 So what are the differences between Docker and Singularity?
 Docker is an open-source project and right now it's a leading software container platform.
-There are various versions of Docker depending on the system you’re using, 
-including Docker for Mac (for OSX users) and Docker for Windows (for Windows Pro users). 
+There are various versions of Docker depending on the system you’re using,
+including Docker for Mac (for OSX users) and Docker for Windows (for Windows Pro users).
 If you have the Home edition of Windows, you still can use Docker, but have to install VM first.
-Unfortunately, Docker can not be easily used on traditional HPC resources. 
+Unfortunately, Docker can not be easily used on traditional HPC resources.
 One of the main reason is privilege escalation via Docker, i.e. users can get root access to the host system.
 
 
-Singularity offers an alternative to docker on HPC clusters. 
+Singularity offers an alternative to docker on HPC clusters.
 A user inside a Singularity container is the same user as outside the container, so you can be a root
 only if you are root on the host system.
-Creating singularity containers requires root privileges on a machine virtual or physical. 
+Creating singularity containers requires root privileges on a machine virtual or physical.
 However, using singularity does not. The Singularity User Guide describes how to use the different components of singularity. One of the big advantages of Singularity is support for native drivers and libraries (e.g., GPU, MPI, etc.,.).
-If you have Linux you can directly install and run on your OS. 
+If you have Linux you can directly install and run on your OS.
 For other systems, you should use Vagrant and VM, follow the instruction for Mac or Windows.
 If you are a Docker user, the good news is that a Singularity image can be created
 from an existing Docker image.
@@ -125,7 +125,7 @@ You can use each of the technologies above to setup analysis environments for br
  - [Nice introduction to containers and technical differences between VM and Docker](https://medium.freecodecamp.com/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b#.kchrpokfz)
 between these technologies.
  - [Features comparison between Docker and Singularity](https://tin6150.github.io/psg/blogger_container_hpc.html).
- - [More technical comparison of Docker and Singularity](http://www.admin-magazine.com/HPC/Articles/Singularity-A-Container-for-HPC)   
+ - [More technical comparison of Docker and Singularity](http://www.admin-magazine.com/HPC/Articles/Singularity-A-Container-for-HPC)
 
 
 > ## Question:
@@ -266,7 +266,7 @@ A simple example of writing Dockerfile and build an image you can find
 [here](http://nipy.org/workshops/2017-03-boston/lectures/lesson-container/#31).
 
 If you want to create a new image for neuroimaging, you should check
-[Nuerodocker project](https://github.com/kaczmarj/neurodocker) that allows you
+[Neurodocker project](https://github.com/kaczmarj/neurodocker) that allows you
 to  generate custom Dockerfiles and minifies existing Docker images.
 Neurodocker not only simplifies writing a new Dockerfile, but also incorporates
 the best practice for installing software.
@@ -291,7 +291,7 @@ you need to have root privileges on a machine.
 It doesn't have to be a physical machine, if you're using HPC account, you can use Vagrant
 to create a Virtual Machine with Singularity  that can in turn be used to create a new image.
 
-Creating a Dockerfile is only the first step, we have the "receipe", now we can ask 
+Creating a Dockerfile is only the first step, we have the "recipe", now we can ask
 Docker to create an image using `docker build` command:
 
 ```

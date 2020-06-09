@@ -44,7 +44,7 @@ environments. The complete simple workflow paper is available
 
 ### Lesson requirements
 
-You will make the most of this lession if you have an understanding of:
+You will make the most of this lesson if you have an understanding of:
 
 - [Unix shell](http://swcarpentry.github.io/shell-novice/)
 - [Version control](http://www.reproducibleimaging.org/module-reproducible-basics/02-vcs/)
@@ -79,8 +79,8 @@ preferably be machine-accessible.
 
 > ## Machine accessibility
 
-> Machine accesibility means that information regarding an analysis or
-> research workflow (a.k.a., metadata) can be easily accesed by and parsed with automated tools.
+> Machine accessibility means that information regarding an analysis or
+> research workflow (a.k.a., metadata) can be easily accessed by and parsed with automated tools.
 > Typically, the main approach to describe our research is to write a document
 > that is shared with colleagues and collaborators. However, extracting
 > relevant information regarding data acquisition, processing and/or
@@ -90,7 +90,7 @@ preferably be machine-accessible.
 > [JSON](http://www.json.org/), [XML](https://www.w3schools.com/xml/)). Often >
 > such markup can be standardized to provide machine accessibility. {: .callout}
 
-In this example data and metdata are stored in a
+In this example data and metadata are stored in a
 [google spreadsheet](https://docs.google.com/spreadsheets/d/11an55u9t2TAf0EV2pHN0vOd8Ww2Gie-tHp9xGULh_dA).
 Phenotypic information is stored as characters/strings. The imaging data are stored as
 pointers/links to files in the NITRC XNAT repository. However, this particular example
@@ -239,7 +239,7 @@ is run, it would be good to know if the same results, within some threshold, are
 obtained when a dataset containing the similar data or a similar
 workflow is used. These can be carried out using continuous integration
 services, such as [Travis](https://travis-ci.org/), [CircleCI](https://circleci.com/),
-[Jenkins](https://jenkins.io/), which allow for the execution of an analysis workflow and, automated comparison tests  
+[Jenkins](https://jenkins.io/), which allow for the execution of an analysis workflow and, automated comparison tests
 as versions of data or software change.
 
 > ## Continuous integration testing
@@ -258,7 +258,7 @@ or when new datasets are available. The intent of this simple workflow
 example is to move the community towards such comprehensive data
 preservation and testing integration.
 
-[Lesson 5](../06-testing) covers how to use continuous integration services and 
+[Lesson 5](../06-testing) covers how to use continuous integration services and
 also how container technologies can be used to run your own integration testing.
 
 > ## Exercise:
