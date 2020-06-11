@@ -48,7 +48,7 @@ Brain imaging covers a diverse set of data acquisition instruments including
 MRI scanners, physiological measurements, cognitive tests, and clinical
 interviews. Further, different analysis software often have their own data
 formats. Therefore, to ensure information is preserved for reproducible
-dataprocessing, it is important to understand the different types of information
+data processing, it is important to understand the different types of information
 stored in each format.
 
 #### Data
@@ -57,7 +57,7 @@ in brain imaging research and the different formats used to store them.
 
 1. **Participant data:** All imaging experiments store some information
 about participants. These include demographic data, data from
-neuropsychological and clinical assessments, and phsyiological measurements.
+neuropsychological and clinical assessments, and physiological measurements.
 Typically such data are stored in CSV, TSV, or [JSON](json.org) files. But some
 types of measurements such as eye-tracking, respiration, GSR, may be stored in
 proprietary file formats. In many cases data are also stored in Excel
@@ -160,7 +160,7 @@ and then using the [BIDS2NDA converter](https://github.com/INCF/BIDS2NDA).
 > ## Hands on Exercise:
 >
 > Use the [NDA api](https://ndar.nih.gov/swagger/#/) to search for the different
-> sources and categories of information in the NDA.  
+> sources and categories of information in the NDA.
 >
 > > ## Solution
 > >

@@ -30,21 +30,20 @@ environments. The complete simple workflow paper is available
 
 ### Lesson outline
 
-- [Overview of the workflow](#overview)
-- [Element 1: Storing data and metadata](#element1)
-   - CSV, JSON/LD, BIDS, NIDM-E
-- [Element 2: Creating a reproducible execution environment](#element2)
-   - Virtual machines, Containers, Scripts
-- [Element 3: Running analysis and storing expected results and provenance](#element3)
-   - Determine which execution outputs constitute test
-- [Element 4: Checking output consistency using continuous integration](#element4)
-   - Couple with continuous integration (CI) services such as [CircleCI](https://circleci.com/) or [travis](https://travis-ci.org/), or
+- [Lesson outline](#lesson-outline)
+- [Lesson requirements](#lesson-requirements)
+- [Overview of workflow](#overview-of-workflow)
+- [Element 1: Storing data and metadata](#element-1-storing-data-and-metadata)
+- [Element 2: Creating a reproducible execution environment](#element-2-creating-a-reproducible-execution-environment)
+- [Element 3: Running analysis and storing expected results and provenance](#element-3-running-analysis-and-storing-expected-results-and-provenance)
+- [Element 4: Checking output consistency using continuous integration](#element-4-checking-output-consistency-using-continuous-integration)
+- [Results from running the Simple Workflow example](#results-from-running-the-simple-workflow-example)
     with your own CI servers running [jenkins](https://jenkins.io/).
 - [Results from running the Workflow](#results)
 
 ### Lesson requirements
 
-You will make the most of this lession if you have an understanding of:
+You will make the most of this lesson if you have an understanding of:
 
 - [Unix shell](http://swcarpentry.github.io/shell-novice/)
 - [Version control](http://www.reproducibleimaging.org/module-reproducible-basics/02-vcs/)
@@ -53,7 +52,7 @@ You will make the most of this lession if you have an understanding of:
 
 ### Overview of workflow
 The basic workflow presented here (i) extracts a collection of brain images
-and associated phenotypic trait (e.g., age) from a spreadsheet, and (ii) runs
+and associated phenotypic traits (e.g., age) from a spreadsheet, and (ii) runs
 a Nipype workflow that takes the anatomical brain images and performs some
 simple anatomical image processing. Executing the whole workflow may take a
 bit of time to run depending on the power of your machine or cluster. For
@@ -78,26 +77,26 @@ To ensure reproducibility all data and metadata must be accessible and
 preferably be machine-accessible.
 
 > ## Machine accessibility
-
-> Machine accesibility means that information regarding an analysis or
-> research workflow (a.k.a., metadata) can be easily accesed by and parsed with automated tools.
+> Machine accessibility means that information regarding an analysis or
+> research workflow (a.k.a., metadata) can be easily accessed by and parsed with automated tools.
 > Typically, the main approach to describe our research is to write a document
 > that is shared with colleagues and collaborators. However, extracting
 > relevant information regarding data acquisition, processing and/or
-> analysis, requires significant human resources, both to interpret and >
-> translate into code. An alternate approach is to encode the metadata > using
-> structured markup (e.g., [RDF](https://www.w3.org/TR/rdf11-concepts/), >
-> [JSON](http://www.json.org/), [XML](https://www.w3schools.com/xml/)). Often >
-> such markup can be standardized to provide machine accessibility. {: .callout}
+> analysis, requires significant human resources, both to interpret and
+> translate into code. An alternate approach is to encode the metadata using
+> structured markup (e.g., [RDF](https://www.w3.org/TR/rdf11-concepts/),
+> [JSON](http://www.json.org/), [XML](https://www.w3schools.com/xml/)). Often
+> such markup can be standardized to provide machine accessibility.
+{: .callout}
 
-In this example data and metdata are stored in a
-[google spreadsheet](https://docs.google.com/spreadsheets/d/11an55u9t2TAf0EV2pHN0vOd8Ww2Gie-tHp9xGULh_dA).
+In this example, data and metadata are stored in a
+[Google spreadsheet](https://docs.google.com/spreadsheets/d/11an55u9t2TAf0EV2pHN0vOd8Ww2Gie-tHp9xGULh_dA).
 Phenotypic information is stored as characters/strings. The imaging data are stored as
 pointers/links to files in the NITRC XNAT repository. However, this particular example
 does not have any semantic or (data) type information associated with the input file.
 
 The column headers can be described in detail in a JSON document using
-[JSONLD](https://json-ld.org/) a format that supports semantic annotation. The
+[JSONLD](https://json-ld.org/), a format that supports semantic annotation. The
 annotation provides information about the data contained in the column and
 allows for the harmonization of the information with other similar tables. For example, the
 JSONLD metadata key could tell us that the URLs correspond to anatomical
@@ -116,7 +115,7 @@ harmonization, cleaning, storage, and sharing.
 > >
 > > There are four types of output files created:
 > >
-> > 1. Compressed [Nifti files](https://brainder.org/2012/09/23/the-nifti-file-format/)
+> > 1. Compressed [NIfTI files](https://brainder.org/2012/09/23/the-nifti-file-format/)
 > >    corresponding to different segmentations
 > > 2. A JSON file corresponding to the volume measures and voxel counts of
 > >    brain segmentations.
@@ -146,8 +145,8 @@ that creates the necessary computational environment for analysis.
 > ## Problems with creating environments with a script
 > 1. The script assumes that you have access to certain software,
 >   such as bash and FSL, on your system. This means you have to run
->   this on a unix-like system such as Linux or MacOS.
-> 2. The script will install all other necessary software (e.g., python libraries and their dependencies) and
+>   this on a Unix-like system such as Linux or MacOS.
+> 2. The script will install all other necessary software (e.g., Python libraries and their dependencies) and
 >   will not handle any conflicts with your existing software environment.
 {: .callout}
 
@@ -191,19 +190,18 @@ script](https://github.com/ReproNim/simple_workflow/blob/master/run_demo_workflo
 The script `Simple_Prep.sh` uses [Nipype dataflows](http://nipy.org/nipype) to ensure a consistent representation of
 the execution graph, itself a representation of the steps followed during this part of the analysis workflow.
 
-
 > ## Using dataflow technologies for analysis instead of shell scripts
 > There are many dataflow platforms out there. These typically enable a
 > compact, abstract graph based representation of a dataflow, allowing
-> for their reuse and consistent of execution. They also enable running the same
+> for their reuse and consistency of execution. They also enable running the same
 > dataflow in different computing environments and not requiring the
 > user to keep track of complex data dependencies across nodes. While
 > Nipype was used in this example, other brain imaging dataflow systems
 > include Automated Analysis, PSOM, FASTR.
 {: .callout}
 
-Running the analysis is one part of reproducibility. It is important to
-also capture the output necessary for scientific hypothesis testing or
+Running the analysis is one part of reproducibility. It is also important
+to capture the output necessary for scientific hypothesis testing or
 exploration. In this example, the volumes of subcortical structures and
 of the different brain tissue classes are extracted and stored in a JSON
 document. A specific run of this workflow on a specific platform was
@@ -211,7 +209,7 @@ used to create the provenance document and the expected outputs data.
 When another user runs this workflow, their output can be compared to
 the expected output.
 
-[Lesson 4](../05-dataflows) covers data flow technologies, specifically how to create
+[Lesson 4](../05-dataflows) covers dataflow technologies, specifically how to create
 analysis pipelines and applications and capture provenance when running
 these pipelines.
 
@@ -239,11 +237,11 @@ is run, it would be good to know if the same results, within some threshold, are
 obtained when a dataset containing the similar data or a similar
 workflow is used. These can be carried out using continuous integration
 services, such as [Travis](https://travis-ci.org/), [CircleCI](https://circleci.com/),
-[Jenkins](https://jenkins.io/), which allow for the execution of an analysis workflow and, automated comparison tests  
-as versions of data or software change.
+[Jenkins](https://jenkins.io/), which allow for the execution of an analysis workflow and,
+automated comparison tests as versions of data or software change.
 
 > ## Continuous integration testing
-> In typical brain imaging analyses there is a complex interaction
+> In typical brain imaging analyses, there is a complex interaction
 > between data, software, and scientific hypothesis testing results.
 > Continuous integration services ensure that such results can be
 > obtained consistently and provide a framework to evaluate when results
@@ -258,7 +256,7 @@ or when new datasets are available. The intent of this simple workflow
 example is to move the community towards such comprehensive data
 preservation and testing integration.
 
-[Lesson 5](../06-testing) covers how to use continuous integration services and 
+[Lesson 5](../06-testing) covers how to use continuous integration services and
 also how container technologies can be used to run your own integration testing.
 
 > ## Exercise:
@@ -284,8 +282,8 @@ also how container technologies can be used to run your own integration testing.
 It turns out that this Simple Workflow is not reproducible across different
 versions of software and operating systems. [The observed inconsistencies (see Table 1)](https://f1000research.com/articles/6-124/)
 point to issues of randomization and/or initialization within the algorithms that
-are run. While its easy to detect deviation of execution in different
-environments it is harder to determine the cause of the deviation. This
+are run. While it is easy to detect deviation of execution in different
+environments, it is harder to determine the cause of the deviation. This
 is where rich provenance capture can help establish where along an
 execution graph an analysis diverged and help zero in on the possible
 culprits.
@@ -298,12 +296,12 @@ culprits.
 >
 > > ## Solution
 > > 1. See an example [here](https://github.com/ReproNim/simple_workflow/tree/master/expected_output)
-> > 2. Using your Unix skills (find, tar) extract only the json files keeping
+> > 2. Using your Unix skills (find, tar), extract only the json files keeping
 > >    the directory structure intact.
 > > 3. Add the provenance files (trig, provn)
 > > 4. Fork the simple_workflow repo
 > > 5. Add your outputs to a new folder under other_outputs.
-> > 6. Commit the changes, push to your repo, and send a pull-request.
+> > 6. Commit the changes, push to your repo, and send a pull request.
 > >
 > {: .solution}
 >

@@ -26,7 +26,7 @@ Typical brain imaging analyses involve data, software, and human interaction
 to test hypotheses, explore relations in data and/or extract properties in
 data (e.g., data features). These analyses rely on numerous elements such as
 data quality, software environment, algorithms, and human input (e.g.,
-assesment and/or curation) that can introduce errors. In order to repeat or
+assessment and/or curation) that can introduce errors. In order to repeat or
 reproduce any analysis, it is essential to record the information of each
 element.
 
@@ -39,25 +39,25 @@ Reproducing an analysis workflow **requires** knowing the details of:
 - Datasets used as input of the analysis, including
     - steps followed to collect or find such data,
     - status of data (e.g., raw/pre-processed).
-- Analysis steps performed 
-    - processing 
+- Analysis steps performed
+    - processing
     - statistics
 - Steps necessary to re-do/re-run the analysis
 - Software environment used, including
     - OS,
-    - enviroment (e.g., Python version, compiler version),
+    - environment (e.g., Python version, compiler version),
     - specific program (version),
     - dependencies.
 - Steps necessary to recreate the same or similar environment
-- Validation procedure (e.g., ow did the researcher validate the output?)
+- Validation procedure (e.g., how did the researcher validate the output?)
 
 These steps are essential for the preservation of information for future use,
 for the correct documentation of methods for widespread dissemination, and for
-the repeatability/reproducibility of the experiment by third parties. 
+the repeatability/reproducibility of the experiment by third parties.
 
 ### Prerequisites
 
-For this module, we expect the reader to be familiar with `unix` environments 
+For this module, we expect the reader to be familiar with `unix` environments
 and have a general idea of brain image analysis. We recommend  that you go
 through the overview lectures of the reproducible basics and FAIR data
 principles modules.
