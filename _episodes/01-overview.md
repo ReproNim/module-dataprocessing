@@ -49,7 +49,7 @@ Reproducing an analysis workflow **requires** knowing the details of:
     - specific program (version),
     - dependencies.
 - Steps necessary to recreate the same or similar environment
-- Validation procedure (e.g., ow did the researcher validate the output?)
+- Validation procedure (e.g., how did the researcher validate the output?)
 
 These steps are essential for the preservation of information for future use,
 for the correct documentation of methods for widespread dissemination, and for
